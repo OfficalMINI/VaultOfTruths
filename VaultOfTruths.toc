@@ -1,0 +1,88 @@
+## Interface: 120001
+## Title: Vault of Truths
+## Notes: PVP-focused guild economy — track contributions, manage crafting orders, and share profits. Non-guildies can browse crafters and request crafts.
+## Author: Harrison
+## Version: 1.0.0
+## SavedVariables: VaultOfTruthsDB
+## SavedVariablesPerCharacter: VaultOfTruthsCharDB
+## OptionalDeps: TradeSkillMaster
+## IconTexture: Interface\Icons\INV_Misc_Coin_01
+
+# Core
+Core\Init.lua
+Core\Utils.lua
+Core\Events.lua
+Core\Settings.lua
+Core\SlashCommands.lua
+
+# Data
+Data\PVPItems.lua
+Data\DailyActivities.lua
+
+# TSM Bridge
+TSMBridge\TSMBridge.lua
+
+# Ledger
+Ledger\Roles.lua
+Ledger\Ledger.lua
+Ledger\Payouts.lua
+Ledger\MailPayout.lua
+Ledger\Snapshot.lua
+Ledger\InactivityTracker.lua
+Ledger\OfficerNoteSync.lua
+Ledger\Progression.lua
+Ledger\ItemTrail.lua
+
+# Guild Bank
+GuildBank\Scanner.lua
+GuildBank\TransactionLog.lua
+GuildBank\DepositHelper.lua
+
+# Notifications
+Notifications\Toast.lua
+Notifications\ChatNotify.lua
+Notifications\LootWatcher.lua
+
+# Crafting Orders
+CraftingOrders\OrderBoard.lua
+CraftingOrders\FeeCalculator.lua
+CraftingOrders\MatPricing.lua
+CraftingOrders\CrafterTracking.lua
+CraftingOrders\RecipeScanner.lua
+CraftingOrders\NPCHelper.lua
+
+# Auction House
+AuctionHouse\AucAccount.lua
+AuctionHouse\SalesLedger.lua
+AuctionHouse\ProfitReturn.lua
+
+# Libs
+Libs\LibStub\LibStub.lua
+Libs\LibSerialize\LibSerialize.lua
+Libs\LibDeflate\LibDeflate.lua
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+# Sync
+Sync\Protocol.lua
+Sync\Sender.lua
+Sync\Receiver.lua
+Sync\CommunityBridge.lua
+
+# UI
+UI\Theme.lua
+UI\Widgets\ScrollList.lua
+UI\Widgets\TabGroup.lua
+UI\Widgets\Tooltip.lua
+UI\Widgets\ConfirmDialog.lua
+UI\MainFrame.lua
+UI\Dashboard.lua
+UI\LedgerBrowser.lua
+UI\CraftingBoard.lua
+UI\AHPanel.lua
+UI\OfficerPanel.lua
+UI\SettingsPanel.lua
+UI\GuildInfoPanel.lua
+UI\OnboardingDialog.lua
+UI\SetupGuide.lua
+UI\ProgressionPanel.lua
+UI\MinimapButton.lua
