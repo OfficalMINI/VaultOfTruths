@@ -92,48 +92,59 @@ function TLog:ProcessLogUpdate()
         guildData.transactionLog = {}
     end
 
+    -- Track last-seen transaction count per tab so we only process NEW entries.
+    -- WoW returns transactions newest-first, so new ones appear at the front.
+    if not self._lastSeenCount then
+        self._lastSeenCount = {}
+    end
+
     local numTransactions = GetNumGuildBankTransactions(tab)
+    local lastSeen = self._lastSeenCount[tab] or 0
+
+    -- How many new entries appeared since last poll
+    local newCount = numTransactions - lastSeen
+    if newCount <= 0 then
+        -- No new transactions — just advance to next tab
+        self:QueryNextLogTab()
+        return
+    end
+
+    -- On first poll (no prior count), seed the log without firing events
+    -- so we don't create ledger entries for old historical transactions
+    local isFirstPoll = (lastSeen == 0)
+
     local newEntries = 0
 
-    for i = 1, numTransactions do
+    -- New transactions are at indices 1..newCount (newest first in API)
+    for i = 1, newCount do
         local transType, playerName, itemLink, count, moveTab1, moveTab2, year, month, day, hour = GetGuildBankTransaction(tab, i)
 
         if transType and playerName then
             local itemID = itemLink and GF.Utils:GetItemIDFromLink(itemLink) or nil
-
-            -- Approximate timestamp from "X time ago" fields
             local approxTimestamp = self:ApproximateTimestamp(year, month, day, hour)
 
-            -- Generate stable dedup hash: snap the approximate timestamp to
-            -- the nearest calendar day so the hash doesn't drift as time passes.
-            -- Two polls of the same transaction hours apart produce the same hash.
-            local stableDay = math.floor(approxTimestamp / 86400)
-            local hashInput = tostring(transType) .. playerName .. tostring(itemID or "money") ..
-                tostring(count or 0) .. tostring(tab) .. tostring(stableDay)
-            local hash = self:SimpleHash(hashInput)
+            local entry = {
+                tabIndex = tab,
+                type = TRANSACTION_TYPES[transType] or "unknown",
+                player = playerName,
+                itemID = itemID,
+                itemLink = itemLink,
+                quantity = count or 0,
+                timestamp = approxTimestamp,
+            }
 
-            -- Check for duplicates
-            if not self:HasTransaction(guildData.transactionLog, hash) then
-                local entry = {
-                    tabIndex = tab,
-                    type = TRANSACTION_TYPES[transType] or "unknown",
-                    player = playerName,
-                    itemID = itemID,
-                    itemLink = itemLink,
-                    quantity = count or 0,
-                    timestamp = approxTimestamp,
-                    hash = hash,
-                }
+            -- Insert newest first
+            table.insert(guildData.transactionLog, 1, entry)
+            newEntries = newEntries + 1
 
-                -- Insert newest first
-                table.insert(guildData.transactionLog, 1, entry)
-                newEntries = newEntries + 1
-
-                -- Fire event for new transactions (useful for ledger wiring)
+            -- Only fire events for genuinely new transactions (not historical seed)
+            if not isFirstPoll then
                 GF.Events:Fire("GF_BANK_TRANSACTION", entry)
             end
         end
     end
+
+    self._lastSeenCount[tab] = numTransactions
 
     if GF.debug and newEntries > 0 then
         print("|cFF33AAFF[Vault of Truths]|r Tab " .. tab .. ": " .. newEntries .. " new transactions logged.")
@@ -146,19 +157,6 @@ function TLog:ProcessLogUpdate()
 
     -- Query next tab
     self:QueryNextLogTab()
-end
-
---- Check if a transaction hash already exists in the log
----@param log table Transaction log array
----@param hash string Hash to check
----@return boolean
-function TLog:HasTransaction(log, hash)
-    for i = 1, #log do
-        if log[i].hash == hash then
-            return true
-        end
-    end
-    return false
 end
 
 --- Approximate a timestamp from the API's relative time fields

@@ -556,13 +556,6 @@ function SL:ScanMailForSales()
                     local ahCut = salePrice - money
 
                     local sale = self:RecordSale(itemID, 1, salePrice, ahCut)
-
-                    -- If RecordSale rejected it (not guild item) but we know it's AH mail,
-                    -- force-record it — the gold came from the AH, it should be tracked
-                    if not sale and itemID == 0 then
-                        sale = self:ForceRecordMailSale(itemName, salePrice, ahCut)
-                    end
-
                     if sale then
                         newSales = newSales + 1
                     end
@@ -576,63 +569,6 @@ function SL:ScanMailForSales()
     end
 end
 
---- Force-record a sale from AH mail when itemID couldn't be resolved
---- This handles offline/missed sales where the item cache isn't loaded
----@param itemName string
----@param salePrice number
----@param ahCut number
----@return table|nil sale record
-function SL:ForceRecordMailSale(itemName, salePrice, ahCut)
-    local guildData = GF.Settings:GetGuildData()
-    if not guildData then return nil end
-
-    if not guildData.ahSales then
-        guildData.ahSales = {}
-    end
-
-    -- Deduplicate against existing sales (same price within an hour)
-    local now = time()
-    for _, existing in ipairs(guildData.ahSales) do
-        if existing.salePrice == salePrice
-           and math.abs((existing.timestamp or 0) - now) < 3600 then
-            return nil
-        end
-    end
-
-    local sale = {
-        id = GF.Utils:GenerateID(),
-        itemID = 0,
-        itemName = itemName,
-        quantity = 1,
-        salePrice = salePrice,
-        ahCut = ahCut,
-        matCost = 0,
-        profit = salePrice - ahCut,
-        auctioneer = GF.Utils:GetPlayerFullName(),
-        timestamp = GF.Utils:GetTime(),
-        distributed = false,
-        fromMail = true, -- Flag so we know this came from mail detection
-    }
-
-    guildData.ahSales[#guildData.ahSales + 1] = sale
-
-    -- Create ledger entry
-    GF.Ledger:AddEntry(GF.ACTIONS.AH_SALE, sale.auctioneer, {
-        { itemID = 0, quantity = 1, unitValue = salePrice, priceSource = "ah_mail" },
-    }, salePrice, "AH Sale (mail) — " .. itemName .. " — Profit: " .. GF.Utils:FormatMoney(sale.profit))
-
-    sale._itemName = itemName
-
-    GF.Events:Fire("GF_AH_SALE_RECORDED", sale)
-
-    GF.ChatNotify:Gold("AH Sale (mail): " .. itemName .. " — " .. GF.Utils:FormatMoney(salePrice) ..
-        " | Profit: " .. GF.Utils:FormatMoney(sale.profit))
-    if GF.Toast and GF.Toast.Show then
-        GF.Toast:Show("Item Sold!", GF.Utils:FormatMoney(salePrice), "Interface\\Icons\\INV_Misc_Coin_02")
-    end
-
-    return sale
-end
 
 --- Get count of pending (not yet distributed) sales
 ---@return number
