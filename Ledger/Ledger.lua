@@ -145,6 +145,9 @@ function Ledger:ProcessBankTransaction(transaction)
         -- Deposits: only count items going into deposit tabs as contributions
         if transaction.type == "deposit" and not DEPOSIT_TABS[tab] then return end
 
+        -- Withdrawals: skip deposit tab (officers sorting, not real withdrawals)
+        if transaction.type == "withdraw" and DEPOSIT_TABS[tab] then return end
+
         -- Withdrawals: skip perk tabs (PVP supplies are a reward, not debt)
         if transaction.type == "withdraw" and PERK_TABS[tab] then return end
     end
