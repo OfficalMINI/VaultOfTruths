@@ -341,57 +341,19 @@ function Scanner:CheckForDeposits()
         end
     end
 
-    -- Process deposits — log as PENDING, accumulate for summary on bank close
+    -- Accumulate deposits for session summary (shown on bank close)
+    -- Ledger entries are created by TransactionLog -> ProcessBankTransaction
+    -- (single source of truth, avoids double-recording)
     for itemID, info in pairs(deposited) do
         local value, source = GF.TSM:GetBestPrice(itemID)
         local unitValue = value or 0
         local totalValue = unitValue * info.count
 
-        -- Log to item trail FIRST so we get the trailID for the ledger entry
-        local trailID = nil
-        if GF.ItemTrail then
-            trailID = GF.ItemTrail:OnDeposit(playerName, itemID, info.link, info.count, totalValue)
-        end
-
-        GF.Ledger:AddEntry(GF.ACTIONS.DEPOSIT, playerName, {
-            { itemID = itemID, quantity = info.count, unitValue = unitValue, priceSource = source or "unknown" },
-        }, totalValue, info.link, "pending", trailID)
-
-        -- Accumulate for session summary (shown on bank close)
         if not sessionDeposits[itemID] then
             sessionDeposits[itemID] = { count = 0, value = 0, link = info.link }
         end
         sessionDeposits[itemID].count = sessionDeposits[itemID].count + info.count
         sessionDeposits[itemID].value = sessionDeposits[itemID].value + totalValue
-    end
-
-    -- Process withdrawals — fire bank transaction event and log to trail
-    -- (Ledger and CrafterTracking will handle tab-based filtering)
-    for itemID, info in pairs(withdrawn) do
-        local value, source = GF.TSM:GetBestPrice(itemID)
-        local unitValue = value or 0
-        local totalValue = unitValue * info.count
-
-        -- Log withdrawal to item trail so supplier chain is tracked
-        if GF.ItemTrail then
-            GF.ItemTrail:OnWithdraw(playerName, itemID, info.count, totalValue)
-        end
-
-        GF.Events:Fire("GF_BANK_TRANSACTION", {
-            type = "withdraw",
-            player = playerName,
-            itemID = itemID,
-            itemLink = info.link,
-            quantity = info.count,
-            tabIndex = nil, -- unknown from bag diff — Ledger lets nil through
-            timestamp = GF.Utils:GetTime(),
-        })
-
-        if GF.debug then
-            local name = C_Item.GetItemInfo(itemID) or "Item:" .. itemID
-            GF.ChatNotify:Debug("Withdrew x" .. info.count .. " " .. name ..
-                " — Value: " .. GF.Utils:FormatMoney(totalValue))
-        end
     end
 
     -- Update snapshot

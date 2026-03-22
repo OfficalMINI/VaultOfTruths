@@ -35,6 +35,33 @@ function Ledger:AddEntry(action, player, items, totalValue, note, status, trailI
         return nil
     end
 
+    -- Dedup: reject deposits/withdrawals of the same item by the same player
+    -- within 120 seconds (bag-diff scanner and transaction log both fire)
+    if action == GF.ACTIONS.DEPOSIT or action == GF.ACTIONS.WITHDRAW then
+        local newItemID = items and items[1] and items[1].itemID
+        local newQty = items and items[1] and items[1].quantity
+        if newItemID then
+            local playerShort = player:match("^(.+)-") or player
+            local now = time()
+            for _, existing in ipairs(guildData.ledger.entries) do
+                if existing.action == action and existing.items and existing.items[1] then
+                    local existPlayer = existing.player:match("^(.+)-") or existing.player
+                    if existPlayer == playerShort
+                       and existing.items[1].itemID == newItemID
+                       and existing.items[1].quantity == newQty
+                       and math.abs((existing.timestamp or 0) - now) < 120 then
+                        if GF.debug then
+                            GF.ChatNotify:Debug("Dedup: skipping duplicate " .. action .. " for " .. player)
+                        end
+                        return nil
+                    end
+                end
+                -- Only check recent entries (entries are newest-first)
+                if existing.timestamp and (now - existing.timestamp) > 300 then break end
+            end
+        end
+    end
+
     -- Deposits start as "pending" until the item is crafted + sold
     -- Other actions (payout, fee, etc.) are immediately "credited"
     if not status then
@@ -126,19 +153,36 @@ function Ledger:ProcessBankTransaction(transaction)
     local action = transaction.type == "deposit" and GF.ACTIONS.DEPOSIT or GF.ACTIONS.WITHDRAW
     local value, source = GF.TSM:GetBestPrice(transaction.itemID)
     local unitValue = value or 0
+    local quantity = transaction.quantity or 1
+
+    -- Normalize player name to full "Name-Realm" format
+    local player = transaction.player
+    if not player:find("-") then
+        player = player .. "-" .. (GetNormalizedRealmName() or "")
+    end
+
+    -- Create item trail for deposits/withdrawals
+    if GF.ItemTrail then
+        local totalVal = unitValue * quantity
+        if action == GF.ACTIONS.DEPOSIT then
+            GF.ItemTrail:OnDeposit(player, transaction.itemID, transaction.itemLink, quantity, totalVal)
+        elseif action == GF.ACTIONS.WITHDRAW then
+            GF.ItemTrail:OnWithdraw(player, transaction.itemID, quantity, totalVal)
+        end
+    end
 
     local items = {
         {
             itemID = transaction.itemID,
-            quantity = transaction.quantity or 1,
+            quantity = quantity,
             unitValue = unitValue,
             priceSource = source or "unknown",
         },
     }
 
-    local totalValue = unitValue * (transaction.quantity or 1)
+    local totalValue = unitValue * quantity
 
-    self:AddEntry(action, transaction.player, items, totalValue, transaction.itemLink)
+    self:AddEntry(action, player, items, totalValue, transaction.itemLink)
 end
 
 --- Update a member's running contribution total
