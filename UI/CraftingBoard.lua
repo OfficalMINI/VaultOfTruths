@@ -13,67 +13,63 @@ local initialized = false
 local function Init()
     if initialized then return end
 
+    local T = GF.UI.Theme
     local parent = GF.UI.MainFrame:GetContentFrame("crafting")
     if not parent then return end
 
-    -- Header
-    local header = parent:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
-    header:SetPoint("TOPLEFT", 8, -8)
-    header:SetText("|cFF33AAFFGuild Crafting|r")
+    local PAD = 10
+
+    ---------- Header ----------
+    local _, headerContainer = T:SectionHeader(
+        parent,
+        { "TOPLEFT", parent, "TOPLEFT", PAD, -PAD },
+        "Guild Crafting",
+        "Interface\\ICONS\\Trade_Engineering"
+    )
+    headerContainer:SetPoint("RIGHT", parent, "RIGHT", -PAD, 0)
 
     -- Open orders count
-    local countText = parent:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    countText:SetPoint("LEFT", header, "RIGHT", 12, 0)
-    countText:SetTextColor(0.6, 0.6, 0.6)
+    local countText = parent:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    countText:SetPoint("LEFT", headerContainer, "LEFT", 160, 0)
+    countText:SetTextColor(unpack(T.COLORS.textDim))
     parent._countText = countText
 
-    -- My Queue indicator (shows if you have assigned orders)
-    local myQueueText = parent:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    myQueueText:SetPoint("TOPLEFT", 8, -24)
-    myQueueText:SetTextColor(1, 0.5, 0)
+    -- My Queue indicator
+    local myQueueText = parent:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    myQueueText:SetPoint("RIGHT", headerContainer, "RIGHT", 0, 0)
+    myQueueText:SetTextColor(unpack(T.COLORS.warning))
     parent._myQueueText = myQueueText
 
-    -- Guild Crafters panel (right side)
-    local crafterPanel = CreateFrame("Frame", nil, parent, "BackdropTemplate")
-    crafterPanel:SetPoint("TOPRIGHT", -4, -36)
+    ---------- Guild Crafters Panel (right side card) ----------
+    local crafterPanel = T:Card(parent)
+    crafterPanel:SetPoint("TOPRIGHT", -PAD, -34)
     crafterPanel:SetWidth(200)
-    crafterPanel:SetPoint("BOTTOM", 0, 60)
-    crafterPanel:SetBackdrop({
-        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-        tile = true, tileSize = 16, edgeSize = 10,
-        insets = { left = 2, right = 2, top = 2, bottom = 2 },
-    })
-    crafterPanel:SetBackdropColor(0.06, 0.08, 0.14, 0.9)
+    crafterPanel:SetPoint("BOTTOM", 0, 52)
 
     local crafterTitle = crafterPanel:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    crafterTitle:SetPoint("TOP", 0, -4)
-    crafterTitle:SetText("|cFF33AAFFGuild Crafters|r")
+    crafterTitle:SetPoint("TOP", 0, -6)
+    crafterTitle:SetText("|cFFFFCC00Guild Crafters|r")
 
     -- Search box
-    local crafterSearch = CreateFrame("EditBox", nil, crafterPanel, "InputBoxTemplate")
-    crafterSearch:SetSize(170, 20)
-    crafterSearch:SetPoint("TOP", 0, -22)
-    crafterSearch:SetAutoFocus(false)
-    crafterSearch:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
+    local crafterSearch = T:EditBox(crafterPanel, 180, 20)
+    crafterSearch:SetPoint("TOP", 0, -24)
 
     local searchHint = crafterPanel:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    searchHint:SetPoint("TOP", crafterSearch, "BOTTOM", 0, -1)
+    searchHint:SetPoint("TOP", crafterSearch, "BOTTOM", 0, -2)
     searchHint:SetText("|cFF555555Search recipes...|r")
 
-    -- Crafter scroll list (interactive rows)
+    -- Crafter scroll list
     local crafterListFrame = CreateFrame("Frame", nil, crafterPanel)
-    crafterListFrame:SetPoint("TOPLEFT", 4, -58)
+    crafterListFrame:SetPoint("TOPLEFT", 4, -62)
     crafterListFrame:SetPoint("BOTTOMRIGHT", -4, 4)
 
     local crafterList = GF.UI.Widgets:CreateScrollList(crafterListFrame, 38,
         function(index, contentFrame)
             local row = CreateFrame("Button", nil, contentFrame)
 
-            -- Highlight on hover
             local hl = row:CreateTexture(nil, "HIGHLIGHT")
             hl:SetAllPoints()
-            hl:SetColorTexture(0.2, 0.4, 0.6, 0.3)
+            hl:SetColorTexture(unpack(T.COLORS.rowHover))
 
             row.name = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
             row.name:SetPoint("TOPLEFT", 4, -3)
@@ -84,14 +80,13 @@ local function Init()
             row.info:SetPoint("TOPLEFT", 4, -16)
             row.info:SetPoint("RIGHT", -4, 0)
             row.info:SetJustifyH("LEFT")
-            row.info:SetTextColor(0.5, 0.5, 0.5)
+            row.info:SetTextColor(unpack(T.COLORS.textDim))
 
-            -- Separator line
             local sep = row:CreateTexture(nil, "ARTWORK")
             sep:SetHeight(1)
             sep:SetPoint("BOTTOMLEFT", 2, 0)
             sep:SetPoint("BOTTOMRIGHT", -2, 0)
-            sep:SetColorTexture(0.2, 0.2, 0.3, 0.4)
+            sep:SetColorTexture(unpack(T.COLORS.divider))
 
             return row
         end,
@@ -100,14 +95,12 @@ local function Init()
                 row.name:SetText("|cFF00FF00" .. entry.displayName .. "|r")
                 row.info:SetText(entry.professions or "")
                 row:SetScript("OnClick", function()
-                    -- Show what this crafter can make
                     if parent._crafterSearch and GF.RecipeScanner then
                         parent._crafterSearch:SetText("")
                         local extGuild = not IsInGuild() and GF.CommunityBridge and GF.CommunityBridge:GetConnectedGuild() or nil
                         local profs = GF.RecipeScanner:GetPlayerProfessions(entry.playerName, extGuild)
                         local data = {}
                         for profName, profData in pairs(profs) do
-                            -- Show first 15 recipes from each profession
                             local crafterRecipes
                             if extGuild then
                                 local extData = GF.Settings:GetExternalGuildData(extGuild)
@@ -149,11 +142,9 @@ local function Init()
                 row.name:SetText("|cFF00AAFF" .. (entry.recipeName or "") .. "|r")
                 row.info:SetText(entry.displayName .. " — " .. (entry.profName or ""))
                 row:SetScript("OnClick", function()
-                    -- Build cost breakdown text
                     local commission = GF.Settings:GetGuild("craftCommission") or GF.DEFAULT_CRAFT_COMMISSION
                     local commissionText = GF.Utils:FormatMoney(commission)
 
-                    -- Try to calculate mat cost from stored reagents
                     local matCostText = ""
                     local totalMatCost = 0
                     if entry.reagents and #entry.reagents > 0 and GF.TSM then
@@ -167,7 +158,6 @@ local function Init()
                         end
                     end
 
-                    -- Check if requester has balance to pay from earnings
                     local totalOrderCost = totalMatCost + commission
                     local balanceInfo = ""
                     local playerBalance = 0
@@ -204,12 +194,10 @@ local function Init()
                         "|r from |cFF00FF00" .. entry.displayName .. "|r?\n\n" .. costInfo,
                         function()
                             if IsInGuild() then
-                                -- Try to pay from balance if sufficient
                                 local myName = GF.Utils:GetPlayerFullName()
                                 local myBalance = GF.Payouts:GetBalance(myName)
                                 local orderFee = totalOrderCost > 0 and totalOrderCost or commission
 
-                                -- Guild member: create order directly
                                 local order = GF.OrderBoard:CreateOrder(
                                     entry.recipeID,
                                     entry.recipeName or "Unknown",
@@ -222,7 +210,6 @@ local function Init()
                                         order.outputItemID = entry.outputItemID
                                     end
 
-                                    -- Deduct from balance if available
                                     if myBalance >= orderFee and orderFee > 0 then
                                         local ok = GF.Payouts:PayFromBalance(myName, orderFee, entry.recipeName or "craft order")
                                         if ok then
@@ -230,7 +217,6 @@ local function Init()
                                             order.paidAmount = orderFee
                                         end
                                     elseif myBalance > 0 and orderFee > 0 then
-                                        -- Partial payment from balance
                                         local partial = myBalance
                                         local ok = GF.Payouts:PayFromBalance(myName, partial, entry.recipeName or "craft order (partial)")
                                         if ok then
@@ -247,7 +233,6 @@ local function Init()
                                     GF.ChatNotify:Success("Order queued: " .. (entry.recipeName or "") .. " — assigned to " .. entry.displayName)
                                 end
                             else
-                                -- Non-guildie: create external order
                                 local extGuild = GF.CommunityBridge:GetConnectedGuild()
                                 if extGuild then
                                     local order = GF.OrderBoard:CreateExternalOrder(
@@ -318,54 +303,43 @@ local function Init()
     parent._crafterPanel = crafterPanel
     parent._crafterSearch = crafterSearch
 
-    -- Order list (left of crafter panel)
+    ---------- Order List (left of crafter panel) ----------
     local listFrame = CreateFrame("Frame", nil, parent)
-    listFrame:SetPoint("TOPLEFT", 8, -42)
-    listFrame:SetPoint("BOTTOMRIGHT", crafterPanel, "BOTTOMLEFT", -4, 0)
+    listFrame:SetPoint("TOPLEFT", PAD, -34)
+    listFrame:SetPoint("BOTTOMRIGHT", crafterPanel, "BOTTOMLEFT", -6, 0)
 
-    local list = GF.UI.Widgets:CreateScrollList(listFrame, 40,
+    local list = GF.UI.Widgets:CreateScrollList(listFrame, 44,
         function(index, contentFrame)
-            local row = CreateFrame("Frame", nil, contentFrame, "BackdropTemplate")
-            row:SetBackdrop({
-                bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-                edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-                tile = true, tileSize = 16, edgeSize = 10,
-                insets = { left = 2, right = 2, top = 2, bottom = 2 },
-            })
-            row:SetBackdropColor(0.12, 0.12, 0.18, 0.6)
+            local row = T:Card(contentFrame)
 
             row.name = row:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-            row.name:SetPoint("TOPLEFT", 8, -4)
-            row.name:SetTextColor(1, 1, 1)
+            row.name:SetPoint("TOPLEFT", 10, -6)
+            row.name:SetTextColor(unpack(T.COLORS.textNormal))
 
             row.status = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-            row.status:SetPoint("TOPRIGHT", -8, -4)
+            row.status:SetPoint("TOPRIGHT", -10, -6)
 
             row.details = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-            row.details:SetPoint("BOTTOMLEFT", 8, 4)
-            row.details:SetTextColor(0.6, 0.6, 0.6)
+            row.details:SetPoint("BOTTOMLEFT", 10, 6)
+            row.details:SetTextColor(unpack(T.COLORS.textDim))
 
             row.fee = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-            row.fee:SetPoint("BOTTOMRIGHT", -8, 4)
-            row.fee:SetTextColor(1, 0.82, 0)
+            row.fee:SetPoint("BOTTOMRIGHT", -10, 6)
+            row.fee:SetTextColor(unpack(T.COLORS.gold))
 
-            -- Action buttons (right side of row)
-            row.acceptBtn = CreateFrame("Button", nil, row, "UIPanelButtonTemplate")
-            row.acceptBtn:SetSize(60, 20)
+            -- Action buttons
+            row.acceptBtn = T:Button(row, "Accept", 56, 18)
             row.acceptBtn:SetPoint("RIGHT", row.status, "LEFT", -8, 0)
-            row.acceptBtn:SetText("Accept")
             row.acceptBtn:Hide()
 
-            row.completeBtn = CreateFrame("Button", nil, row, "UIPanelButtonTemplate")
-            row.completeBtn:SetSize(70, 20)
+            row.completeBtn = T:Button(row, "Complete", 64, 18)
             row.completeBtn:SetPoint("RIGHT", row.acceptBtn, "LEFT", -4, 0)
-            row.completeBtn:SetText("Complete")
+            row.completeBtn._label:SetTextColor(unpack(T.COLORS.positive))
             row.completeBtn:Hide()
 
-            row.cancelBtn = CreateFrame("Button", nil, row, "UIPanelButtonTemplate")
-            row.cancelBtn:SetSize(60, 20)
+            row.cancelBtn = T:Button(row, "Cancel", 52, 18)
             row.cancelBtn:SetPoint("RIGHT", row.completeBtn, "LEFT", -4, 0)
-            row.cancelBtn:SetText("Cancel")
+            row.cancelBtn._label:SetTextColor(unpack(T.COLORS.negative))
             row.cancelBtn:Hide()
 
             return row
@@ -390,7 +364,6 @@ local function Init()
 
             local myName = GF.Utils:GetPlayerFullName()
 
-            -- Accept: open orders, player has crafter role
             if order.status == GF.ORDER_STATUS.OPEN and GF.Roles:HasRole(myName, GF.ROLES.CRAFTER) then
                 row.acceptBtn:Show()
                 row.acceptBtn:SetScript("OnClick", function()
@@ -402,7 +375,6 @@ local function Init()
                 row.acceptBtn:Hide()
             end
 
-            -- Complete: accepted orders where you're the crafter
             if order.status == GF.ORDER_STATUS.ACCEPTED and order.crafter == myName then
                 row.completeBtn:Show()
                 row.completeBtn:SetScript("OnClick", function()
@@ -414,7 +386,6 @@ local function Init()
                 row.completeBtn:Hide()
             end
 
-            -- Cancel: open/accepted, requester or officer
             if (order.status == GF.ORDER_STATUS.OPEN or order.status == GF.ORDER_STATUS.ACCEPTED)
                 and (order.requester == myName or GF.Roles:IsAddonOfficer()) then
                 row.cancelBtn:Show()
@@ -430,48 +401,36 @@ local function Init()
     )
     parent._list = list
 
-    -- Bottom action bar
-    local actionBar = CreateFrame("Frame", nil, parent)
-    actionBar:SetHeight(50)
-    actionBar:SetPoint("BOTTOMLEFT", 8, 4)
-    actionBar:SetPoint("BOTTOMRIGHT", -8, 4)
+    ---------- Bottom Action Bar ----------
+    local actionBar = T:Card(parent)
+    actionBar:SetHeight(42)
+    actionBar:SetPoint("BOTTOMLEFT", PAD, PAD)
+    actionBar:SetPoint("BOTTOMRIGHT", -PAD, PAD)
 
-    -- Refresh button
-    local refreshBtn = CreateFrame("Button", nil, actionBar, "UIPanelButtonTemplate")
-    refreshBtn:SetSize(80, 26)
-    refreshBtn:SetPoint("LEFT", 0, 0)
-    refreshBtn:SetText("Refresh")
+    local refreshBtn = T:Button(actionBar, "Refresh", 80, 26)
+    refreshBtn:SetPoint("LEFT", 8, 0)
     refreshBtn:SetScript("OnClick", function() CB:Refresh() end)
 
-    -- Post Order button
-    local postBtn = CreateFrame("Button", nil, actionBar, "UIPanelButtonTemplate")
-    postBtn:SetSize(100, 26)
+    local postBtn = T:ActionButton(actionBar, "Post Order", 110, 26)
     postBtn:SetPoint("LEFT", refreshBtn, "RIGHT", 8, 0)
-    postBtn:SetText("Post Order")
 
-    -- === Order Creation Overlay ===
-    local overlay = CreateFrame("Frame", nil, parent, "BackdropTemplate")
+    ---------- Order Creation Overlay ----------
+    local overlay = T:Card(parent)
     overlay:SetAllPoints(listFrame)
-    overlay:SetBackdrop({
-        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-        tile = true, tileSize = 16, edgeSize = 12,
-        insets = { left = 3, right = 3, top = 3, bottom = 3 },
-    })
-    overlay:SetBackdropColor(0.08, 0.08, 0.12, 0.98)
+    overlay:SetBackdropColor(0.06, 0.07, 0.11, 0.98)
     overlay:SetFrameLevel(parent:GetFrameLevel() + 10)
     overlay:Hide()
     parent._orderOverlay = overlay
 
-    -- Title bar with icon
+    -- Title
     local overlayTitleIcon = overlay:CreateTexture(nil, "ARTWORK")
-    overlayTitleIcon:SetSize(20, 20)
-    overlayTitleIcon:SetPoint("TOPLEFT", 10, -8)
+    overlayTitleIcon:SetSize(18, 18)
+    overlayTitleIcon:SetPoint("TOPLEFT", 12, -10)
     overlayTitleIcon:SetTexture("Interface\\Icons\\INV_Misc_Note_01")
 
-    local overlayTitle = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+    local overlayTitle = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     overlayTitle:SetPoint("LEFT", overlayTitleIcon, "RIGHT", 6, 0)
-    overlayTitle:SetText("|cFF33AAFFPost Crafting Order|r")
+    overlayTitle:SetText("|cFFFFCC00Post Crafting Order|r")
 
     local overlaySubtitle = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     overlaySubtitle:SetPoint("TOPLEFT", 12, -32)
@@ -479,42 +438,22 @@ local function Init()
     overlaySubtitle:SetText("|cFF888888Search for an item, pick who supplies mats, and submit.|r")
     overlaySubtitle:SetJustifyH("LEFT")
 
-    -- Divider
-    local div1 = overlay:CreateTexture(nil, "ARTWORK")
-    div1:SetHeight(1)
-    div1:SetPoint("TOPLEFT", 8, -46)
-    div1:SetPoint("RIGHT", -8, 0)
-    div1:SetColorTexture(0.2, 0.3, 0.5, 0.5)
+    T:Divider(overlay, -46)
 
     -- Section 1: Item Search
-    local searchIcon = overlay:CreateTexture(nil, "ARTWORK")
-    searchIcon:SetSize(14, 14)
-    searchIcon:SetPoint("TOPLEFT", 12, -52)
-    searchIcon:SetTexture("Interface\\Common\\UI-Searchbox-Icon")
-
     local searchLabel = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    searchLabel:SetPoint("LEFT", searchIcon, "RIGHT", 4, 0)
-    searchLabel:SetText("Item to Craft")
-    searchLabel:SetTextColor(1, 0.82, 0)
+    searchLabel:SetPoint("TOPLEFT", 12, -54)
+    searchLabel:SetText("|cFFFFCC00Item to Craft|r")
 
-    local searchBox = CreateFrame("EditBox", nil, overlay, "InputBoxTemplate")
-    searchBox:SetSize(280, 22)
-    searchBox:SetPoint("TOPLEFT", 12, -70)
-    searchBox:SetAutoFocus(false)
-    searchBox:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
+    local searchBox = T:EditBox(overlay, 280, 22)
+    searchBox:SetPoint("TOPLEFT", 12, -72)
 
     -- Selected item display
-    local selectedFrame = CreateFrame("Frame", nil, overlay, "BackdropTemplate")
-    selectedFrame:SetPoint("TOPLEFT", 12, -98)
+    local selectedFrame = T:Card(overlay)
+    selectedFrame:SetPoint("TOPLEFT", 12, -100)
     selectedFrame:SetPoint("RIGHT", overlay, "RIGHT", -12, 0)
     selectedFrame:SetHeight(40)
-    selectedFrame:SetBackdrop({
-        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-        tile = true, tileSize = 16, edgeSize = 8,
-        insets = { left = 2, right = 2, top = 2, bottom = 2 },
-    })
-    selectedFrame:SetBackdropColor(0.1, 0.15, 0.2, 0.8)
+    selectedFrame:SetBackdropColor(0.06, 0.08, 0.12, 0.8)
 
     local selectedIcon = selectedFrame:CreateTexture(nil, "ARTWORK")
     selectedIcon:SetSize(24, 24)
@@ -530,28 +469,21 @@ local function Init()
     overlay._selectedItemID = nil
     overlay._selectedName = nil
 
-    -- "Who can craft this" display
     local crafterMatchText = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     crafterMatchText:SetPoint("TOPLEFT", selectedFrame, "BOTTOMLEFT", 0, -4)
     crafterMatchText:SetPoint("RIGHT", overlay, "RIGHT", -12, 0)
     crafterMatchText:SetJustifyH("LEFT")
     crafterMatchText:SetWordWrap(true)
-    crafterMatchText:SetTextColor(0.6, 0.6, 0.6)
+    crafterMatchText:SetTextColor(unpack(T.COLORS.textDim))
     crafterMatchText:SetText("")
     overlay._crafterMatchText = crafterMatchText
 
     -- Autocomplete dropdown
-    local dropdown = CreateFrame("Frame", nil, overlay, "BackdropTemplate")
-    dropdown:SetPoint("TOPLEFT", searchBox, "BOTTOMLEFT", -4, -2)
+    local dropdown = T:Card(overlay)
+    dropdown:SetPoint("TOPLEFT", searchBox, "BOTTOMLEFT", -2, -2)
     dropdown:SetPoint("RIGHT", overlay, "RIGHT", -12, 0)
     dropdown:SetHeight(160)
-    dropdown:SetBackdrop({
-        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-        tile = true, tileSize = 16, edgeSize = 10,
-        insets = { left = 3, right = 3, top = 3, bottom = 3 },
-    })
-    dropdown:SetBackdropColor(0.05, 0.05, 0.1, 0.95)
+    dropdown:SetBackdropColor(0.04, 0.05, 0.08, 0.98)
     dropdown:SetFrameLevel(overlay:GetFrameLevel() + 5)
     dropdown:Hide()
 
@@ -566,7 +498,7 @@ local function Init()
 
         local hl = row:CreateTexture(nil, "HIGHLIGHT")
         hl:SetAllPoints()
-        hl:SetColorTexture(0.2, 0.4, 0.6, 0.4)
+        hl:SetColorTexture(unpack(T.COLORS.rowHover))
 
         row.icon = row:CreateTexture(nil, "ARTWORK")
         row.icon:SetSize(16, 16)
@@ -581,7 +513,6 @@ local function Init()
         dropdownRows[i] = row
     end
 
-    -- Search function: scan cached items by name
     local function DoSearch(query)
         if not query or #query < 2 then
             dropdown:Hide()
@@ -591,14 +522,11 @@ local function Init()
         query = query:lower()
         local results = {}
 
-        -- Search common crafted item ID ranges (scan cached items)
-        -- WoW caches items you've seen; GetItemInfo returns nil for uncached
-        -- We scan a range of IDs known to contain TWW/Midnight craftable items
         local scanRanges = {
-            {190000, 200000},  -- Dragonflight crafts
-            {210000, 215000},  -- TWW S1
-            {220000, 232000},  -- TWW S2-S3
-            {240000, 257000},  -- Midnight
+            {190000, 200000},
+            {210000, 215000},
+            {220000, 232000},
+            {240000, 257000},
         }
 
         for _, range in ipairs(scanRanges) do
@@ -612,7 +540,6 @@ local function Init()
             if #results >= MAX_DROPDOWN_ROWS then break end
         end
 
-        -- Also search items in player bags
         for bag = 0, NUM_BAG_SLOTS + (NUM_REAGENTBAG_SLOTS or 0) do
             local slots = C_Container.GetContainerNumSlots(bag)
             for slot = 1, slots do
@@ -620,7 +547,6 @@ local function Init()
                 if info and info.itemID then
                     local name, _, quality, _, _, _, _, _, _, icon = C_Item.GetItemInfo(info.itemID)
                     if name and name:lower():find(query, 1, true) then
-                        -- Dedupe
                         local found = false
                         for _, r in ipairs(results) do
                             if r.itemID == info.itemID then found = true; break end
@@ -635,10 +561,8 @@ local function Init()
             if #results >= MAX_DROPDOWN_ROWS then break end
         end
 
-        -- Sort by quality descending
         table.sort(results, function(a, b) return a.quality > b.quality end)
 
-        -- Populate dropdown
         for i = 1, MAX_DROPDOWN_ROWS do
             local row = dropdownRows[i]
             local r = results[i]
@@ -650,9 +574,6 @@ local function Init()
                 elseif r.quality >= 2 then colorPrefix = "|cFF1EFF00"
                 end
                 row.text:SetText(colorPrefix .. r.name .. "|r")
-                row._itemID = r.itemID
-                row._itemName = r.name
-                row._itemIcon = r.icon
                 row:SetScript("OnClick", function()
                     overlay._selectedItemID = r.itemID
                     overlay._selectedName = r.name
@@ -662,7 +583,6 @@ local function Init()
                     searchBox:ClearFocus()
                     dropdown:Hide()
 
-                    -- Search for guild crafters who can make this
                     if GF.RecipeScanner and overlay._crafterMatchText then
                         local crafters = GF.RecipeScanner:FindCrafters(r.name)
                         if #crafters > 0 then
@@ -690,61 +610,42 @@ local function Init()
         end
     end
 
-    -- Throttle search to avoid scanning every keystroke
-    local searchTimer = nil
+    local searchTimer2 = nil
     searchBox:SetScript("OnTextChanged", function(self, userInput)
         if not userInput then return end
-        if searchTimer then searchTimer:Cancel() end
-        searchTimer = C_Timer.NewTimer(0.3, function()
+        if searchTimer2 then searchTimer2:Cancel() end
+        searchTimer2 = C_Timer.NewTimer(0.3, function()
             DoSearch(self:GetText())
         end)
     end)
-
     searchBox:SetScript("OnEnterPressed", function(self)
         DoSearch(self:GetText())
     end)
 
-    -- Divider
-    local div2 = overlay:CreateTexture(nil, "ARTWORK")
-    div2:SetHeight(1)
-    div2:SetPoint("TOPLEFT", 8, -148)
-    div2:SetPoint("RIGHT", -8, 0)
-    div2:SetColorTexture(0.2, 0.3, 0.5, 0.5)
+    T:Divider(overlay, -148)
 
     -- Section 2: Supply Mode
-    local supplyIcon = overlay:CreateTexture(nil, "ARTWORK")
-    supplyIcon:SetSize(14, 14)
-    supplyIcon:SetPoint("TOPLEFT", 12, -154)
-    supplyIcon:SetTexture("Interface\\Icons\\INV_Misc_Bag_10_Green")
-
     local supplyLabel = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    supplyLabel:SetPoint("LEFT", supplyIcon, "RIGHT", 4, 0)
-    supplyLabel:SetText("Material Supply")
-    supplyLabel:SetTextColor(1, 0.82, 0)
+    supplyLabel:SetPoint("TOPLEFT", 12, -156)
+    supplyLabel:SetText("|cFFFFCC00Material Supply|r")
 
     overlay._supplyMode = "guild"
 
-    local guildMatBtn = CreateFrame("Button", nil, overlay, "UIPanelButtonTemplate")
-    guildMatBtn:SetSize(130, 26)
-    guildMatBtn:SetPoint("TOPLEFT", 12, -174)
-    guildMatBtn:SetText("Guild Supplies")
+    local guildMatBtn = T:Button(overlay, "Guild Supplies", 130, 26)
+    guildMatBtn:SetPoint("TOPLEFT", 12, -176)
 
-    local reqMatBtn = CreateFrame("Button", nil, overlay, "UIPanelButtonTemplate")
-    reqMatBtn:SetSize(130, 26)
+    local reqMatBtn = T:Button(overlay, "I Supply Mats", 130, 26)
     reqMatBtn:SetPoint("LEFT", guildMatBtn, "RIGHT", 8, 0)
-    reqMatBtn:SetText("I Supply Mats")
 
-    -- Supply mode explanation text
     local supplyExplain = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    supplyExplain:SetPoint("TOPLEFT", 12, -204)
+    supplyExplain:SetPoint("TOPLEFT", 12, -206)
     supplyExplain:SetPoint("RIGHT", -12, 0)
     supplyExplain:SetJustifyH("LEFT")
     supplyExplain:SetWordWrap(true)
     overlay._supplyExplain = supplyExplain
 
-    -- Cost preview
     local costPreview = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    costPreview:SetPoint("TOPLEFT", 12, -224)
+    costPreview:SetPoint("TOPLEFT", 12, -226)
     costPreview:SetPoint("RIGHT", -12, 0)
     costPreview:SetJustifyH("LEFT")
     overlay._costPreview = costPreview
@@ -780,40 +681,24 @@ local function Init()
         UpdateSupplyToggle()
     end)
 
-    -- Divider
-    local div3 = overlay:CreateTexture(nil, "ARTWORK")
-    div3:SetHeight(1)
-    div3:SetPoint("TOPLEFT", 8, -246)
-    div3:SetPoint("RIGHT", -8, 0)
-    div3:SetColorTexture(0.2, 0.3, 0.5, 0.5)
+    T:Divider(overlay, -248)
 
     -- Section 3: Notes
-    local notesIcon = overlay:CreateTexture(nil, "ARTWORK")
-    notesIcon:SetSize(14, 14)
-    notesIcon:SetPoint("TOPLEFT", 12, -252)
-    notesIcon:SetTexture("Interface\\Icons\\INV_Inscription_Scroll")
-
     local notesLabel = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-    notesLabel:SetPoint("LEFT", notesIcon, "RIGHT", 4, 0)
-    notesLabel:SetText("Notes")
-    notesLabel:SetTextColor(1, 0.82, 0)
+    notesLabel:SetPoint("TOPLEFT", 12, -256)
+    notesLabel:SetText("|cFFFFCC00Notes|r")
 
     local notesHint = overlay:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     notesHint:SetPoint("LEFT", notesLabel, "RIGHT", 8, 0)
     notesHint:SetText("|cFF666666(optional — quality, enchant, etc.)|r")
 
-    local notesBox = CreateFrame("EditBox", nil, overlay, "InputBoxTemplate")
-    notesBox:SetSize(280, 22)
-    notesBox:SetPoint("TOPLEFT", 12, -270)
-    notesBox:SetAutoFocus(false)
-    notesBox:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
+    local notesBox = T:EditBox(overlay, 280, 22)
+    notesBox:SetPoint("TOPLEFT", 12, -274)
     overlay._notesBox = notesBox
 
     -- Submit / Cancel
-    local submitBtn = CreateFrame("Button", nil, overlay, "UIPanelButtonTemplate")
-    submitBtn:SetSize(140, 30)
+    local submitBtn = T:ActionButton(overlay, "Submit Order", 140, 28)
     submitBtn:SetPoint("BOTTOMLEFT", 12, 12)
-    submitBtn:SetText("Submit Order")
     submitBtn:SetScript("OnClick", function()
         local itemID = overlay._selectedItemID
         local itemName = overlay._selectedName
@@ -822,7 +707,6 @@ local function Init()
             return
         end
 
-        -- Build mats from the item info if available (simplified — just the item itself)
         local mats = {}
         if itemID then
             mats[#mats + 1] = { itemID = itemID, quantity = 1 }
@@ -833,7 +717,6 @@ local function Init()
             itemName = itemName .. " (" .. notes .. ")"
         end
 
-        -- Show cost confirmation for guild mat orders
         local supplyMode = overlay._supplyMode
         local commission = GF.Settings:GetGuild("craftCommission") or GF.DEFAULT_CRAFT_COMMISSION
 
@@ -864,7 +747,6 @@ local function Init()
 
         if supplyMode == "guild" then
             local commissionText = GF.Utils:FormatMoney(commission)
-            -- Calculate mat cost if we have reagent data
             local matTotal = 0
             for _, m in ipairs(mats) do
                 if m.itemID and GF.TSM then
@@ -889,13 +771,10 @@ local function Init()
         end
     end)
 
-    local cancelFormBtn = CreateFrame("Button", nil, overlay, "UIPanelButtonTemplate")
-    cancelFormBtn:SetSize(100, 30)
+    local cancelFormBtn = T:Button(overlay, "Cancel", 100, 28)
     cancelFormBtn:SetPoint("BOTTOMRIGHT", -12, 12)
-    cancelFormBtn:SetText("Cancel")
     cancelFormBtn:SetScript("OnClick", function() overlay:Hide() end)
 
-    -- Post button toggles overlay
     postBtn:SetScript("OnClick", function()
         if overlay:IsShown() then
             overlay:Hide()
@@ -931,7 +810,6 @@ function CB:Refresh()
     if IsInGuild() then
         orders = GF.OrderBoard:GetOrders()
     else
-        -- Non-guildie: show orders from external guild data
         local guildName = GF.CommunityBridge and GF.CommunityBridge:GetConnectedGuild()
         if guildName then
             local extData = GF.Settings:GetExternalGuildData(guildName)
@@ -941,9 +819,7 @@ function CB:Refresh()
         end
     end
 
-    -- Sort: MY assigned orders first, then open, then others
     table.sort(orders, function(a, b)
-        -- My accepted orders always on top
         local aIsMine = (a.crafter == myName and a.status == GF.ORDER_STATUS.ACCEPTED) and 0 or 1
         local bIsMine = (b.crafter == myName and b.status == GF.ORDER_STATUS.ACCEPTED) and 0 or 1
         if aIsMine ~= bIsMine then return aIsMine < bIsMine end
@@ -962,7 +838,6 @@ function CB:Refresh()
 
     parent._list:SetData(orders)
 
-    -- Counts
     local openCount = #GF.OrderBoard:GetOrders(GF.ORDER_STATUS.OPEN)
     local myOrders = GF.OrderBoard:GetCrafterOrders(myName)
     local myActiveCount = 0
@@ -974,24 +849,21 @@ function CB:Refresh()
 
     if parent._myQueueText then
         if myActiveCount > 0 then
-            parent._myQueueText:SetText("|cFFFFAA00Your queue: " .. myActiveCount .. " order(s) to craft|r")
+            parent._myQueueText:SetText("|cFFFFAA00Your queue: " .. myActiveCount .. " order(s)|r")
         else
             parent._myQueueText:SetText("")
         end
     end
 
-    -- Refresh crafter directory
     self:RefreshCrafterList()
 end
 
---- Refresh the crafter list panel (default view when not searching)
+--- Refresh the crafter list panel
 function CB:RefreshCrafterList()
     local parent = GF.UI.MainFrame:GetContentFrame("crafting")
     if not parent or not parent._crafterList then return end
 
     local data = {}
-
-    -- Determine which guild data source to use
     local extGuildName = not IsInGuild() and GF.CommunityBridge and GF.CommunityBridge:GetConnectedGuild() or nil
 
     if GF.RecipeScanner then
@@ -1012,7 +884,6 @@ function CB:RefreshCrafterList()
         end
     end
 
-    -- Fallback: role-based crafters without recipe data (guild members only)
     if #data == 0 and IsInGuild() then
         local crafters = GF.Roles:GetMembersWithRole(GF.ROLES.CRAFTER)
         for _, name in ipairs(crafters) do
@@ -1041,4 +912,3 @@ function CB:RefreshCrafterList()
 
     parent._crafterList:SetData(data)
 end
-

@@ -137,17 +137,107 @@ function T:StripeRow(row, index)
     end
 end
 
---- Create a styled action button (larger, more padded)
+--- Create a flat themed button (no WoW chrome)
+---@param parent Frame
+---@param text string
+---@param width number|nil
+---@param height number|nil
+---@return Button
+function T:Button(parent, text, width, height)
+    local btn = CreateFrame("Button", nil, parent, "BackdropTemplate")
+    btn:SetSize(width or 120, height or 24)
+    btn:SetBackdrop(self.CARD_BACKDROP)
+    btn:SetBackdropColor(0.14, 0.18, 0.28, 0.9)
+    btn:SetBackdropBorderColor(0.2, 0.35, 0.55, 0.7)
+
+    local label = btn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    label:SetPoint("CENTER")
+    label:SetText(text)
+    label:SetTextColor(0.9, 0.9, 0.9)
+    btn._label = label
+
+    btn:SetScript("OnEnter", function(self)
+        self:SetBackdropColor(0.2, 0.3, 0.45, 0.95)
+        self:SetBackdropBorderColor(0.3, 0.5, 0.8, 0.9)
+    end)
+    btn:SetScript("OnLeave", function(self)
+        if self._disabled then
+            self:SetBackdropColor(0.08, 0.09, 0.12, 0.6)
+        else
+            self:SetBackdropColor(0.14, 0.18, 0.28, 0.9)
+        end
+        self:SetBackdropBorderColor(0.2, 0.35, 0.55, 0.7)
+    end)
+    btn:SetScript("OnMouseDown", function(self)
+        if not self._disabled then
+            self:SetBackdropColor(0.1, 0.15, 0.25, 1)
+        end
+    end)
+    btn:SetScript("OnMouseUp", function(self)
+        if not self._disabled then
+            self:SetBackdropColor(0.2, 0.3, 0.45, 0.95)
+        end
+    end)
+
+    -- Override SetText
+    function btn:SetText(t)
+        self._label:SetText(t)
+    end
+    function btn:GetFontString()
+        return self._label
+    end
+    function btn:Disable()
+        self._disabled = true
+        self:SetBackdropColor(0.08, 0.09, 0.12, 0.6)
+        self._label:SetTextColor(0.4, 0.4, 0.4)
+        self:EnableMouse(false)
+    end
+    function btn:Enable()
+        self._disabled = false
+        self:SetBackdropColor(0.14, 0.18, 0.28, 0.9)
+        self._label:SetTextColor(0.9, 0.9, 0.9)
+        self:EnableMouse(true)
+    end
+
+    return btn
+end
+
+--- Create a styled action button (alias for Button with accent color)
 ---@param parent Frame
 ---@param text string
 ---@param width number|nil
 ---@param height number|nil
 ---@return Button
 function T:ActionButton(parent, text, width, height)
-    local btn = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-    btn:SetSize(width or 120, height or 24)
-    btn:SetText(text)
+    local btn = self:Button(parent, text, width, height)
+    btn:SetBackdropColor(0.12, 0.22, 0.38, 0.9)
+    btn:SetBackdropBorderColor(0.2, 0.45, 0.7, 0.8)
+    btn._label:SetTextColor(1, 0.85, 0.3)
     return btn
+end
+
+--- Create a themed edit box (no WoW InputBoxTemplate)
+---@param parent Frame
+---@param width number|nil
+---@param height number|nil
+---@return EditBox
+function T:EditBox(parent, width, height)
+    local box = CreateFrame("EditBox", nil, parent, "BackdropTemplate")
+    box:SetSize(width or 200, height or 22)
+    box:SetBackdrop(self.CARD_BACKDROP)
+    box:SetBackdropColor(0.04, 0.05, 0.08, 0.9)
+    box:SetBackdropBorderColor(0.15, 0.22, 0.35, 0.6)
+    box:SetFontObject("GameFontHighlightSmall")
+    box:SetTextInsets(6, 6, 0, 0)
+    box:SetAutoFocus(false)
+    box:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
+    box:SetScript("OnEditFocusGained", function(self)
+        self:SetBackdropBorderColor(0.3, 0.5, 0.8, 0.9)
+    end)
+    box:SetScript("OnEditFocusLost", function(self)
+        self:SetBackdropBorderColor(0.15, 0.22, 0.35, 0.6)
+    end)
+    return box
 end
 
 --- Muted hint text

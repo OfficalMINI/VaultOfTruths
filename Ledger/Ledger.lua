@@ -165,10 +165,11 @@ function Ledger:ProcessBankTransaction(transaction)
     end
 
     -- Create item trail for deposits/withdrawals
+    local trailID = nil
     if GF.ItemTrail then
         local totalVal = unitValue * quantity
         if action == GF.ACTIONS.DEPOSIT then
-            GF.ItemTrail:OnDeposit(player, transaction.itemID, transaction.itemLink, quantity, totalVal)
+            trailID = GF.ItemTrail:OnDeposit(player, transaction.itemID, transaction.itemLink, quantity, totalVal)
         elseif action == GF.ACTIONS.WITHDRAW then
             GF.ItemTrail:OnWithdraw(player, transaction.itemID, quantity, totalVal)
         end
@@ -185,7 +186,7 @@ function Ledger:ProcessBankTransaction(transaction)
 
     local totalValue = unitValue * quantity
 
-    self:AddEntry(action, player, items, totalValue, transaction.itemLink)
+    self:AddEntry(action, player, items, totalValue, transaction.itemLink, nil, trailID)
 end
 
 --- Update a member's running contribution total
@@ -198,11 +199,16 @@ function Ledger:UpdateContribution(player, amount)
     if not guildData.payouts[player] then
         guildData.payouts[player] = {
             totalContributed = 0,
-            totalPaidOut = 0,
-            currentBalance = 0,
+            contributorEarnings = 0,
             crafterEarnings = 0,
             auctioneerEarnings = 0,
+            totalPaidOut = 0,
+            currentBalance = 0,
         }
+    end
+    -- Backfill missing fields for records created before contributorEarnings existed
+    if not guildData.payouts[player].contributorEarnings then
+        guildData.payouts[player].contributorEarnings = 0
     end
 
     local record = guildData.payouts[player]
@@ -344,13 +350,11 @@ function Ledger:CalculateProfitDistribution(saleAmount, matCost, ahCut, crafterN
     if guildTotal > 0 and contributorPool > 0 then
         for playerName, record in pairs(guildData.payouts) do
             if record.totalContributed > 0 then
-                -- Only PVPers and Both get contributor share
-                if GF.Roles:HasRole(playerName, GF.ROLES.PVPER) then
-                    local share = record.totalContributed / guildTotal
-                    local payout = math.floor(contributorPool * share)
-                    if payout > 0 then
-                        contributorPayouts[playerName] = payout
-                    end
+                -- Anyone who deposited gets contributor share proportional to their contributions
+                local share = record.totalContributed / guildTotal
+                local payout = math.floor(contributorPool * share)
+                if payout > 0 then
+                    contributorPayouts[playerName] = payout
                 end
             end
         end

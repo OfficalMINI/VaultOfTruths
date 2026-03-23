@@ -1,0 +1,34 @@
+package-as: VaultOfTruths
+
+enable-nolib-creation: no
+
+externals:
+    Libs/LibStub:
+        url: https://repos.wowace.com/wow/libstub/trunk
+        tag: latest
+    Libs/LibSerialize:
+        url: https://github.com/rossnichols/LibSerialize.git
+        tag: latest
+    Libs/LibDeflate:
+        url: https://github.com/SafeteeWoW/LibDeflate.git
+        tag: latest
+    Libs/LibDataBroker-1.1:
+        url: https://github.com/tekkub/libdatabroker-1-1.git
+        tag: latest
+
+ignore:
+    - README.md
+    - CHANGELOG.md
+    - .github
+    - .vscode
+    - .claude
+    - tests
+    - "*.md"
+    - "*.rockspec"
+
+manual-changelog: CHANGELOG.md
+
+required-dependencies: []
+
+optional-dependencies:
+    - tradeskillmaster
