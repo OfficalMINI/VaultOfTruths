@@ -2,7 +2,7 @@
 ## Title: Vault of Truths
 ## Notes: PVP-focused guild economy — track contributions, manage crafting orders, and share profits. Non-guildies can browse crafters and request crafts.
 ## Author: Harrison
-## Version: 1.0.2
+## Version: 1.0.3
 ## SavedVariables: VaultOfTruthsDB
 ## SavedVariablesPerCharacter: VaultOfTruthsCharDB
 ## OptionalDeps: TradeSkillMaster
