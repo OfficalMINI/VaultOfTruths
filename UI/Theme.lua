@@ -145,6 +145,7 @@ end
 ---@return Button
 function T:Button(parent, text, width, height)
     local btn = CreateFrame("Button", nil, parent, "BackdropTemplate")
+    btn:RegisterForClicks("AnyUp")
     btn:SetSize(width or 120, height or 24)
     btn:SetBackdrop(self.CARD_BACKDROP)
     btn:SetBackdropColor(0.14, 0.18, 0.28, 0.9)
