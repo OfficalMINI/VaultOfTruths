@@ -86,6 +86,12 @@ local function Init()
             row.status = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
             row.status:SetPoint("RIGHT", -4, 0)
 
+            row.distBtn = CreateFrame("Button", nil, row, "UIPanelButtonTemplate")
+            row.distBtn:SetSize(70, 16)
+            row.distBtn:SetPoint("RIGHT", -4, 0)
+            row.distBtn:SetText("Distribute")
+            row.distBtn:GetFontString():SetFont(row.distBtn:GetFontString():GetFont(), 10)
+
             -- Item tooltip on hover
             row:SetScript("OnEnter", function(self)
                 if self._itemID and self._itemID > 0 then
@@ -128,7 +134,20 @@ local function Init()
                 row.profit:SetText("|cFFFF0000" .. GF.Utils:FormatGold(sale.profit) .. "|r")
             end
 
-            row.status:SetText(sale.distributed and "|cFF00FF00Paid|r" or "|cFFFFAA00Undistributed|r")
+            if sale.distributed then
+                row.status:SetText("|cFF00FF00Paid|r")
+                row.status:Show()
+                row.distBtn:Hide()
+            else
+                row.status:SetText("")
+                row.status:Hide()
+                row.distBtn:Show()
+                row.distBtn:SetScript("OnClick", function()
+                    GF.SalesLedger:DistributeProfit(sale.id)
+                    AHP:Refresh()
+                    GF.ChatNotify:Success("Distributed profit for " .. (sale.itemName or "sale"))
+                end)
+            end
         end
     )
     parent._salesList = list
