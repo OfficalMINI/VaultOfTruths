@@ -317,7 +317,7 @@ function IT:DetectAHListing()
         local diff = oldCount - newCount
         if diff > 0 then
             -- Only track if this item has a guild trail (came from guild bank)
-            local trailID = self:FindCraftedTrail(itemID) or self:FindActiveTrail(itemID)
+            local trailID = self:FindActiveTrail(itemID) or self:FindCraftedTrail(itemID)
             if trailID then
                 local value = GF.TSM and GF.TSM:GetBestPrice(itemID) or 0
                 self:OnAHList(player, itemID, diff, value * diff)
@@ -452,7 +452,8 @@ end
 ---@param quantity number
 ---@param listPrice number
 function IT:OnAHList(player, itemID, quantity, listPrice)
-    local trailID = self:FindCraftedTrail(itemID) or self:FindActiveTrail(itemID)
+    -- Prefer active trails (raw deposits) over crafted — FIFO across both
+    local trailID = self:FindActiveTrail(itemID) or self:FindCraftedTrail(itemID)
     if trailID then
         self:LogEvent(GF.ACTIONS.AH_LIST, player, itemID, nil, quantity, listPrice, trailID,
             "Listed on AH for " .. GF.Utils:FormatMoney(listPrice))

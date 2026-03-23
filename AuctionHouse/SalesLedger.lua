@@ -55,8 +55,8 @@ function SL:RecordSale(itemID, quantity, salePrice, ahCut, sourceOrderID, crafte
 
     -- Check 1: has an item trail (was deposited/withdrawn through guild bank)
     if GF.ItemTrail then
-        local trailID = GF.ItemTrail:FindCraftedTrail(itemID)
-            or GF.ItemTrail:FindActiveTrail(itemID)
+        local trailID = GF.ItemTrail:FindActiveTrail(itemID)
+            or GF.ItemTrail:FindCraftedTrail(itemID)
         if trailID then isGuildItem = true end
     end
 
@@ -223,7 +223,7 @@ function SL:RecordSale(itemID, quantity, salePrice, ahCut, sourceOrderID, crafte
                     end
                 end
                 -- Only attribute as crafted if the trail has a CRAFT_DEPOSIT event
-                if trail.craftedBy and trail.status == "crafted" or craftedTrailID then
+                if trail.craftedBy and (trail.status == "crafted" or trail.status == "listed" or trail.status == "sold") then
                     wasCrafted = true
                     if not crafterShort then
                         crafterShort = trail.craftedBy:match("^(.+)-") or trail.craftedBy
