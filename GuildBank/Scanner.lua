@@ -341,13 +341,23 @@ function Scanner:CheckForDeposits()
         end
     end
 
-    -- Accumulate deposits for session summary (shown on bank close)
-    -- Ledger entries are created by TransactionLog -> ProcessBankTransaction
-    -- (single source of truth, avoids double-recording)
+    -- Create ledger entries and accumulate for session summary
     for itemID, info in pairs(deposited) do
         local value, source = GF.TSM:GetBestPrice(itemID)
         local unitValue = value or 0
         local totalValue = unitValue * info.count
+
+        -- Fire bank transaction event so Ledger records the deposit
+        -- (Ledger:AddEntry has 120s dedup to prevent double-recording with TransactionLog)
+        GF.Events:Fire("GF_BANK_TRANSACTION", {
+            tabIndex = 1,
+            type = "deposit",
+            player = playerName,
+            itemID = itemID,
+            itemLink = info.link,
+            quantity = info.count,
+            timestamp = time(),
+        })
 
         if not sessionDeposits[itemID] then
             sessionDeposits[itemID] = { count = 0, value = 0, link = info.link }
