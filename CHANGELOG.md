@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.1.0
+- Restyle all UI panels to custom theme — no default WoW chrome remaining
+- Fix T:Button not responding to clicks (missing RegisterForClicks)
+- Fix crafting item search causing massive lag (was scanning 67k item IDs)
+- Fix "I Supply Mats" mode not showing fee confirmation
+- Auto-size confirm dialog based on content
+- Add CurseForge automatic packaging via BigWigs packager
+- Add GitHub Actions release workflow (tag to release)
+
+## 1.0.13
+- Add CurseForge project ID for automatic upload
+- Remove invalid dependency slug
+
+## 1.0.12
+- Add X-Curse-Project-ID to TOC
+
+## 1.0.11
+- Fix GitHub release permissions (contents: write)
+- Exclude dev files from release package
+
+## 1.0.10
+- Add .pkgmeta, GitHub Actions workflow, CHANGELOG.md
+- Use @project-version@ tokens for packager
+
 ## 1.0.9
 - Add per-sale Distribute button on AH panel
 - Fix Distribute button click handling
