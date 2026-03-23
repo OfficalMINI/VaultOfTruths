@@ -181,3 +181,4 @@ function Utils:IsInVoTGuild()
     local guildName = GetGuildInfo("player")
     return guildName == "Vault of Truths"
 end
+-- test
