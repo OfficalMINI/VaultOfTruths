@@ -294,14 +294,28 @@ local function Init()
     )
     parent._debtList = debtList
 
-    -- Debt column headers
-    local debtHeaders = debtListFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    debtHeaders:SetPoint("BOTTOMLEFT", debtListFrame, "TOPLEFT", 4, 2)
-    debtHeaders:SetText("|cFF888888Name              Withdrawn     Deposited       Net|r")
+    -- Debt column headers (inside the list frame, above rows)
+    local debtHeaderRow = CreateFrame("Frame", nil, parent)
+    debtHeaderRow:SetHeight(14)
+    debtHeaderRow:SetPoint("BOTTOMLEFT", debtListFrame, "TOPLEFT", 0, 2)
+    debtHeaderRow:SetPoint("BOTTOMRIGHT", debtListFrame, "TOPRIGHT", 0, 2)
 
-    -- Overdue allocations count
+    local colName = debtHeaderRow:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    colName:SetPoint("LEFT", 4, 0)
+    colName:SetText("|cFF888888Name|r")
+    local colDebt = debtHeaderRow:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    colDebt:SetPoint("LEFT", 108, 0)
+    colDebt:SetText("|cFF888888Withdrawn|r")
+    local colCredit = debtHeaderRow:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    colCredit:SetPoint("LEFT", 192, 0)
+    colCredit:SetText("|cFF888888Deposited|r")
+    local colNet = debtHeaderRow:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    colNet:SetPoint("LEFT", 276, 0)
+    colNet:SetText("|cFF888888Net|r")
+
+    -- Overdue allocations count (right of section header)
     local overdueText = parent:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    overdueText:SetPoint("TOPRIGHT", debtListFrame, "TOPRIGHT", 0, 14)
+    overdueText:SetPoint("BOTTOMRIGHT", debtHeaderRow, "TOPRIGHT", 0, 4)
     parent._overdueText = overdueText
 
     -- ===== BOTTOM ROW: 3 blocks side-by-side =====
