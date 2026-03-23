@@ -86,11 +86,9 @@ local function Init()
             row.status = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
             row.status:SetPoint("RIGHT", -4, 0)
 
-            row.distBtn = CreateFrame("Button", nil, row, "UIPanelButtonTemplate")
-            row.distBtn:SetSize(70, 16)
+            row.distBtn = T:Button(row, "Distribute", 76, 18)
             row.distBtn:SetPoint("RIGHT", -4, 0)
-            row.distBtn:SetText("Distribute")
-            row.distBtn:GetFontString():SetFont(row.distBtn:GetFontString():GetFont(), 10)
+            row.distBtn:SetFrameLevel(row:GetFrameLevel() + 5)
 
             -- Item tooltip on hover
             row:SetScript("OnEnter", function(self)
