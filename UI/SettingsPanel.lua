@@ -207,15 +207,11 @@ local function Init()
         local val = guildCard:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
         val:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -68, ry)
 
-        local minus = CreateFrame("Button", nil, guildCard, "UIPanelButtonTemplate")
-        minus:SetSize(22, 18)
+        local minus = T:Button(guildCard, "-", 22, 18)
         minus:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -42, ry + 2)
-        minus:SetText("-")
 
-        local plus = CreateFrame("Button", nil, guildCard, "UIPanelButtonTemplate")
-        plus:SetSize(22, 18)
+        local plus = T:Button(guildCard, "+", 22, 18)
         plus:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -CARD_PAD, ry + 2)
-        plus:SetText("+")
 
         parent._splitControls[splitKeys[i]] = { val = val, minus = minus, plus = plus }
     end
@@ -234,15 +230,11 @@ local function Init()
     parent._feeVal = guildCard:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
     parent._feeVal:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -68, secY)
 
-    parent._feeMinus = CreateFrame("Button", nil, guildCard, "UIPanelButtonTemplate")
-    parent._feeMinus:SetSize(22, 18)
+    parent._feeMinus = T:Button(guildCard, "-", 22, 18)
     parent._feeMinus:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -42, secY + 2)
-    parent._feeMinus:SetText("-")
 
-    parent._feePlus = CreateFrame("Button", nil, guildCard, "UIPanelButtonTemplate")
-    parent._feePlus:SetSize(22, 18)
+    parent._feePlus = T:Button(guildCard, "+", 22, 18)
     parent._feePlus:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -CARD_PAD, secY + 2)
-    parent._feePlus:SetText("+")
 
     secY = secY - CONTROL_ROW_H - 4
 
@@ -257,12 +249,9 @@ local function Init()
 
     secY = secY - 18
 
-    local tsmBox = CreateFrame("EditBox", nil, guildCard, "InputBoxTemplate")
-    tsmBox:SetSize(0, 20)
+    local tsmBox = T:EditBox(guildCard, 0, 20)
     tsmBox:SetPoint("TOPLEFT", CARD_PAD + 2, secY)
     tsmBox:SetPoint("RIGHT", guildCard, "RIGHT", -CARD_PAD - 2, 0)
-    tsmBox:SetAutoFocus(false)
-    tsmBox:SetScript("OnEscapePressed", function(self) self:ClearFocus() end)
     tsmBox:SetScript("OnEnterPressed", function(self)
         local text = self:GetText()
         if text and text ~= "" then
@@ -302,15 +291,11 @@ local function Init()
     periodLbl:SetText("Tracking Period:")
     periodLbl:SetTextColor(0.7, 0.7, 0.7)
 
-    parent._weeklyBtn = CreateFrame("Button", nil, guildCard, "UIPanelButtonTemplate")
-    parent._weeklyBtn:SetSize(65, 20)
+    parent._weeklyBtn = T:Button(guildCard, "Weekly", 65, 20)
     parent._weeklyBtn:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -76, secY + 1)
-    parent._weeklyBtn:SetText("Weekly")
 
-    parent._monthlyBtn = CreateFrame("Button", nil, guildCard, "UIPanelButtonTemplate")
-    parent._monthlyBtn:SetSize(65, 20)
+    parent._monthlyBtn = T:Button(guildCard, "Monthly", 65, 20)
     parent._monthlyBtn:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -CARD_PAD, secY + 1)
-    parent._monthlyBtn:SetText("Monthly")
 
     secY = secY - CONTROL_ROW_H - 4
 
@@ -323,10 +308,8 @@ local function Init()
     lockLbl:SetText("System:")
     lockLbl:SetTextColor(0.7, 0.7, 0.7)
 
-    parent._lockBtn = CreateFrame("Button", nil, guildCard, "UIPanelButtonTemplate")
-    parent._lockBtn:SetSize(90, 20)
+    parent._lockBtn = T:Button(guildCard, "Toggle Lock", 90, 20)
     parent._lockBtn:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -46, secY + 1)
-    parent._lockBtn:SetText("Toggle Lock")
 
     parent._lockStatus = guildCard:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     parent._lockStatus:SetPoint("TOPRIGHT", guildCard, "TOPRIGHT", -CARD_PAD, secY)

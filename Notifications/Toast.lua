@@ -25,16 +25,10 @@ end
 local function EnsureFrame()
     if toastFrame then return end
 
-    toastFrame = CreateFrame("Frame", "VaultOfTruthsToast", UIParent, "BackdropTemplate")
+    toastFrame = GF.UI.Theme:Card(UIParent)
     toastFrame:SetSize(320, 72)
     toastFrame:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -20, -100)
     toastFrame:SetFrameStrata("DIALOG")
-    toastFrame:SetBackdrop({
-        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-        tile = true, tileSize = 16, edgeSize = 16,
-        insets = { left = 4, right = 4, top = 4, bottom = 4 },
-    })
     toastFrame:SetBackdropColor(0.1, 0.1, 0.15, 0.95)
     toastFrame:SetBackdropBorderColor(0.3, 0.5, 0.8, 1)
 

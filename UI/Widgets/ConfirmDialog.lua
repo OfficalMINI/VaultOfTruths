@@ -15,19 +15,15 @@ local dialog = nil
 ---@param onConfirm function Called when user clicks Yes
 ---@param onCancel function|nil Called when user clicks No
 function GF.UI.Widgets:ShowConfirmDialog(title, message, onConfirm, onCancel)
+    local T = GF.UI.Theme
+
     if not dialog then
-        dialog = CreateFrame("Frame", "VaultOfTruthsConfirmDialog", UIParent, "BackdropTemplate")
+        dialog = T:Card(UIParent)
         dialog:SetSize(340, 160)
         dialog:SetPoint("CENTER")
         dialog:SetFrameStrata("FULLSCREEN_DIALOG")
-        dialog:SetBackdrop({
-            bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-            edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-            tile = true, tileSize = 16, edgeSize = 16,
-            insets = { left = 4, right = 4, top = 4, bottom = 4 },
-        })
-        dialog:SetBackdropColor(0.1, 0.1, 0.15, 0.95)
-        dialog:SetBackdropBorderColor(0.6, 0.2, 0.2, 1)
+        dialog:SetBackdropColor(0.06, 0.07, 0.11, 0.98)
+        dialog:SetBackdropBorderColor(0.2, 0.35, 0.55, 0.8)
 
         -- Title
         dialog.title = dialog:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
@@ -41,18 +37,15 @@ function GF.UI.Widgets:ShowConfirmDialog(title, message, onConfirm, onCancel)
         dialog.message:SetWordWrap(true)
 
         -- Yes button
-        dialog.yesBtn = CreateFrame("Button", nil, dialog, "UIPanelButtonTemplate")
-        dialog.yesBtn:SetSize(100, 26)
+        dialog.yesBtn = T:ActionButton(dialog, "Confirm", 100, 26)
         dialog.yesBtn:SetPoint("BOTTOMLEFT", 40, 16)
-        dialog.yesBtn:SetText("Confirm")
 
         -- No button
-        dialog.noBtn = CreateFrame("Button", nil, dialog, "UIPanelButtonTemplate")
-        dialog.noBtn:SetSize(100, 26)
+        dialog.noBtn = T:Button(dialog, "Cancel", 100, 26)
         dialog.noBtn:SetPoint("BOTTOMRIGHT", -40, 16)
-        dialog.noBtn:SetText("Cancel")
 
         -- Make it close with Escape
+        dialog:SetFrameRef("name", dialog)
         tinsert(UISpecialFrames, "VaultOfTruthsConfirmDialog")
     end
 

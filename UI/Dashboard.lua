@@ -29,10 +29,8 @@ local function Init()
         "Interface\\Icons\\INV_Misc_Book_09")
 
     -- Guild Info button (opens the detailed info panel)
-    local infoBtn = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-    infoBtn:SetSize(70, 18)
+    local infoBtn = T:Button(parent, "Guild Info", 70, 18)
     infoBtn:SetPoint("TOPRIGHT", parent, "TOPRIGHT", -8, -6)
-    infoBtn:SetText("Guild Info")
     infoBtn:SetScript("OnClick", function()
         if GF.UI.GuildInfoPanel then GF.UI.GuildInfoPanel:Toggle() end
     end)

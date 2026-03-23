@@ -53,7 +53,7 @@ local function Init()
     parent._permText = permText
 
     -- Setup Guide button
-    local setupBtn = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
+    local setupBtn = T:Button(parent, "")
     setupBtn:SetSize(90, 20)
     setupBtn:SetPoint("TOPRIGHT", -4, -6)
     setupBtn:SetText("Setup Guide")
@@ -253,11 +253,8 @@ local function Init()
             row.netText:SetWidth(80)
 
             -- Clear debt button
-            row.clearBtn = CreateFrame("Button", nil, row, "UIPanelButtonTemplate")
-            row.clearBtn:SetSize(50, 16)
+            row.clearBtn = T:Button(row, "Clear", 50, 16)
             row.clearBtn:SetPoint("RIGHT", -4, 0)
-            row.clearBtn:SetText("Clear")
-            row.clearBtn:GetFontString():SetFont(row.clearBtn:GetFontString():GetFont(), 10)
 
             if index % 2 == 0 then
                 local bg = row:CreateTexture(nil, "BACKGROUND")
@@ -367,7 +364,7 @@ local function Init()
     liabilityText:SetTextColor(0.6, 0.6, 0.6)
     parent._liabilityText = liabilityText
 
-    local payoutBtn = CreateFrame("Button", nil, payoutBlock, "UIPanelButtonTemplate")
+    local payoutBtn = T:Button(payoutBlock, "")
     payoutBtn:SetSize(110, 20)
     payoutBtn:SetPoint("BOTTOMLEFT", 4, 4)
     payoutBtn:SetText("Mail Payouts")
@@ -401,7 +398,7 @@ local function Init()
     parent._syncPending   = StatRow(syncBlock, -60, "Pending:")
     parent._syncLastRecv  = StatRow(syncBlock, -74, "Last Sync:")
 
-    local forceSyncBtn = CreateFrame("Button", nil, syncBlock, "UIPanelButtonTemplate")
+    local forceSyncBtn = T:Button(syncBlock, "")
     forceSyncBtn:SetSize(76, 20)
     forceSyncBtn:SetPoint("BOTTOMLEFT", 4, 4)
     forceSyncBtn:SetText("Guild Sync")
@@ -414,11 +411,10 @@ local function Init()
     end)
 
     -- Community Sync button (posts sync data to community chat — requires click)
-    local commSyncBtn = CreateFrame("Button", nil, syncBlock, "UIPanelButtonTemplate")
+    local commSyncBtn = T:Button(syncBlock, "")
     commSyncBtn:SetSize(76, 20)
     commSyncBtn:SetPoint("LEFT", forceSyncBtn, "RIGHT", 4, 0)
     commSyncBtn:SetText("Community")
-    commSyncBtn:RegisterForClicks("LeftButtonUp")
     commSyncBtn:SetScript("OnClick", function()
         if GF.CommunityBridge and GF.CommunityBridge.ShowSyncCopyDialog then
             GF.CommunityBridge:ShowSyncCopyDialog()
@@ -438,12 +434,10 @@ local function Init()
     recruitBlock:SetPoint("BOTTOM", 0, 4)
 
     -- Guild Link
-    local guildLinkBtn = CreateFrame("Button", nil, recruitBlock, "UIPanelButtonTemplate")
+    local guildLinkBtn = T:Button(recruitBlock, "")
     guildLinkBtn:SetSize(120, 22)
     guildLinkBtn:SetPoint("TOPLEFT", 6, -6)
     guildLinkBtn:SetText("Guild Link")
-    guildLinkBtn:RegisterForClicks("LeftButtonUp")
-
     local guildLinkPending = false
     guildLinkBtn:SetScript("OnClick", function()
         if guildLinkPending then return end
@@ -520,12 +514,12 @@ local function Init()
     linkHint:SetJustifyH("LEFT")
 
     -- Invite
-    local inviteBtn = CreateFrame("Button", nil, recruitBlock, "UIPanelButtonTemplate")
+    local inviteBtn = T:Button(recruitBlock, "")
     inviteBtn:SetSize(120, 22)
     inviteBtn:SetPoint("TOPLEFT", linkHint, "BOTTOMLEFT", 0, -8)
     inviteBtn:SetText("Invite Player")
 
-    local inviteBox = CreateFrame("EditBox", nil, recruitBlock, "InputBoxTemplate")
+    local inviteBox = T:EditBox(recruitBlock)
     inviteBox:SetSize(110, 20)
     inviteBox:SetPoint("TOPLEFT", inviteBtn, "BOTTOMLEFT", 0, -4)
     inviteBox:SetAutoFocus(false)
@@ -572,11 +566,9 @@ local function Init()
     configHint:SetJustifyH("LEFT")
 
     -- ===== GUILD OWNER ONLY: RESET DATA =====
-    local resetBtn = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-    resetBtn:SetSize(100, 20)
+    local resetBtn = T:Button(parent, "Reset All Data", 100, 20)
     resetBtn:SetPoint("BOTTOMRIGHT", -8, 8)
-    resetBtn:SetText("Reset All Data")
-    resetBtn:GetFontString():SetTextColor(1, 0.3, 0.3)
+    resetBtn._label:SetTextColor(1, 0.3, 0.3)
     resetBtn:SetScript("OnClick", function()
         if not GF.Utils:IsGuildMaster() then
             GF.ChatNotify:Error("Only the Guild Owner can reset data.")
@@ -606,32 +598,23 @@ end
 
 --- Show typed confirmation input for data reset (guild owner only)
 function OP:ShowResetConfirmInput()
-    local confirmFrame = CreateFrame("Frame", "VoTResetConfirm", UIParent, "BackdropTemplate")
+    local confirmFrame = T:Card(UIParent)
     confirmFrame:SetSize(300, 100)
     confirmFrame:SetPoint("CENTER")
     confirmFrame:SetFrameStrata("DIALOG")
-    confirmFrame:SetBackdrop({
-        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-        tile = true, tileSize = 16, edgeSize = 16,
-        insets = { left = 4, right = 4, top = 4, bottom = 4 },
-    })
-    confirmFrame:SetBackdropColor(0.1, 0.05, 0.05, 0.95)
-    confirmFrame:SetBackdropBorderColor(0.8, 0.2, 0.2, 1)
+    confirmFrame:SetBackdropColor(0.08, 0.04, 0.04, 0.98)
+    confirmFrame:SetBackdropBorderColor(0.6, 0.15, 0.15, 0.9)
 
     local label = confirmFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     label:SetPoint("TOP", 0, -12)
     label:SetText("|cFFFF4444Type RESET to erase all data:|r")
 
-    local input = CreateFrame("EditBox", nil, confirmFrame, "InputBoxTemplate")
-    input:SetSize(150, 22)
+    local input = T:EditBox(confirmFrame, 150, 22)
     input:SetPoint("CENTER", 0, -4)
     input:SetAutoFocus(true)
 
-    local cancelBtn = CreateFrame("Button", nil, confirmFrame, "UIPanelButtonTemplate")
-    cancelBtn:SetSize(80, 22)
+    local cancelBtn = T:Button(confirmFrame, "Cancel", 80, 22)
     cancelBtn:SetPoint("BOTTOMRIGHT", -10, 8)
-    cancelBtn:SetText("Cancel")
     cancelBtn:SetScript("OnClick", function() confirmFrame:Hide() end)
 
     input:SetScript("OnEnterPressed", function(self)

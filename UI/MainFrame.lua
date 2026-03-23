@@ -206,10 +206,8 @@ local function CreateMainFrame()
 
         -- Buttons anchored from bottom of card, going upward
         -- Paste Search button (bottom)
-        local pasteBtn = CreateFrame("Button", nil, ctaCard, "UIPanelButtonTemplate")
-        pasteBtn:SetSize(260, 28)
+        local pasteBtn = T:Button(ctaCard, "Paste Search", 260, 28)
         pasteBtn:SetPoint("BOTTOM", ctaCard, "BOTTOM", 0, 16)
-        pasteBtn:SetText("Paste Search")
         pasteBtn:SetScript("OnClick", function()
             pcall(function()
                 if not CommunitiesFrame or not CommunitiesFrame:IsShown() then
@@ -248,10 +246,8 @@ local function CreateMainFrame()
         end)
 
         -- Find Community button (above paste)
-        local ctaBtn = CreateFrame("Button", nil, ctaCard, "UIPanelButtonTemplate")
-        ctaBtn:SetSize(260, 32)
+        local ctaBtn = T:ActionButton(ctaCard, "Find Community", 260, 32)
         ctaBtn:SetPoint("BOTTOM", pasteBtn, "TOP", 0, 6)
-        ctaBtn:SetText("Find Community")
         ctaBtn:SetScript("OnClick", function()
             if ToggleGuildFrame then
                 ToggleGuildFrame()
