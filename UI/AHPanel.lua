@@ -142,11 +142,16 @@ local function Init()
     local distributeBtn = T:ActionButton(actionBar, "Distribute All", 150, 28)
     distributeBtn:SetPoint("LEFT", INNER, 0)
     distributeBtn:SetScript("OnClick", function()
+        local pendingCount = GF.SalesLedger:GetPendingSalesCount()
+        if pendingCount == 0 then
+            GF.ChatNotify:Warning("No pending sales to distribute.")
+            return
+        end
         GF.UI.Widgets:ShowConfirmDialog(
             "Distribute Profits",
-            "Distribute all pending sale profits to contributors, crafters, and auctioneers?",
+            "Distribute " .. pendingCount .. " pending sale profit(s) to contributors, crafters, and auctioneers?",
             function()
-                GF.SalesLedger:DistributeAllPending()
+                local count, totalProfit = GF.SalesLedger:DistributeAllPending()
                 AHP:Refresh()
             end
         )
