@@ -5,7 +5,7 @@
 local ADDON_NAME, GF = ...
 
 -- Version info
-GF.VERSION = "1.0.4"
+GF.VERSION = "1.0.5"
 GF.ADDON_NAME = ADDON_NAME
 GF.PREFIX = "VaultOfTruths" -- Addon message prefix (max 16 chars)
 GF.CHANNEL_PREFIX = "VoT_" -- Shared channel prefix for non-guildie discovery

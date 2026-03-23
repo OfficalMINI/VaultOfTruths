@@ -221,8 +221,91 @@ local function Init()
     )
     parent._roleList = roleList
 
+    -- ===== MAT DEBTS =====
+    SectionHeader(parent, -244, "Mat Debts")
+
+    local debtListFrame = CreateFrame("Frame", nil, parent)
+    debtListFrame:SetPoint("TOPLEFT", 4, -262)
+    debtListFrame:SetPoint("RIGHT", -4, 0)
+    debtListFrame:SetHeight(88)
+
+    local debtList = GF.UI.Widgets:CreateScrollList(debtListFrame, 22,
+        function(index, contentFrame)
+            local row = CreateFrame("Frame", nil, contentFrame)
+
+            row.nameText = row:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+            row.nameText:SetPoint("LEFT", 4, 0)
+            row.nameText:SetWidth(100)
+            row.nameText:SetJustifyH("LEFT")
+
+            row.debtText = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+            row.debtText:SetPoint("LEFT", 108, 0)
+            row.debtText:SetWidth(80)
+            row.debtText:SetTextColor(1, 0.3, 0.3)
+
+            row.creditText = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+            row.creditText:SetPoint("LEFT", 192, 0)
+            row.creditText:SetWidth(80)
+            row.creditText:SetTextColor(0, 0.9, 0.3)
+
+            row.netText = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+            row.netText:SetPoint("LEFT", 276, 0)
+            row.netText:SetWidth(80)
+
+            -- Clear debt button
+            row.clearBtn = CreateFrame("Button", nil, row, "UIPanelButtonTemplate")
+            row.clearBtn:SetSize(50, 16)
+            row.clearBtn:SetPoint("RIGHT", -4, 0)
+            row.clearBtn:SetText("Clear")
+            row.clearBtn:GetFontString():SetFont(row.clearBtn:GetFontString():GetFont(), 10)
+
+            if index % 2 == 0 then
+                local bg = row:CreateTexture(nil, "BACKGROUND")
+                bg:SetAllPoints()
+                bg:SetColorTexture(1, 1, 1, 0.02)
+            end
+
+            return row
+        end,
+        function(row, entry)
+            row.nameText:SetText(entry.displayName)
+            row.debtText:SetText("-" .. GF.Utils:FormatGold(entry.debt))
+            row.creditText:SetText("+" .. GF.Utils:FormatGold(entry.credits))
+
+            if entry.net < 0 then
+                row.netText:SetText("|cFFFF4444-" .. GF.Utils:FormatGold(-entry.net) .. "|r")
+            else
+                row.netText:SetText("|cFF00FF00+" .. GF.Utils:FormatGold(entry.net) .. "|r")
+            end
+
+            row.clearBtn:SetScript("OnClick", function()
+                GF.UI.Widgets:ShowConfirmDialog(
+                    "Clear Mat Debt",
+                    "Clear all mat debt for |cFFFFFFFF" .. entry.displayName .. "|r?\n" ..
+                    "Net: " .. GF.Utils:FormatGold(math.abs(entry.net)) .. "\n\n" ..
+                    "This marks the debt as settled.",
+                    function()
+                        GF.CrafterTracking:ClearMatDebt(entry.player)
+                        OP:Refresh()
+                    end
+                )
+            end)
+        end
+    )
+    parent._debtList = debtList
+
+    -- Debt column headers
+    local debtHeaders = debtListFrame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    debtHeaders:SetPoint("BOTTOMLEFT", debtListFrame, "TOPLEFT", 4, 2)
+    debtHeaders:SetText("|cFF888888Name              Withdrawn     Deposited       Net|r")
+
+    -- Overdue allocations count
+    local overdueText = parent:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    overdueText:SetPoint("TOPRIGHT", debtListFrame, "TOPRIGHT", 0, 14)
+    parent._overdueText = overdueText
+
     -- ===== BOTTOM ROW: 3 blocks side-by-side =====
-    local bottomY = -244
+    local bottomY = -358
 
     -- --- PAYOUTS (left third) ---
     SectionHeader(parent, bottomY, "Payouts")
@@ -663,6 +746,39 @@ function OP:Refresh()
             end
         end
         parent._syncLastRecv:SetText(latestSeen > 0 and GF.Utils:FormatRelativeTime(latestSeen) or "|cFF666666Never|r")
+    end
+
+    -- Mat debts
+    if parent._debtList and GF.CrafterTracking then
+        local debts = GF.CrafterTracking:GetAllMatDebts()
+        if #debts == 0 then
+            parent._debtList:SetData({
+                { displayName = "No outstanding debts", player = "", debt = 0, credits = 0, net = 0 }
+            })
+        else
+            parent._debtList:SetData(debts)
+        end
+
+        -- Overdue allocation count
+        local overdueCount = 0
+        local guildData = GF.Settings:GetGuildData()
+        if guildData and guildData.matAllocations then
+            local now = GF.Utils:GetTime()
+            for orderID, alloc in pairs(guildData.matAllocations) do
+                if alloc.deadline and now > alloc.deadline then
+                    local order = GF.OrderBoard:GetOrder(orderID)
+                    if order and order.status == GF.ORDER_STATUS.ACCEPTED then
+                        overdueCount = overdueCount + 1
+                    end
+                end
+            end
+        end
+
+        if overdueCount > 0 then
+            parent._overdueText:SetText("|cFFFF4444" .. overdueCount .. " overdue order(s)|r")
+        else
+            parent._overdueText:SetText("|cFF00FF00No overdue|r")
+        end
     end
 
     -- Role management
