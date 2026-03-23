@@ -33,8 +33,3 @@ ignore:
     - "*.rockspec"
 
 manual-changelog: CHANGELOG.md
-
-required-dependencies: []
-
-optional-dependencies:
-    - tradeskillmaster
