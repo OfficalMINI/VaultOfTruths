@@ -128,7 +128,7 @@ local function Init()
                 row.profit:SetText("|cFFFF0000" .. GF.Utils:FormatGold(sale.profit) .. "|r")
             end
 
-            row.status:SetText(sale.distributed and "|cFF888888Distributed|r" or "|cFF00FF00Pending|r")
+            row.status:SetText(sale.distributed and "|cFF00FF00Paid|r" or "|cFFFFAA00Undistributed|r")
         end
     )
     parent._salesList = list
