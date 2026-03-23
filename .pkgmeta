@@ -17,11 +17,17 @@ externals:
         tag: latest
 
 ignore:
-    - README.md
-    - CHANGELOG.md
+    - .gitignore
+    - .gitattributes
     - .github
     - .vscode
     - .claude
+    - .editorconfig
+    - .luacheckrc
+    - README.md
+    - CHANGELOG.md
+    - LICENSE
+    - VERSION
     - tests
     - "*.md"
     - "*.rockspec"
