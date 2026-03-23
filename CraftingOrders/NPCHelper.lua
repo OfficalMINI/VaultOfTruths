@@ -38,15 +38,9 @@ end
 local function EnsureFrame()
     if helperFrame then return end
 
-    helperFrame = CreateFrame("Frame", "VoTCraftQueue", UIParent, "BackdropTemplate")
+    helperFrame = GF.UI.Theme:Card(UIParent)
     helperFrame:SetSize(300, 360)
     helperFrame:SetPoint("TOPLEFT", UIParent, "CENTER", 310, 150)
-    helperFrame:SetBackdrop({
-        bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-        tile = true, tileSize = 16, edgeSize = 12,
-        insets = { left = 3, right = 3, top = 3, bottom = 3 },
-    })
     helperFrame:SetBackdropColor(0.04, 0.06, 0.1, 0.96)
     helperFrame:SetBackdropBorderColor(0.2, 0.5, 0.8, 0.9)
     helperFrame:SetFrameStrata("DIALOG")

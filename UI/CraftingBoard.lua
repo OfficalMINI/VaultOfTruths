@@ -521,44 +521,76 @@ local function Init()
 
         query = query:lower()
         local results = {}
+        local seen = {}
 
-        local scanRanges = {
-            {190000, 200000},
-            {210000, 215000},
-            {220000, 232000},
-            {240000, 257000},
-        }
-
-        for _, range in ipairs(scanRanges) do
-            for id = range[1], range[2], 1 do
-                local name, _, quality, _, _, _, _, _, _, icon = C_Item.GetItemInfo(id)
-                if name and name:lower():find(query, 1, true) then
-                    results[#results + 1] = { itemID = id, name = name, icon = icon, quality = quality or 1 }
-                    if #results >= MAX_DROPDOWN_ROWS then break end
-                end
+        local function TryAdd(itemID)
+            if seen[itemID] or #results >= MAX_DROPDOWN_ROWS then return end
+            local name, _, quality, _, _, _, _, _, _, icon = C_Item.GetItemInfo(itemID)
+            if name and name:lower():find(query, 1, true) then
+                seen[itemID] = true
+                results[#results + 1] = { itemID = itemID, name = name, icon = icon, quality = quality or 1 }
             end
-            if #results >= MAX_DROPDOWN_ROWS then break end
         end
 
+        -- Search player bags
         for bag = 0, NUM_BAG_SLOTS + (NUM_REAGENTBAG_SLOTS or 0) do
             local slots = C_Container.GetContainerNumSlots(bag)
             for slot = 1, slots do
                 local info = C_Container.GetContainerItemInfo(bag, slot)
-                if info and info.itemID then
-                    local name, _, quality, _, _, _, _, _, _, icon = C_Item.GetItemInfo(info.itemID)
-                    if name and name:lower():find(query, 1, true) then
-                        local found = false
-                        for _, r in ipairs(results) do
-                            if r.itemID == info.itemID then found = true; break end
-                        end
-                        if not found then
-                            results[#results + 1] = { itemID = info.itemID, name = name, icon = icon, quality = quality or 1 }
+                if info and info.itemID then TryAdd(info.itemID) end
+            end
+            if #results >= MAX_DROPDOWN_ROWS then break end
+        end
+
+        -- Search guild bank snapshot
+        if #results < MAX_DROPDOWN_ROWS then
+            local guildData = GF.Settings:GetGuildData()
+            if guildData and guildData.bankSnapshots and guildData.bankSnapshots.tabs then
+                for _, tabData in pairs(guildData.bankSnapshots.tabs) do
+                    if tabData.items then
+                        for _, item in pairs(tabData.items) do
+                            if item.itemID then TryAdd(item.itemID) end
                             if #results >= MAX_DROPDOWN_ROWS then break end
                         end
                     end
+                    if #results >= MAX_DROPDOWN_ROWS then break end
                 end
             end
-            if #results >= MAX_DROPDOWN_ROWS then break end
+        end
+
+        -- Search ledger entries
+        if #results < MAX_DROPDOWN_ROWS then
+            local guildData = GF.Settings:GetGuildData()
+            if guildData then
+                for _, entry in ipairs(guildData.ledger.entries) do
+                    if entry.items then
+                        for _, item in ipairs(entry.items) do
+                            if item.itemID then TryAdd(item.itemID) end
+                        end
+                    end
+                    if #results >= MAX_DROPDOWN_ROWS then break end
+                end
+            end
+        end
+
+        -- Search crafter recipes
+        if #results < MAX_DROPDOWN_ROWS and GF.RecipeScanner then
+            local guildData = GF.Settings:GetGuildData()
+            if guildData and guildData.crafterRecipes then
+                for _, crafterData in pairs(guildData.crafterRecipes) do
+                    for _, profData in pairs(crafterData.professions or {}) do
+                        for _, recipe in ipairs(profData.recipes or {}) do
+                            if recipe.outputItemID then TryAdd(recipe.outputItemID) end
+                            if recipe.name and recipe.name:lower():find(query, 1, true) and recipe.recipeID then
+                                TryAdd(recipe.recipeID)
+                            end
+                            if #results >= MAX_DROPDOWN_ROWS then break end
+                        end
+                        if #results >= MAX_DROPDOWN_ROWS then break end
+                    end
+                    if #results >= MAX_DROPDOWN_ROWS then break end
+                end
+            end
         end
 
         table.sort(results, function(a, b) return a.quality > b.quality end)
@@ -767,7 +799,23 @@ local function Init()
                 DoCreateOrder
             )
         else
-            DoCreateOrder()
+            -- Requester supplies mats — show fee-only confirmation
+            local matTotal = 0
+            for _, m in ipairs(mats) do
+                if m.itemID and GF.TSM then
+                    local price = GF.TSM:GetBestPrice(m.itemID) or 0
+                    matTotal = matTotal + (price * (m.quantity or 1))
+                end
+            end
+            local fee = GF.FeeCalculator:Calculate(matTotal)
+            local feePercent = GF.Settings:GetGuild("feePercent") or 10
+            GF.UI.Widgets:ShowConfirmDialog(
+                "Confirm Order — Your Mats",
+                "|cFF00AAFF" .. itemName .. "|r\n\n" ..
+                "|cFFFFD700Crafting fee (" .. feePercent .. "%):|r " .. GF.Utils:FormatMoney(fee) .. "\n\n" ..
+                "|cFF888888You supply the mats directly to the crafter.\nNo guild mat cost charged.|r",
+                DoCreateOrder
+            )
         end
     end)
 

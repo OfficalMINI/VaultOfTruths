@@ -51,15 +51,9 @@ function MP:ShowPayoutButton()
     if #queue == 0 then return end
 
     if not payoutFrame then
-        payoutFrame = CreateFrame("Frame", "VoTPayoutFrame", UIParent, "BackdropTemplate")
+        payoutFrame = GF.UI.Theme:Card(UIParent)
         payoutFrame:SetSize(220, 120)
         payoutFrame:SetPoint("TOPLEFT", UIParent, "CENTER", 280, 50)
-        payoutFrame:SetBackdrop({
-            bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-            edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-            tile = true, tileSize = 16, edgeSize = 12,
-            insets = { left = 3, right = 3, top = 3, bottom = 3 },
-        })
         payoutFrame:SetBackdropColor(0.04, 0.06, 0.1, 0.96)
         payoutFrame:SetBackdropBorderColor(0.2, 0.5, 0.8, 0.9)
         payoutFrame:SetFrameStrata("DIALOG")
@@ -86,16 +80,12 @@ function MP:ShowPayoutButton()
         payoutFrame._info:SetWordWrap(true)
 
         -- Send button
-        payoutFrame._sendBtn = CreateFrame("Button", nil, payoutFrame, "UIPanelButtonTemplate")
-        payoutFrame._sendBtn:SetSize(90, 26)
+        payoutFrame._sendBtn = GF.UI.Theme:ActionButton(payoutFrame, "Send Payout", 90, 26)
         payoutFrame._sendBtn:SetPoint("BOTTOMLEFT", 8, 8)
-        payoutFrame._sendBtn:SetText("Send Payout")
 
         -- Skip button
-        payoutFrame._skipBtn = CreateFrame("Button", nil, payoutFrame, "UIPanelButtonTemplate")
-        payoutFrame._skipBtn:SetSize(60, 26)
+        payoutFrame._skipBtn = GF.UI.Theme:Button(payoutFrame, "Skip", 60, 26)
         payoutFrame._skipBtn:SetPoint("LEFT", payoutFrame._sendBtn, "RIGHT", 4, 0)
-        payoutFrame._skipBtn:SetText("Skip")
 
         -- Close
         local closeBtn = CreateFrame("Button", nil, payoutFrame, "UIPanelCloseButton")

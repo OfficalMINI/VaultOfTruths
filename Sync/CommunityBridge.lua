@@ -553,16 +553,13 @@ function CB:ShowSyncCopyDialog()
         dialog._editBox = editBox
 
         -- Next / Done button
-        local nextBtn = CreateFrame("Button", nil, dialog, "UIPanelButtonTemplate")
-        nextBtn:SetSize(120, 26)
+        local nextBtn = GF.UI.Theme:Button(dialog, "", 120, 26)
         nextBtn:SetPoint("BOTTOMRIGHT", -10, 10)
         dialog._nextBtn = nextBtn
 
         -- Select All button
-        local selectBtn = CreateFrame("Button", nil, dialog, "UIPanelButtonTemplate")
-        selectBtn:SetSize(130, 26)
+        local selectBtn = GF.UI.Theme:Button(dialog, "Select All (Ctrl+C)", 130, 26)
         selectBtn:SetPoint("BOTTOMLEFT", 10, 10)
-        selectBtn:SetText("Select All (Ctrl+C)")
         selectBtn:SetScript("OnClick", function()
             dialog._editBox:SetFocus()
             dialog._editBox:HighlightText()
