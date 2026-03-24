@@ -389,11 +389,21 @@ function SL:DistributeAllPending()
     local count = 0
     local totalProfit = 0
 
-    for _, sale in ipairs(guildData.ahSales) do
-        if not sale.distributed and sale.profit > 0 then
-            self:DistributeProfit(sale.id)
-            count = count + 1
-            totalProfit = totalProfit + sale.profit
+    for i, sale in ipairs(guildData.ahSales) do
+        if not sale.distributed then
+            print("|cFF33AAFF[VoT]|r DistributeAll — sale #" .. i ..
+                " id=" .. tostring(sale.id) ..
+                " profit=" .. tostring(sale.profit) ..
+                " item=" .. tostring(sale.itemName or sale.itemID))
+            if (sale.profit or 0) > 0 then
+                self:DistributeProfit(sale.id)
+                count = count + 1
+                totalProfit = totalProfit + sale.profit
+            else
+                -- Force-mark zero/negative profit sales as distributed
+                sale.distributed = true
+                count = count + 1
+            end
         end
     end
 
