@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.0
+- Fix confirm dialog buttons not clicking (EnableMouse on parent intercepting)
+- Fix nil contributorEarnings crash on old payout records
+- Fix value inflation from deposit-withdraw-redeposit cycles
+- Add /vot redist command to repair broken profit distributions
+- Add in-game "What's New" tab with version history
+- Ledger footer now shows deposits, withdrawals, and sales separately
+- Crafter recipe snapshot exported on commit for non-guildie browsing
+- Withdrawal trails now split across multiple depositors (FIFO)
+
 ## 1.1.4
 - Fix withdrawal trail tracking to split across multiple depositors (FIFO)
 - Stacked guild bank items now properly attribute to each depositor

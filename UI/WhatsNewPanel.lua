@@ -14,6 +14,18 @@ local initialized = false
 -- Each entry: { version, date, changes = { "line1", "line2", ... } }
 local CHANGELOG = {
     {
+        version = "1.2.0",
+        changes = {
+            "Fix confirm dialog buttons not clicking",
+            "Fix nil contributorEarnings crash on old payout records",
+            "Fix value inflation from deposit-withdraw-redeposit cycles",
+            "Add /vot redist to repair broken profit distributions",
+            "Add in-game What's New tab",
+            "Ledger footer shows deposits, withdrawals, and sales separately",
+            "Crafter recipe snapshot exported on commit",
+        },
+    },
+    {
         version = "1.1.4",
         changes = {
             "Fix withdrawal trail tracking to split across multiple depositors (FIFO)",
