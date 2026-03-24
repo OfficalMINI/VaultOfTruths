@@ -230,138 +230,787 @@
               "name": "Ingenuity",
               "pvp": false,
               "recipeID": 1265708,
-              "outputItemID": 244633
+              "outputItemID": 238204
             },
             {
               "name": "Multicraft",
               "pvp": false,
               "recipeID": 1265608,
-              "outputItemID": 244631
+              "outputItemID": 238202
             },
             {
               "name": "Resourcefulness",
               "pvp": false,
               "recipeID": 1265700,
-              "outputItemID": 244637
+              "outputItemID": 238197
             },
             {
               "name": "Skill",
               "pvp": false,
               "recipeID": 1265683,
-              "outputItemID": 244635
+              "outputItemID": 237917
             },
             {
               "name": "Bolt of Linen Cloth",
               "pvp": false,
               "recipeID": 2963,
-              "outputItemID": 244639
+              "outputItemID": 237922
             },
             {
               "name": "Simple Linen Pants",
               "pvp": false,
               "recipeID": 12044,
-              "outputItemID": 244644
+              "outputItemID": 237924
             },
             {
               "name": "Linen Cloak",
               "pvp": false,
               "recipeID": 2387,
-              "outputItemID": 244591
+              "outputItemID": 237921
             },
             {
               "name": "Brown Linen Shirt",
               "pvp": false,
               "recipeID": 3915,
-              "outputItemID": 244594
+              "outputItemID": 237925
             },
             {
               "name": "Linen Bandage",
               "pvp": false,
               "recipeID": 3275,
-              "outputItemID": 244592
+              "outputItemID": 237920
             },
             {
               "name": "Fine Void-Tempered Hide",
               "pvp": false,
               "recipeID": 1225908,
-              "outputItemID": 244593
+              "outputItemID": 237923
             },
             {
               "name": "Void-Tempered Hide",
               "pvp": false,
               "recipeID": 1225902,
-              "outputItemID": 244595
+              "outputItemID": 237919
             },
             {
               "name": "Void-Tempered Leather",
               "pvp": false,
               "recipeID": 1225901,
-              "outputItemID": 244587
+              "outputItemID": 237918
             },
             {
               "name": "Void-Tempered Plating",
               "pvp": false,
               "recipeID": 1225903,
-              "outputItemID": 244585
+              "outputItemID": 237930
             },
             {
               "name": "Void-Tempered Scales",
               "pvp": false,
               "recipeID": 1225897,
-              "outputItemID": 244586
+              "outputItemID": 237929
             },
             {
               "name": "Majestic Eversong Lure",
               "pvp": false,
               "recipeID": 1225943,
-              "outputItemID": 244596
+              "outputItemID": 237928
             },
             {
               "name": "Artisan Skinner's Moxie",
               "pvp": false,
               "recipeID": 1265817,
-              "outputItemID": 244599
+              "outputItemID": 237931
             },
             {
               "name": "Knowledge",
               "pvp": false,
               "recipeID": 1265715,
-              "outputItemID": 244597
+              "outputItemID": 237927
             },
             {
               "name": "Quality",
               "pvp": false,
               "recipeID": 1265712,
-              "outputItemID": 244598
+              "outputItemID": 237926
             },
             {
               "name": "High-Value Beasts",
               "pvp": false,
               "recipeID": 1277733,
-              "outputItemID": 244600
+              "outputItemID": 237932
             },
             {
               "name": "Deftness",
               "pvp": false,
               "recipeID": 1265730,
-              "outputItemID": 244590
+              "outputItemID": 238013
             },
             {
               "name": "Finesse",
               "pvp": false,
               "recipeID": 1265723,
-              "outputItemID": 244588
+              "outputItemID": 237948
             },
             {
               "name": "Perception",
               "pvp": false,
               "recipeID": 1265727,
-              "outputItemID": 244589
+              "outputItemID": 238012
             },
             {
               "name": "Skill",
               "pvp": false,
               "recipeID": 1265719,
+              "outputItemID": 237946
+            },
+            {
+              "name": "Recraft Equipment",
+              "pvp": false,
+              "recipeID": 471041,
+              "outputItemID": 238009
+            },
+            {
+              "name": "Sterling Alloy",
+              "pvp": false,
+              "recipeID": 1230763,
+              "outputItemID": 238011
+            },
+            {
+              "name": "Gloaming Alloy",
+              "pvp": false,
+              "recipeID": 1230762,
+              "outputItemID": 237947
+            },
+            {
+              "name": "Refulgent Copper Ingot",
+              "pvp": false,
+              "recipeID": 1230761,
+              "outputItemID": 238010
+            },
+            {
+              "name": "Blood-Tempered Greaves",
+              "pvp": false,
+              "recipeID": 1229629,
+              "outputItemID": 237372
+            },
+            {
+              "name": "Blood-Tempered Leggings",
+              "pvp": false,
+              "recipeID": 1229624,
+              "outputItemID": 237367
+            },
+            {
+              "name": "Blood-Tempered Pauldrons",
+              "pvp": false,
+              "recipeID": 1229622,
+              "outputItemID": 237370
+            },
+            {
+              "name": "Blood-Tempered Basinet",
+              "pvp": false,
+              "recipeID": 1229625,
+              "outputItemID": 237914
+            },
+            {
+              "name": "Blood-Tempered Gauntlets",
+              "pvp": false,
+              "recipeID": 1229621,
+              "outputItemID": 237916
+            },
+            {
+              "name": "Blood-Tempered Bulwark",
+              "pvp": false,
+              "recipeID": 1229626,
+              "outputItemID": 237912
+            },
+            {
+              "name": "Blood-Tempered Bracers",
+              "pvp": false,
+              "recipeID": 1229623,
+              "outputItemID": 237915
+            },
+            {
+              "name": "Blood-Tempered Greatbelt",
+              "pvp": false,
+              "recipeID": 1229627,
+              "outputItemID": 238209
+            },
+            {
+              "name": "Blood-Tempered Chestplate",
+              "pvp": false,
+              "recipeID": 1229628,
+              "outputItemID": 2862
+            },
+            {
+              "name": "Dawnforged War Mace",
+              "pvp": false,
+              "recipeID": 1229616,
+              "outputItemID": 3239
+            },
+            {
+              "name": "Primalforged Knuckles",
+              "pvp": false,
+              "recipeID": 1229617,
+              "outputItemID": 10421
+            },
+            {
+              "name": "Dawnforged Long Blade",
+              "pvp": false,
+              "recipeID": 1229618,
+              "outputItemID": 2853
+            },
+            {
+              "name": "Dawnforged Splitter",
+              "pvp": false,
+              "recipeID": 1229615
+            },
+            {
+              "name": "Dawnforged Edge",
+              "pvp": false,
+              "recipeID": 1229619
+            },
+            {
+              "name": "Dawnforged Ritual Knife",
+              "pvp": false,
+              "recipeID": 1229620
+            },
+            {
+              "name": "Primalforged Heavy Axe",
+              "pvp": false,
+              "recipeID": 1229614
+            },
+            {
+              "name": "Thalassian Blacksmith's Hammer",
+              "pvp": true,
+              "recipeID": 1229606
+            },
+            {
+              "name": "Thalassian Blacksmith's Toolbox",
+              "pvp": true,
+              "recipeID": 1229611
+            },
+            {
+              "name": "Thalassian Leatherworker's Knife",
+              "pvp": true,
+              "recipeID": 1229607
+            },
+            {
+              "name": "Thalassian Needle Set",
+              "pvp": true,
+              "recipeID": 1229613
+            },
+            {
+              "name": "Thalassian Sickle",
+              "pvp": true,
+              "recipeID": 1229610
+            },
+            {
+              "name": "Thalassian Skinning Knife",
+              "pvp": true,
+              "recipeID": 1229608
+            },
+            {
+              "name": "Thalassian Leatherworker's Toolset",
+              "pvp": true,
+              "recipeID": 1229612
+            },
+            {
+              "name": "Thalassian Pickaxe",
+              "pvp": true,
+              "recipeID": 1229609
+            },
+            {
+              "name": "Refulgent Razorstone",
+              "pvp": false,
+              "recipeID": 1230760
+            },
+            {
+              "name": "Refulgent Weightstone",
+              "pvp": false,
+              "recipeID": 1230759
+            },
+            {
+              "name": "Refulgent Whetstone",
+              "pvp": false,
+              "recipeID": 1230758
+            },
+            {
+              "name": "Thalassian Competitor's Skewer",
+              "pvp": true,
+              "recipeID": 1229632
+            },
+            {
+              "name": "Thalassian Competitor's Sword",
+              "pvp": true,
+              "recipeID": 1229630
+            },
+            {
+              "name": "Thalassian Competitor's Bulwark",
+              "pvp": true,
+              "recipeID": 1229634
+            },
+            {
+              "name": "Thalassian Competitor's Greatsword",
+              "pvp": true,
+              "recipeID": 1229631
+            },
+            {
+              "name": "Refulgent Repair Hammer",
+              "pvp": false,
+              "recipeID": 1230764
+            },
+            {
+              "name": "Artisan Blacksmith's Moxie",
+              "pvp": false,
+              "recipeID": 1265668
+            },
+            {
+              "name": "Concentration",
+              "pvp": false,
+              "recipeID": 1265676
+            },
+            {
+              "name": "Knowledge",
+              "pvp": false,
+              "recipeID": 1265615
+            },
+            {
+              "name": "Quality",
+              "pvp": false,
+              "recipeID": 1265652
+            },
+            {
+              "name": "Sparks",
+              "pvp": false,
+              "recipeID": 1265660
+            },
+            {
+              "name": "Ingenuity",
+              "pvp": false,
+              "recipeID": 1265702
+            },
+            {
+              "name": "Multicraft",
+              "pvp": false,
+              "recipeID": 1265594
+            },
+            {
+              "name": "Skill",
+              "pvp": false,
+              "recipeID": 1265684
+            },
+            {
+              "name": "Resourcefulness",
+              "pvp": false,
+              "recipeID": 1265694
+            },
+            {
+              "name": "Rough Sharpening Stone",
+              "pvp": false,
+              "recipeID": 2660
+            },
+            {
+              "name": "Rough Weightstone",
+              "pvp": false,
+              "recipeID": 3115
+            },
+            {
+              "name": "Rough Copper Vest",
+              "pvp": false,
+              "recipeID": 12260
+            },
+            {
+              "name": "Copper Bracers",
+              "pvp": false,
+              "recipeID": 2663
+            },
+            {
+              "name": "Recraft Equipment",
+              "pvp": false,
+              "recipeID": 471046
+            }
+          ],
+          "count": 110
+        },
+        "Skinning": {
+          "recipes": [
+            {
+              "name": "Fine Void-Tempered Hide",
+              "pvp": false,
+              "recipeID": 1225908,
+              "outputItemID": 238652
+            },
+            {
+              "name": "Void-Tempered Hide",
+              "pvp": false,
+              "recipeID": 1225902,
+              "outputItemID": 238204
+            },
+            {
+              "name": "Void-Tempered Leather",
+              "pvp": false,
+              "recipeID": 1225901,
+              "outputItemID": 238202
+            },
+            {
+              "name": "Void-Tempered Plating",
+              "pvp": false,
+              "recipeID": 1225903,
+              "outputItemID": 238197
+            },
+            {
+              "name": "Void-Tempered Scales",
+              "pvp": false,
+              "recipeID": 1225897,
+              "outputItemID": 237917
+            },
+            {
+              "name": "Majestic Eversong Lure",
+              "pvp": false,
+              "recipeID": 1225943,
+              "outputItemID": 237922
+            },
+            {
+              "name": "Artisan Skinner's Moxie",
+              "pvp": false,
+              "recipeID": 1265817,
+              "outputItemID": 237924
+            },
+            {
+              "name": "Knowledge",
+              "pvp": false,
+              "recipeID": 1265715,
+              "outputItemID": 237921
+            },
+            {
+              "name": "Quality",
+              "pvp": false,
+              "recipeID": 1265712,
+              "outputItemID": 237925
+            },
+            {
+              "name": "High-Value Beasts",
+              "pvp": false,
+              "recipeID": 1277733,
+              "outputItemID": 237920
+            },
+            {
+              "name": "Deftness",
+              "pvp": false,
+              "recipeID": 1265730,
+              "outputItemID": 237923
+            },
+            {
+              "name": "Finesse",
+              "pvp": false,
+              "recipeID": 1265723,
+              "outputItemID": 237919
+            },
+            {
+              "name": "Perception",
+              "pvp": false,
+              "recipeID": 1265727,
+              "outputItemID": 237918
+            },
+            {
+              "name": "Skill",
+              "pvp": false,
+              "recipeID": 1265719,
+              "outputItemID": 237930
+            },
+            {
+              "name": "Recraft Equipment",
+              "pvp": false,
+              "recipeID": 471041,
+              "outputItemID": 237929
+            },
+            {
+              "name": "Sterling Alloy",
+              "pvp": false,
+              "recipeID": 1230763,
+              "outputItemID": 237928
+            },
+            {
+              "name": "Gloaming Alloy",
+              "pvp": false,
+              "recipeID": 1230762,
+              "outputItemID": 237931
+            },
+            {
+              "name": "Refulgent Copper Ingot",
+              "pvp": false,
+              "recipeID": 1230761,
+              "outputItemID": 237927
+            },
+            {
+              "name": "Blood-Tempered Greaves",
+              "pvp": false,
+              "recipeID": 1229629,
+              "outputItemID": 237926
+            },
+            {
+              "name": "Blood-Tempered Leggings",
+              "pvp": false,
+              "recipeID": 1229624,
+              "outputItemID": 237932
+            },
+            {
+              "name": "Blood-Tempered Pauldrons",
+              "pvp": false,
+              "recipeID": 1229622,
+              "outputItemID": 238013
+            },
+            {
+              "name": "Blood-Tempered Basinet",
+              "pvp": false,
+              "recipeID": 1229625,
+              "outputItemID": 237948
+            },
+            {
+              "name": "Blood-Tempered Gauntlets",
+              "pvp": false,
+              "recipeID": 1229621,
+              "outputItemID": 238012
+            },
+            {
+              "name": "Blood-Tempered Bulwark",
+              "pvp": false,
+              "recipeID": 1229626,
+              "outputItemID": 237946
+            },
+            {
+              "name": "Blood-Tempered Bracers",
+              "pvp": false,
+              "recipeID": 1229623,
+              "outputItemID": 238009
+            },
+            {
+              "name": "Blood-Tempered Greatbelt",
+              "pvp": false,
+              "recipeID": 1229627,
+              "outputItemID": 238011
+            },
+            {
+              "name": "Blood-Tempered Chestplate",
+              "pvp": false,
+              "recipeID": 1229628,
+              "outputItemID": 237947
+            },
+            {
+              "name": "Dawnforged War Mace",
+              "pvp": false,
+              "recipeID": 1229616,
+              "outputItemID": 238010
+            },
+            {
+              "name": "Primalforged Knuckles",
+              "pvp": false,
+              "recipeID": 1229617,
+              "outputItemID": 237372
+            },
+            {
+              "name": "Dawnforged Long Blade",
+              "pvp": false,
+              "recipeID": 1229618,
+              "outputItemID": 237367
+            },
+            {
+              "name": "Dawnforged Splitter",
+              "pvp": false,
+              "recipeID": 1229615,
+              "outputItemID": 237370
+            },
+            {
+              "name": "Dawnforged Edge",
+              "pvp": false,
+              "recipeID": 1229619,
+              "outputItemID": 237914
+            },
+            {
+              "name": "Dawnforged Ritual Knife",
+              "pvp": false,
+              "recipeID": 1229620,
+              "outputItemID": 237916
+            },
+            {
+              "name": "Primalforged Heavy Axe",
+              "pvp": false,
+              "recipeID": 1229614,
+              "outputItemID": 237912
+            },
+            {
+              "name": "Thalassian Blacksmith's Hammer",
+              "pvp": true,
+              "recipeID": 1229606,
+              "outputItemID": 237915
+            },
+            {
+              "name": "Thalassian Blacksmith's Toolbox",
+              "pvp": true,
+              "recipeID": 1229611,
+              "outputItemID": 238209
+            },
+            {
+              "name": "Thalassian Leatherworker's Knife",
+              "pvp": true,
+              "recipeID": 1229607,
+              "outputItemID": 2862
+            },
+            {
+              "name": "Thalassian Needle Set",
+              "pvp": true,
+              "recipeID": 1229613,
+              "outputItemID": 3239
+            },
+            {
+              "name": "Thalassian Sickle",
+              "pvp": true,
+              "recipeID": 1229610,
+              "outputItemID": 10421
+            },
+            {
+              "name": "Thalassian Skinning Knife",
+              "pvp": true,
+              "recipeID": 1229608,
+              "outputItemID": 2853
+            },
+            {
+              "name": "Thalassian Leatherworker's Toolset",
+              "pvp": true,
+              "recipeID": 1229612,
+              "outputItemID": 244633
+            },
+            {
+              "name": "Thalassian Pickaxe",
+              "pvp": true,
+              "recipeID": 1229609,
+              "outputItemID": 244631
+            },
+            {
+              "name": "Refulgent Razorstone",
+              "pvp": false,
+              "recipeID": 1230760,
+              "outputItemID": 244637
+            },
+            {
+              "name": "Refulgent Weightstone",
+              "pvp": false,
+              "recipeID": 1230759,
+              "outputItemID": 244635
+            },
+            {
+              "name": "Refulgent Whetstone",
+              "pvp": false,
+              "recipeID": 1230758,
+              "outputItemID": 244639
+            },
+            {
+              "name": "Thalassian Competitor's Skewer",
+              "pvp": true,
+              "recipeID": 1229632,
+              "outputItemID": 244644
+            },
+            {
+              "name": "Thalassian Competitor's Sword",
+              "pvp": true,
+              "recipeID": 1229630,
+              "outputItemID": 244591
+            },
+            {
+              "name": "Thalassian Competitor's Bulwark",
+              "pvp": true,
+              "recipeID": 1229634,
+              "outputItemID": 244594
+            },
+            {
+              "name": "Thalassian Competitor's Greatsword",
+              "pvp": true,
+              "recipeID": 1229631,
+              "outputItemID": 244592
+            },
+            {
+              "name": "Refulgent Repair Hammer",
+              "pvp": false,
+              "recipeID": 1230764,
+              "outputItemID": 244593
+            },
+            {
+              "name": "Artisan Blacksmith's Moxie",
+              "pvp": false,
+              "recipeID": 1265668,
+              "outputItemID": 244595
+            },
+            {
+              "name": "Concentration",
+              "pvp": false,
+              "recipeID": 1265676,
+              "outputItemID": 244587
+            },
+            {
+              "name": "Knowledge",
+              "pvp": false,
+              "recipeID": 1265615,
+              "outputItemID": 244585
+            },
+            {
+              "name": "Quality",
+              "pvp": false,
+              "recipeID": 1265652,
+              "outputItemID": 244586
+            },
+            {
+              "name": "Sparks",
+              "pvp": false,
+              "recipeID": 1265660,
+              "outputItemID": 244596
+            },
+            {
+              "name": "Ingenuity",
+              "pvp": false,
+              "recipeID": 1265702,
+              "outputItemID": 244599
+            },
+            {
+              "name": "Multicraft",
+              "pvp": false,
+              "recipeID": 1265594,
+              "outputItemID": 244597
+            },
+            {
+              "name": "Skill",
+              "pvp": false,
+              "recipeID": 1265684,
+              "outputItemID": 244598
+            },
+            {
+              "name": "Resourcefulness",
+              "pvp": false,
+              "recipeID": 1265694,
+              "outputItemID": 244600
+            },
+            {
+              "name": "Rough Sharpening Stone",
+              "pvp": false,
+              "recipeID": 2660,
+              "outputItemID": 244590
+            },
+            {
+              "name": "Rough Weightstone",
+              "pvp": false,
+              "recipeID": 3115,
+              "outputItemID": 244588
+            },
+            {
+              "name": "Rough Copper Vest",
+              "pvp": false,
+              "recipeID": 12260,
+              "outputItemID": 244589
+            },
+            {
+              "name": "Copper Bracers",
+              "pvp": false,
+              "recipeID": 2663,
               "outputItemID": 244564
             },
             {
@@ -589,1184 +1238,13 @@
               "name": "Light Leather",
               "pvp": false,
               "recipeID": 2881
-            }
-          ],
-          "count": 103
-        },
-        "Skinning": {
-          "recipes": [
-            {
-              "name": "Fine Void-Tempered Hide",
-              "pvp": false,
-              "recipeID": 1225908,
-              "outputItemID": 238652
-            },
-            {
-              "name": "Void-Tempered Hide",
-              "pvp": false,
-              "recipeID": 1225902,
-              "outputItemID": 244633
-            },
-            {
-              "name": "Void-Tempered Leather",
-              "pvp": false,
-              "recipeID": 1225901,
-              "outputItemID": 244631
-            },
-            {
-              "name": "Void-Tempered Plating",
-              "pvp": false,
-              "recipeID": 1225903,
-              "outputItemID": 244637
-            },
-            {
-              "name": "Void-Tempered Scales",
-              "pvp": false,
-              "recipeID": 1225897,
-              "outputItemID": 244635
-            },
-            {
-              "name": "Majestic Eversong Lure",
-              "pvp": false,
-              "recipeID": 1225943,
-              "outputItemID": 244639
-            },
-            {
-              "name": "Artisan Skinner's Moxie",
-              "pvp": false,
-              "recipeID": 1265817,
-              "outputItemID": 244644
-            },
-            {
-              "name": "Knowledge",
-              "pvp": false,
-              "recipeID": 1265715,
-              "outputItemID": 244591
-            },
-            {
-              "name": "Quality",
-              "pvp": false,
-              "recipeID": 1265712,
-              "outputItemID": 244594
-            },
-            {
-              "name": "High-Value Beasts",
-              "pvp": false,
-              "recipeID": 1277733,
-              "outputItemID": 244592
-            },
-            {
-              "name": "Deftness",
-              "pvp": false,
-              "recipeID": 1265730,
-              "outputItemID": 244593
-            },
-            {
-              "name": "Finesse",
-              "pvp": false,
-              "recipeID": 1265723,
-              "outputItemID": 244595
-            },
-            {
-              "name": "Perception",
-              "pvp": false,
-              "recipeID": 1265727,
-              "outputItemID": 244587
-            },
-            {
-              "name": "Skill",
-              "pvp": false,
-              "recipeID": 1265719,
-              "outputItemID": 244585
-            },
-            {
-              "name": "Recraft Equipment",
-              "pvp": false,
-              "recipeID": 471046,
-              "outputItemID": 244586
-            },
-            {
-              "name": "Infused Scalewoven Hide",
-              "pvp": false,
-              "recipeID": 1237573,
-              "outputItemID": 244596
-            },
-            {
-              "name": "Scalewoven Hide",
-              "pvp": false,
-              "recipeID": 1237572,
-              "outputItemID": 244599
-            },
-            {
-              "name": "Silvermoon Weapon Wrap",
-              "pvp": false,
-              "recipeID": 1237575,
-              "outputItemID": 244597
-            },
-            {
-              "name": "Sin'dorei Armor Banding",
-              "pvp": false,
-              "recipeID": 1237574,
-              "outputItemID": 244598
-            },
-            {
-              "name": "Void-touched Drums",
-              "pvp": false,
-              "recipeID": 1237547,
-              "outputItemID": 244600
-            },
-            {
-              "name": "Thalassian Scout Armor Kit",
-              "pvp": true,
-              "recipeID": 1237546,
-              "outputItemID": 244590
-            },
-            {
-              "name": "Smuggler's Reinforced Hood",
-              "pvp": false,
-              "recipeID": 1237502,
-              "outputItemID": 244588
-            },
-            {
-              "name": "Smuggler's Reinforced Pants",
-              "pvp": false,
-              "recipeID": 1237503,
-              "outputItemID": 244589
-            },
-            {
-              "name": "Smuggler's Reinforced Shoulderguards",
-              "pvp": false,
-              "recipeID": 1237504,
-              "outputItemID": 244564
-            },
-            {
-              "name": "Smuggler's Reinforced Gloves",
-              "pvp": false,
-              "recipeID": 1237501,
-              "outputItemID": 244809
-            },
-            {
-              "name": "Smuggler's Reinforced Binding",
-              "pvp": false,
-              "recipeID": 1237505,
-              "outputItemID": 244627
-            },
-            {
-              "name": "Smuggler's Leather Tunic",
-              "pvp": false,
-              "recipeID": 1237499,
-              "outputItemID": 244620
-            },
-            {
-              "name": "Smuggler's Leather Footpads",
-              "pvp": false,
-              "recipeID": 1237500,
-              "outputItemID": 244629
-            },
-            {
-              "name": "Smuggler's Leather Wristbands",
-              "pvp": false,
-              "recipeID": 1237506,
-              "outputItemID": 244618
-            },
-            {
-              "name": "Scout's Polished Skullcap",
-              "pvp": false,
-              "recipeID": 1237531,
-              "outputItemID": 244619
-            },
-            {
-              "name": "Scout's Polished Legguards",
-              "pvp": false,
-              "recipeID": 1237532,
-              "outputItemID": 244616
-            },
-            {
-              "name": "Scout's Polished Spaulders",
-              "pvp": false,
-              "recipeID": 1237533,
-              "outputItemID": 244615
-            },
-            {
-              "name": "Scout's Polished Gauntlets",
-              "pvp": false,
-              "recipeID": 1237530,
-              "outputItemID": 244617
-            },
-            {
-              "name": "Scout's Polished Wrap",
-              "pvp": false,
-              "recipeID": 1237534,
-              "outputItemID": 2318
-            },
-            {
-              "name": "Scout's Scaled Vest",
-              "pvp": false,
-              "recipeID": 1237528,
-              "outputItemID": 2304
-            },
-            {
-              "name": "Scout's Scaled Boots",
-              "pvp": false,
-              "recipeID": 1237529,
-              "outputItemID": 5957
-            },
-            {
-              "name": "Scout's Scaled Bracers",
-              "pvp": false,
-              "recipeID": 1237535,
-              "outputItemID": 7277
-            },
-            {
-              "name": "Thalassian Competitor's Chain Epaulets",
-              "pvp": true,
-              "recipeID": 1237525,
-              "outputItemID": 2302
-            },
-            {
-              "name": "Thalassian Wildseeker's Stridercap",
-              "pvp": true,
-              "recipeID": 1237571,
-              "outputItemID": 7276
-            },
-            {
-              "name": "Apprentice Smith's Apron",
-              "pvp": false,
-              "recipeID": 1237551,
-              "outputItemID": 238204
-            },
-            {
-              "name": "Chemist's Cap",
-              "pvp": false,
-              "recipeID": 1237548,
-              "outputItemID": 238202
-            },
-            {
-              "name": "Apprentice Jeweler's Apron",
-              "pvp": false,
-              "recipeID": 1237560,
-              "outputItemID": 238197
-            },
-            {
-              "name": "Tinker's Handguard",
-              "pvp": false,
-              "recipeID": 1237554,
-              "outputItemID": 237917
-            },
-            {
-              "name": "Hideworker's Cover",
-              "pvp": false,
-              "recipeID": 1237563,
-              "outputItemID": 237922
-            },
-            {
-              "name": "Skinner's Backpack",
-              "pvp": false,
-              "recipeID": 1237566,
-              "outputItemID": 237924
-            },
-            {
-              "name": "Eversong Botanist's Satchel",
-              "pvp": false,
-              "recipeID": 1237557,
-              "outputItemID": 237921
-            },
-            {
-              "name": "Skinner's Cap",
-              "pvp": false,
-              "recipeID": 1237569,
-              "outputItemID": 237925
-            },
-            {
-              "name": "Artisan Leatherworker's Moxie",
-              "pvp": false,
-              "recipeID": 1265672,
-              "outputItemID": 237920
-            },
-            {
-              "name": "Concentration",
-              "pvp": false,
-              "recipeID": 1265681,
-              "outputItemID": 237923
-            },
-            {
-              "name": "Knowledge",
-              "pvp": false,
-              "recipeID": 1265620,
-              "outputItemID": 237919
-            },
-            {
-              "name": "Quality",
-              "pvp": false,
-              "recipeID": 1265657,
-              "outputItemID": 237918
-            },
-            {
-              "name": "Sparks",
-              "pvp": false,
-              "recipeID": 1265665,
-              "outputItemID": 237930
-            },
-            {
-              "name": "Ingenuity",
-              "pvp": false,
-              "recipeID": 1265707,
-              "outputItemID": 237929
-            },
-            {
-              "name": "Multicraft",
-              "pvp": false,
-              "recipeID": 1265607,
-              "outputItemID": 237928
-            },
-            {
-              "name": "Resourcefulness",
-              "pvp": false,
-              "recipeID": 1265699,
-              "outputItemID": 237931
-            },
-            {
-              "name": "Skill",
-              "pvp": false,
-              "recipeID": 1265691,
-              "outputItemID": 237927
-            },
-            {
-              "name": "Light Leather",
-              "pvp": false,
-              "recipeID": 2881,
-              "outputItemID": 237926
             },
             {
               "name": "Light Armor Kit",
-              "pvp": false,
-              "recipeID": 2152,
-              "outputItemID": 237932
-            },
-            {
-              "name": "Handstitched Leather Vest",
-              "pvp": false,
-              "recipeID": 7126,
-              "outputItemID": 238013
-            },
-            {
-              "name": "Handstitched Leather Bracers",
-              "pvp": false,
-              "recipeID": 9059,
-              "outputItemID": 237948
-            },
-            {
-              "name": "Handstitched Leather Boots",
-              "pvp": false,
-              "recipeID": 2149,
-              "outputItemID": 238012
-            },
-            {
-              "name": "Handstitched Leather Cloak",
-              "pvp": false,
-              "recipeID": 9058,
-              "outputItemID": 237946
-            },
-            {
-              "name": "Recraft Equipment",
-              "pvp": false,
-              "recipeID": 471041,
-              "outputItemID": 238009
-            },
-            {
-              "name": "Sterling Alloy",
-              "pvp": false,
-              "recipeID": 1230763,
-              "outputItemID": 238011
-            },
-            {
-              "name": "Gloaming Alloy",
-              "pvp": false,
-              "recipeID": 1230762,
-              "outputItemID": 237947
-            },
-            {
-              "name": "Refulgent Copper Ingot",
-              "pvp": false,
-              "recipeID": 1230761,
-              "outputItemID": 238010
-            },
-            {
-              "name": "Blood-Tempered Greaves",
-              "pvp": false,
-              "recipeID": 1229629,
-              "outputItemID": 237372
-            },
-            {
-              "name": "Blood-Tempered Leggings",
-              "pvp": false,
-              "recipeID": 1229624,
-              "outputItemID": 237367
-            },
-            {
-              "name": "Blood-Tempered Pauldrons",
-              "pvp": false,
-              "recipeID": 1229622,
-              "outputItemID": 237370
-            },
-            {
-              "name": "Blood-Tempered Basinet",
-              "pvp": false,
-              "recipeID": 1229625,
-              "outputItemID": 237914
-            },
-            {
-              "name": "Blood-Tempered Gauntlets",
-              "pvp": false,
-              "recipeID": 1229621,
-              "outputItemID": 237916
-            },
-            {
-              "name": "Blood-Tempered Bulwark",
-              "pvp": false,
-              "recipeID": 1229626,
-              "outputItemID": 237912
-            },
-            {
-              "name": "Blood-Tempered Bracers",
-              "pvp": false,
-              "recipeID": 1229623,
-              "outputItemID": 237915
-            },
-            {
-              "name": "Blood-Tempered Greatbelt",
-              "pvp": false,
-              "recipeID": 1229627,
-              "outputItemID": 238209
-            },
-            {
-              "name": "Blood-Tempered Chestplate",
-              "pvp": false,
-              "recipeID": 1229628
-            },
-            {
-              "name": "Dawnforged War Mace",
-              "pvp": false,
-              "recipeID": 1229616
-            },
-            {
-              "name": "Primalforged Knuckles",
-              "pvp": false,
-              "recipeID": 1229617
-            },
-            {
-              "name": "Dawnforged Long Blade",
-              "pvp": false,
-              "recipeID": 1229618
-            },
-            {
-              "name": "Dawnforged Splitter",
-              "pvp": false,
-              "recipeID": 1229615
-            },
-            {
-              "name": "Dawnforged Edge",
-              "pvp": false,
-              "recipeID": 1229619
-            },
-            {
-              "name": "Dawnforged Ritual Knife",
-              "pvp": false,
-              "recipeID": 1229620
-            },
-            {
-              "name": "Primalforged Heavy Axe",
-              "pvp": false,
-              "recipeID": 1229614
-            },
-            {
-              "name": "Thalassian Blacksmith's Hammer",
-              "pvp": true,
-              "recipeID": 1229606
-            },
-            {
-              "name": "Thalassian Blacksmith's Toolbox",
-              "pvp": true,
-              "recipeID": 1229611
-            },
-            {
-              "name": "Thalassian Leatherworker's Knife",
-              "pvp": true,
-              "recipeID": 1229607
-            },
-            {
-              "name": "Thalassian Needle Set",
-              "pvp": true,
-              "recipeID": 1229613
-            },
-            {
-              "name": "Thalassian Sickle",
-              "pvp": true,
-              "recipeID": 1229610
-            },
-            {
-              "name": "Thalassian Skinning Knife",
-              "pvp": true,
-              "recipeID": 1229608
-            },
-            {
-              "name": "Thalassian Leatherworker's Toolset",
-              "pvp": true,
-              "recipeID": 1229612
-            },
-            {
-              "name": "Thalassian Pickaxe",
-              "pvp": true,
-              "recipeID": 1229609
-            },
-            {
-              "name": "Refulgent Razorstone",
-              "pvp": false,
-              "recipeID": 1230760
-            },
-            {
-              "name": "Refulgent Weightstone",
-              "pvp": false,
-              "recipeID": 1230759
-            },
-            {
-              "name": "Refulgent Whetstone",
-              "pvp": false,
-              "recipeID": 1230758
-            },
-            {
-              "name": "Thalassian Competitor's Skewer",
-              "pvp": true,
-              "recipeID": 1229632
-            },
-            {
-              "name": "Thalassian Competitor's Sword",
-              "pvp": true,
-              "recipeID": 1229630
-            },
-            {
-              "name": "Thalassian Competitor's Bulwark",
-              "pvp": true,
-              "recipeID": 1229634
-            },
-            {
-              "name": "Thalassian Competitor's Greatsword",
-              "pvp": true,
-              "recipeID": 1229631
-            },
-            {
-              "name": "Refulgent Repair Hammer",
-              "pvp": false,
-              "recipeID": 1230764
-            },
-            {
-              "name": "Artisan Blacksmith's Moxie",
-              "pvp": false,
-              "recipeID": 1265668
-            },
-            {
-              "name": "Concentration",
-              "pvp": false,
-              "recipeID": 1265676
-            },
-            {
-              "name": "Knowledge",
-              "pvp": false,
-              "recipeID": 1265615
-            },
-            {
-              "name": "Quality",
-              "pvp": false,
-              "recipeID": 1265652
-            },
-            {
-              "name": "Sparks",
-              "pvp": false,
-              "recipeID": 1265660
-            },
-            {
-              "name": "Ingenuity",
-              "pvp": false,
-              "recipeID": 1265702
-            },
-            {
-              "name": "Multicraft",
-              "pvp": false,
-              "recipeID": 1265594
-            }
-          ],
-          "count": 105
-        },
-        "Leatherworking": {
-          "recipes": [
-            {
-              "name": "Recraft Equipment",
-              "pvp": false,
-              "recipeID": 471046,
-              "outputItemID": 244633
-            },
-            {
-              "name": "Infused Scalewoven Hide",
-              "pvp": false,
-              "recipeID": 1237573,
-              "outputItemID": 244631
-            },
-            {
-              "name": "Scalewoven Hide",
-              "pvp": false,
-              "recipeID": 1237572,
-              "outputItemID": 244637
-            },
-            {
-              "name": "Silvermoon Weapon Wrap",
-              "pvp": false,
-              "recipeID": 1237575,
-              "outputItemID": 244635
-            },
-            {
-              "name": "Sin'dorei Armor Banding",
-              "pvp": false,
-              "recipeID": 1237574,
-              "outputItemID": 244639
-            },
-            {
-              "name": "Void-touched Drums",
-              "pvp": false,
-              "recipeID": 1237547,
-              "outputItemID": 244644
-            },
-            {
-              "name": "Thalassian Scout Armor Kit",
-              "pvp": true,
-              "recipeID": 1237546,
-              "outputItemID": 244591
-            },
-            {
-              "name": "Smuggler's Reinforced Hood",
-              "pvp": false,
-              "recipeID": 1237502,
-              "outputItemID": 244594
-            },
-            {
-              "name": "Smuggler's Reinforced Pants",
-              "pvp": false,
-              "recipeID": 1237503,
-              "outputItemID": 244592
-            },
-            {
-              "name": "Smuggler's Reinforced Shoulderguards",
-              "pvp": false,
-              "recipeID": 1237504,
-              "outputItemID": 244593
-            },
-            {
-              "name": "Smuggler's Reinforced Gloves",
-              "pvp": false,
-              "recipeID": 1237501,
-              "outputItemID": 244595
-            },
-            {
-              "name": "Smuggler's Reinforced Binding",
-              "pvp": false,
-              "recipeID": 1237505,
-              "outputItemID": 244587
-            },
-            {
-              "name": "Smuggler's Leather Tunic",
-              "pvp": false,
-              "recipeID": 1237499,
-              "outputItemID": 244585
-            },
-            {
-              "name": "Smuggler's Leather Footpads",
-              "pvp": false,
-              "recipeID": 1237500,
-              "outputItemID": 244586
-            },
-            {
-              "name": "Smuggler's Leather Wristbands",
-              "pvp": false,
-              "recipeID": 1237506,
-              "outputItemID": 244596
-            },
-            {
-              "name": "Scout's Polished Skullcap",
-              "pvp": false,
-              "recipeID": 1237531,
-              "outputItemID": 244599
-            },
-            {
-              "name": "Scout's Polished Legguards",
-              "pvp": false,
-              "recipeID": 1237532,
-              "outputItemID": 244597
-            },
-            {
-              "name": "Scout's Polished Spaulders",
-              "pvp": false,
-              "recipeID": 1237533,
-              "outputItemID": 244598
-            },
-            {
-              "name": "Scout's Polished Gauntlets",
-              "pvp": false,
-              "recipeID": 1237530,
-              "outputItemID": 244600
-            },
-            {
-              "name": "Scout's Polished Wrap",
-              "pvp": false,
-              "recipeID": 1237534,
-              "outputItemID": 244590
-            },
-            {
-              "name": "Scout's Scaled Vest",
-              "pvp": false,
-              "recipeID": 1237528,
-              "outputItemID": 244588
-            },
-            {
-              "name": "Scout's Scaled Boots",
-              "pvp": false,
-              "recipeID": 1237529,
-              "outputItemID": 244589
-            },
-            {
-              "name": "Scout's Scaled Bracers",
-              "pvp": false,
-              "recipeID": 1237535,
-              "outputItemID": 244564
-            },
-            {
-              "name": "Thalassian Competitor's Chain Epaulets",
-              "pvp": true,
-              "recipeID": 1237525,
-              "outputItemID": 244809
-            },
-            {
-              "name": "Thalassian Wildseeker's Stridercap",
-              "pvp": true,
-              "recipeID": 1237571,
-              "outputItemID": 244627
-            },
-            {
-              "name": "Apprentice Smith's Apron",
-              "pvp": false,
-              "recipeID": 1237551,
-              "outputItemID": 244620
-            },
-            {
-              "name": "Chemist's Cap",
-              "pvp": false,
-              "recipeID": 1237548,
-              "outputItemID": 244629
-            },
-            {
-              "name": "Apprentice Jeweler's Apron",
-              "pvp": false,
-              "recipeID": 1237560,
-              "outputItemID": 244618
-            },
-            {
-              "name": "Tinker's Handguard",
-              "pvp": false,
-              "recipeID": 1237554,
-              "outputItemID": 244619
-            },
-            {
-              "name": "Hideworker's Cover",
-              "pvp": false,
-              "recipeID": 1237563,
-              "outputItemID": 244616
-            },
-            {
-              "name": "Skinner's Backpack",
-              "pvp": false,
-              "recipeID": 1237566,
-              "outputItemID": 244615
-            },
-            {
-              "name": "Eversong Botanist's Satchel",
-              "pvp": false,
-              "recipeID": 1237557,
-              "outputItemID": 244617
-            },
-            {
-              "name": "Skinner's Cap",
-              "pvp": false,
-              "recipeID": 1237569,
-              "outputItemID": 2318
-            },
-            {
-              "name": "Artisan Leatherworker's Moxie",
-              "pvp": false,
-              "recipeID": 1265672,
-              "outputItemID": 2304
-            },
-            {
-              "name": "Concentration",
-              "pvp": false,
-              "recipeID": 1265681,
-              "outputItemID": 5957
-            },
-            {
-              "name": "Knowledge",
-              "pvp": false,
-              "recipeID": 1265620,
-              "outputItemID": 7277
-            },
-            {
-              "name": "Quality",
-              "pvp": false,
-              "recipeID": 1265657,
-              "outputItemID": 2302
-            },
-            {
-              "name": "Sparks",
-              "pvp": false,
-              "recipeID": 1265665,
-              "outputItemID": 7276
-            },
-            {
-              "name": "Ingenuity",
-              "pvp": false,
-              "recipeID": 1265707,
-              "outputItemID": 238204
-            },
-            {
-              "name": "Multicraft",
-              "pvp": false,
-              "recipeID": 1265607,
-              "outputItemID": 238202
-            },
-            {
-              "name": "Resourcefulness",
-              "pvp": false,
-              "recipeID": 1265699,
-              "outputItemID": 238197
-            },
-            {
-              "name": "Skill",
-              "pvp": false,
-              "recipeID": 1265691,
-              "outputItemID": 237917
-            },
-            {
-              "name": "Light Leather",
-              "pvp": false,
-              "recipeID": 2881,
-              "outputItemID": 237922
-            },
-            {
-              "name": "Light Armor Kit",
-              "pvp": false,
-              "recipeID": 2152,
-              "outputItemID": 237924
-            },
-            {
-              "name": "Handstitched Leather Vest",
-              "pvp": false,
-              "recipeID": 7126,
-              "outputItemID": 237921
-            },
-            {
-              "name": "Handstitched Leather Bracers",
-              "pvp": false,
-              "recipeID": 9059,
-              "outputItemID": 237925
-            },
-            {
-              "name": "Handstitched Leather Boots",
-              "pvp": false,
-              "recipeID": 2149,
-              "outputItemID": 237920
-            },
-            {
-              "name": "Handstitched Leather Cloak",
-              "pvp": false,
-              "recipeID": 9058,
-              "outputItemID": 237923
-            },
-            {
-              "name": "Recraft Equipment",
-              "pvp": false,
-              "recipeID": 471041,
-              "outputItemID": 237919
-            },
-            {
-              "name": "Sterling Alloy",
-              "pvp": false,
-              "recipeID": 1230763,
-              "outputItemID": 237918
-            },
-            {
-              "name": "Gloaming Alloy",
-              "pvp": false,
-              "recipeID": 1230762,
-              "outputItemID": 237930
-            },
-            {
-              "name": "Refulgent Copper Ingot",
-              "pvp": false,
-              "recipeID": 1230761,
-              "outputItemID": 237929
-            },
-            {
-              "name": "Blood-Tempered Greaves",
-              "pvp": false,
-              "recipeID": 1229629,
-              "outputItemID": 237928
-            },
-            {
-              "name": "Blood-Tempered Leggings",
-              "pvp": false,
-              "recipeID": 1229624,
-              "outputItemID": 237931
-            },
-            {
-              "name": "Blood-Tempered Pauldrons",
-              "pvp": false,
-              "recipeID": 1229622,
-              "outputItemID": 237927
-            },
-            {
-              "name": "Blood-Tempered Basinet",
-              "pvp": false,
-              "recipeID": 1229625,
-              "outputItemID": 237926
-            },
-            {
-              "name": "Blood-Tempered Gauntlets",
-              "pvp": false,
-              "recipeID": 1229621,
-              "outputItemID": 237932
-            },
-            {
-              "name": "Blood-Tempered Bulwark",
-              "pvp": false,
-              "recipeID": 1229626,
-              "outputItemID": 238013
-            },
-            {
-              "name": "Blood-Tempered Bracers",
-              "pvp": false,
-              "recipeID": 1229623,
-              "outputItemID": 237948
-            },
-            {
-              "name": "Blood-Tempered Greatbelt",
-              "pvp": false,
-              "recipeID": 1229627,
-              "outputItemID": 238012
-            },
-            {
-              "name": "Blood-Tempered Chestplate",
-              "pvp": false,
-              "recipeID": 1229628,
-              "outputItemID": 237946
-            },
-            {
-              "name": "Dawnforged War Mace",
-              "pvp": false,
-              "recipeID": 1229616,
-              "outputItemID": 238009
-            },
-            {
-              "name": "Primalforged Knuckles",
-              "pvp": false,
-              "recipeID": 1229617,
-              "outputItemID": 238011
-            },
-            {
-              "name": "Dawnforged Long Blade",
-              "pvp": false,
-              "recipeID": 1229618,
-              "outputItemID": 237947
-            },
-            {
-              "name": "Dawnforged Splitter",
-              "pvp": false,
-              "recipeID": 1229615,
-              "outputItemID": 238010
-            },
-            {
-              "name": "Dawnforged Edge",
-              "pvp": false,
-              "recipeID": 1229619,
-              "outputItemID": 237372
-            },
-            {
-              "name": "Dawnforged Ritual Knife",
-              "pvp": false,
-              "recipeID": 1229620,
-              "outputItemID": 237367
-            },
-            {
-              "name": "Primalforged Heavy Axe",
-              "pvp": false,
-              "recipeID": 1229614,
-              "outputItemID": 237370
-            },
-            {
-              "name": "Thalassian Blacksmith's Hammer",
-              "pvp": true,
-              "recipeID": 1229606,
-              "outputItemID": 237914
-            },
-            {
-              "name": "Thalassian Blacksmith's Toolbox",
-              "pvp": true,
-              "recipeID": 1229611,
-              "outputItemID": 237916
-            },
-            {
-              "name": "Thalassian Leatherworker's Knife",
-              "pvp": true,
-              "recipeID": 1229607,
-              "outputItemID": 237912
-            },
-            {
-              "name": "Thalassian Needle Set",
-              "pvp": true,
-              "recipeID": 1229613,
-              "outputItemID": 237915
-            },
-            {
-              "name": "Thalassian Sickle",
-              "pvp": true,
-              "recipeID": 1229610,
-              "outputItemID": 238209
-            },
-            {
-              "name": "Thalassian Skinning Knife",
-              "pvp": true,
-              "recipeID": 1229608,
-              "outputItemID": 2862
-            },
-            {
-              "name": "Thalassian Leatherworker's Toolset",
-              "pvp": true,
-              "recipeID": 1229612,
-              "outputItemID": 3239
-            },
-            {
-              "name": "Thalassian Pickaxe",
-              "pvp": true,
-              "recipeID": 1229609,
-              "outputItemID": 10421
-            },
-            {
-              "name": "Refulgent Razorstone",
-              "pvp": false,
-              "recipeID": 1230760,
-              "outputItemID": 2853
-            },
-            {
-              "name": "Refulgent Weightstone",
-              "pvp": false,
-              "recipeID": 1230759
-            },
-            {
-              "name": "Refulgent Whetstone",
-              "pvp": false,
-              "recipeID": 1230758
-            },
-            {
-              "name": "Thalassian Competitor's Skewer",
-              "pvp": true,
-              "recipeID": 1229632
-            },
-            {
-              "name": "Thalassian Competitor's Sword",
-              "pvp": true,
-              "recipeID": 1229630
-            },
-            {
-              "name": "Thalassian Competitor's Bulwark",
-              "pvp": true,
-              "recipeID": 1229634
-            },
-            {
-              "name": "Thalassian Competitor's Greatsword",
-              "pvp": true,
-              "recipeID": 1229631
-            },
-            {
-              "name": "Refulgent Repair Hammer",
-              "pvp": false,
-              "recipeID": 1230764
-            },
-            {
-              "name": "Artisan Blacksmith's Moxie",
-              "pvp": false,
-              "recipeID": 1265668
-            },
-            {
-              "name": "Concentration",
-              "pvp": false,
-              "recipeID": 1265676
-            },
-            {
-              "name": "Knowledge",
-              "pvp": false,
-              "recipeID": 1265615
-            },
-            {
-              "name": "Quality",
-              "pvp": false,
-              "recipeID": 1265652
-            },
-            {
-              "name": "Sparks",
-              "pvp": false,
-              "recipeID": 1265660
-            },
-            {
-              "name": "Ingenuity",
-              "pvp": false,
-              "recipeID": 1265702
-            },
-            {
-              "name": "Multicraft",
-              "pvp": false,
-              "recipeID": 1265594
-            },
-            {
-              "name": "Skill",
-              "pvp": false,
-              "recipeID": 1265684
-            },
-            {
-              "name": "Resourcefulness",
-              "pvp": false,
-              "recipeID": 1265694
-            },
-            {
-              "name": "Rough Sharpening Stone",
-              "pvp": false,
-              "recipeID": 2660
-            },
-            {
-              "name": "Rough Weightstone",
-              "pvp": false,
-              "recipeID": 3115
-            },
-            {
-              "name": "Rough Copper Vest",
-              "pvp": false,
-              "recipeID": 12260
-            },
-            {
-              "name": "Copper Bracers",
-              "pvp": false,
-              "recipeID": 2663
-            },
-            {
-              "name": "Deposit",
               "pvp": false
             }
           ],
-          "count": 98
+          "count": 107
         },
         "Blacksmithing": {
           "recipes": [
@@ -2008,53 +1486,618 @@
               "name": "Quality",
               "pvp": false,
               "recipeID": 1265652,
-              "outputItemID": 240951
+              "outputItemID": 244633
             },
             {
               "name": "Sparks",
               "pvp": false,
               "recipeID": 1265660,
-              "outputItemID": 471047
+              "outputItemID": 244631
             },
             {
               "name": "Ingenuity",
               "pvp": false,
-              "recipeID": 1265702
+              "recipeID": 1265702,
+              "outputItemID": 244637
             },
             {
               "name": "Multicraft",
               "pvp": false,
-              "recipeID": 1265594
+              "recipeID": 1265594,
+              "outputItemID": 244635
             },
             {
               "name": "Skill",
               "pvp": false,
-              "recipeID": 1265684
+              "recipeID": 1265684,
+              "outputItemID": 244639
             },
             {
               "name": "Resourcefulness",
               "pvp": false,
-              "recipeID": 1265694
+              "recipeID": 1265694,
+              "outputItemID": 244644
             },
             {
               "name": "Rough Sharpening Stone",
               "pvp": false,
-              "recipeID": 2660
+              "recipeID": 2660,
+              "outputItemID": 244591
             },
             {
               "name": "Rough Weightstone",
               "pvp": false,
-              "recipeID": 3115
+              "recipeID": 3115,
+              "outputItemID": 244594
             },
             {
               "name": "Rough Copper Vest",
               "pvp": false,
-              "recipeID": 12260
+              "recipeID": 12260,
+              "outputItemID": 244592
             },
             {
               "name": "Copper Bracers",
               "pvp": false,
-              "recipeID": 2663
+              "recipeID": 2663,
+              "outputItemID": 244593
+            },
+            {
+              "name": "Recraft Equipment",
+              "pvp": false,
+              "recipeID": 471046,
+              "outputItemID": 244595
+            },
+            {
+              "name": "Infused Scalewoven Hide",
+              "pvp": false,
+              "recipeID": 1237573,
+              "outputItemID": 244587
+            },
+            {
+              "name": "Scalewoven Hide",
+              "pvp": false,
+              "recipeID": 1237572,
+              "outputItemID": 244585
+            },
+            {
+              "name": "Silvermoon Weapon Wrap",
+              "pvp": false,
+              "recipeID": 1237575,
+              "outputItemID": 244586
+            },
+            {
+              "name": "Sin'dorei Armor Banding",
+              "pvp": false,
+              "recipeID": 1237574,
+              "outputItemID": 244596
+            },
+            {
+              "name": "Void-touched Drums",
+              "pvp": false,
+              "recipeID": 1237547,
+              "outputItemID": 244599
+            },
+            {
+              "name": "Thalassian Scout Armor Kit",
+              "pvp": true,
+              "recipeID": 1237546,
+              "outputItemID": 244597
+            },
+            {
+              "name": "Smuggler's Reinforced Hood",
+              "pvp": false,
+              "recipeID": 1237502,
+              "outputItemID": 244598
+            },
+            {
+              "name": "Smuggler's Reinforced Pants",
+              "pvp": false,
+              "recipeID": 1237503,
+              "outputItemID": 244600
+            },
+            {
+              "name": "Smuggler's Reinforced Shoulderguards",
+              "pvp": false,
+              "recipeID": 1237504,
+              "outputItemID": 244590
+            },
+            {
+              "name": "Smuggler's Reinforced Gloves",
+              "pvp": false,
+              "recipeID": 1237501,
+              "outputItemID": 244588
+            },
+            {
+              "name": "Smuggler's Reinforced Binding",
+              "pvp": false,
+              "recipeID": 1237505,
+              "outputItemID": 244589
+            },
+            {
+              "name": "Smuggler's Leather Tunic",
+              "pvp": false,
+              "recipeID": 1237499,
+              "outputItemID": 244564
+            },
+            {
+              "name": "Smuggler's Leather Footpads",
+              "pvp": false,
+              "recipeID": 1237500,
+              "outputItemID": 244809
+            },
+            {
+              "name": "Smuggler's Leather Wristbands",
+              "pvp": false,
+              "recipeID": 1237506,
+              "outputItemID": 244627
+            },
+            {
+              "name": "Scout's Polished Skullcap",
+              "pvp": false,
+              "recipeID": 1237531,
+              "outputItemID": 244620
+            },
+            {
+              "name": "Scout's Polished Legguards",
+              "pvp": false,
+              "recipeID": 1237532,
+              "outputItemID": 244629
+            },
+            {
+              "name": "Scout's Polished Spaulders",
+              "pvp": false,
+              "recipeID": 1237533,
+              "outputItemID": 244618
+            },
+            {
+              "name": "Scout's Polished Gauntlets",
+              "pvp": false,
+              "recipeID": 1237530,
+              "outputItemID": 244619
+            },
+            {
+              "name": "Scout's Polished Wrap",
+              "pvp": false,
+              "recipeID": 1237534,
+              "outputItemID": 244616
+            },
+            {
+              "name": "Scout's Scaled Vest",
+              "pvp": false,
+              "recipeID": 1237528,
+              "outputItemID": 244615
+            },
+            {
+              "name": "Scout's Scaled Boots",
+              "pvp": false,
+              "recipeID": 1237529,
+              "outputItemID": 244617
+            },
+            {
+              "name": "Scout's Scaled Bracers",
+              "pvp": false,
+              "recipeID": 1237535,
+              "outputItemID": 2318
+            },
+            {
+              "name": "Thalassian Competitor's Chain Epaulets",
+              "pvp": true,
+              "recipeID": 1237525,
+              "outputItemID": 2304
+            },
+            {
+              "name": "Thalassian Wildseeker's Stridercap",
+              "pvp": true,
+              "recipeID": 1237571,
+              "outputItemID": 5957
+            },
+            {
+              "name": "Apprentice Smith's Apron",
+              "pvp": false,
+              "recipeID": 1237551,
+              "outputItemID": 7277
+            },
+            {
+              "name": "Chemist's Cap",
+              "pvp": false,
+              "recipeID": 1237548,
+              "outputItemID": 2302
+            },
+            {
+              "name": "Apprentice Jeweler's Apron",
+              "pvp": false,
+              "recipeID": 1237560,
+              "outputItemID": 7276
+            },
+            {
+              "name": "Tinker's Handguard",
+              "pvp": false,
+              "recipeID": 1237554
+            },
+            {
+              "name": "Hideworker's Cover",
+              "pvp": false,
+              "recipeID": 1237563
+            },
+            {
+              "name": "Skinner's Backpack",
+              "pvp": false,
+              "recipeID": 1237566
+            },
+            {
+              "name": "Eversong Botanist's Satchel",
+              "pvp": false,
+              "recipeID": 1237557
+            },
+            {
+              "name": "Skinner's Cap",
+              "pvp": false,
+              "recipeID": 1237569
+            },
+            {
+              "name": "Artisan Leatherworker's Moxie",
+              "pvp": false,
+              "recipeID": 1265672
+            },
+            {
+              "name": "Concentration",
+              "pvp": false,
+              "recipeID": 1265681
+            },
+            {
+              "name": "Knowledge",
+              "pvp": false,
+              "recipeID": 1265620
+            },
+            {
+              "name": "Quality",
+              "pvp": false,
+              "recipeID": 1265657
+            },
+            {
+              "name": "Sparks",
+              "pvp": false,
+              "recipeID": 1265665
+            },
+            {
+              "name": "Ingenuity",
+              "pvp": false,
+              "recipeID": 1265707
+            },
+            {
+              "name": "Multicraft",
+              "pvp": false,
+              "recipeID": 1265607
+            },
+            {
+              "name": "Resourcefulness",
+              "pvp": false,
+              "recipeID": 1265699
+            },
+            {
+              "name": "Skill",
+              "pvp": false,
+              "recipeID": 1265691
+            },
+            {
+              "name": "Light Leather",
+              "pvp": false,
+              "recipeID": 2881
+            },
+            {
+              "name": "Light Armor Kit",
+              "pvp": false,
+              "recipeID": 2152
+            },
+            {
+              "name": "Handstitched Leather Vest",
+              "pvp": false,
+              "recipeID": 7126
+            },
+            {
+              "name": "Handstitched Leather Bracers",
+              "pvp": false,
+              "recipeID": 9059
+            },
+            {
+              "name": "Handstitched Leather Boots",
+              "pvp": false,
+              "recipeID": 2149
+            },
+            {
+              "name": "Handstitched Leather Cloak",
+              "pvp": false,
+              "recipeID": 9058
+            },
+            {
+              "name": "Deposit",
+              "pvp": false
+            }
+          ],
+          "count": 98
+        },
+        "Leatherworking": {
+          "recipes": [
+            {
+              "name": "Recraft Equipment",
+              "pvp": false,
+              "recipeID": 471046,
+              "outputItemID": 244633
+            },
+            {
+              "name": "Infused Scalewoven Hide",
+              "pvp": false,
+              "recipeID": 1237573,
+              "outputItemID": 244631
+            },
+            {
+              "name": "Scalewoven Hide",
+              "pvp": false,
+              "recipeID": 1237572,
+              "outputItemID": 244637
+            },
+            {
+              "name": "Silvermoon Weapon Wrap",
+              "pvp": false,
+              "recipeID": 1237575,
+              "outputItemID": 244635
+            },
+            {
+              "name": "Sin'dorei Armor Banding",
+              "pvp": false,
+              "recipeID": 1237574,
+              "outputItemID": 244639
+            },
+            {
+              "name": "Void-touched Drums",
+              "pvp": false,
+              "recipeID": 1237547,
+              "outputItemID": 244644
+            },
+            {
+              "name": "Thalassian Scout Armor Kit",
+              "pvp": true,
+              "recipeID": 1237546,
+              "outputItemID": 244591
+            },
+            {
+              "name": "Smuggler's Reinforced Hood",
+              "pvp": false,
+              "recipeID": 1237502,
+              "outputItemID": 244594
+            },
+            {
+              "name": "Smuggler's Reinforced Pants",
+              "pvp": false,
+              "recipeID": 1237503,
+              "outputItemID": 244592
+            },
+            {
+              "name": "Smuggler's Reinforced Shoulderguards",
+              "pvp": false,
+              "recipeID": 1237504,
+              "outputItemID": 244593
+            },
+            {
+              "name": "Smuggler's Reinforced Gloves",
+              "pvp": false,
+              "recipeID": 1237501,
+              "outputItemID": 244595
+            },
+            {
+              "name": "Smuggler's Reinforced Binding",
+              "pvp": false,
+              "recipeID": 1237505,
+              "outputItemID": 244587
+            },
+            {
+              "name": "Smuggler's Leather Tunic",
+              "pvp": false,
+              "recipeID": 1237499,
+              "outputItemID": 244585
+            },
+            {
+              "name": "Smuggler's Leather Footpads",
+              "pvp": false,
+              "recipeID": 1237500,
+              "outputItemID": 244586
+            },
+            {
+              "name": "Smuggler's Leather Wristbands",
+              "pvp": false,
+              "recipeID": 1237506,
+              "outputItemID": 244596
+            },
+            {
+              "name": "Scout's Polished Skullcap",
+              "pvp": false,
+              "recipeID": 1237531,
+              "outputItemID": 244599
+            },
+            {
+              "name": "Scout's Polished Legguards",
+              "pvp": false,
+              "recipeID": 1237532,
+              "outputItemID": 244597
+            },
+            {
+              "name": "Scout's Polished Spaulders",
+              "pvp": false,
+              "recipeID": 1237533,
+              "outputItemID": 244598
+            },
+            {
+              "name": "Scout's Polished Gauntlets",
+              "pvp": false,
+              "recipeID": 1237530,
+              "outputItemID": 244600
+            },
+            {
+              "name": "Scout's Polished Wrap",
+              "pvp": false,
+              "recipeID": 1237534,
+              "outputItemID": 244590
+            },
+            {
+              "name": "Scout's Scaled Vest",
+              "pvp": false,
+              "recipeID": 1237528,
+              "outputItemID": 244588
+            },
+            {
+              "name": "Scout's Scaled Boots",
+              "pvp": false,
+              "recipeID": 1237529,
+              "outputItemID": 244589
+            },
+            {
+              "name": "Scout's Scaled Bracers",
+              "pvp": false,
+              "recipeID": 1237535,
+              "outputItemID": 244564
+            },
+            {
+              "name": "Thalassian Competitor's Chain Epaulets",
+              "pvp": true,
+              "recipeID": 1237525,
+              "outputItemID": 244809
+            },
+            {
+              "name": "Thalassian Wildseeker's Stridercap",
+              "pvp": true,
+              "recipeID": 1237571,
+              "outputItemID": 244627
+            },
+            {
+              "name": "Apprentice Smith's Apron",
+              "pvp": false,
+              "recipeID": 1237551,
+              "outputItemID": 244620
+            },
+            {
+              "name": "Chemist's Cap",
+              "pvp": false,
+              "recipeID": 1237548,
+              "outputItemID": 244629
+            },
+            {
+              "name": "Apprentice Jeweler's Apron",
+              "pvp": false,
+              "recipeID": 1237560,
+              "outputItemID": 244618
+            },
+            {
+              "name": "Tinker's Handguard",
+              "pvp": false,
+              "recipeID": 1237554,
+              "outputItemID": 244619
+            },
+            {
+              "name": "Hideworker's Cover",
+              "pvp": false,
+              "recipeID": 1237563,
+              "outputItemID": 244616
+            },
+            {
+              "name": "Skinner's Backpack",
+              "pvp": false,
+              "recipeID": 1237566,
+              "outputItemID": 244615
+            },
+            {
+              "name": "Eversong Botanist's Satchel",
+              "pvp": false,
+              "recipeID": 1237557,
+              "outputItemID": 244617
+            },
+            {
+              "name": "Skinner's Cap",
+              "pvp": false,
+              "recipeID": 1237569,
+              "outputItemID": 2318
+            },
+            {
+              "name": "Artisan Leatherworker's Moxie",
+              "pvp": false,
+              "recipeID": 1265672,
+              "outputItemID": 2304
+            },
+            {
+              "name": "Concentration",
+              "pvp": false,
+              "recipeID": 1265681,
+              "outputItemID": 5957
+            },
+            {
+              "name": "Knowledge",
+              "pvp": false,
+              "recipeID": 1265620,
+              "outputItemID": 7277
+            },
+            {
+              "name": "Quality",
+              "pvp": false,
+              "recipeID": 1265657,
+              "outputItemID": 2302
+            },
+            {
+              "name": "Sparks",
+              "pvp": false,
+              "recipeID": 1265665,
+              "outputItemID": 7276
+            },
+            {
+              "name": "Ingenuity",
+              "pvp": false,
+              "recipeID": 1265707,
+              "outputItemID": 240951
+            },
+            {
+              "name": "Multicraft",
+              "pvp": false,
+              "recipeID": 1265607,
+              "outputItemID": 471047
+            },
+            {
+              "name": "Resourcefulness",
+              "pvp": false,
+              "recipeID": 1265699
+            },
+            {
+              "name": "Skill",
+              "pvp": false,
+              "recipeID": 1265691
+            },
+            {
+              "name": "Light Leather",
+              "pvp": false,
+              "recipeID": 2881
+            },
+            {
+              "name": "Light Armor Kit",
+              "pvp": false,
+              "recipeID": 2152
+            },
+            {
+              "name": "Handstitched Leather Vest",
+              "pvp": false,
+              "recipeID": 7126
+            },
+            {
+              "name": "Handstitched Leather Bracers",
+              "pvp": false,
+              "recipeID": 9059
+            },
+            {
+              "name": "Handstitched Leather Boots",
+              "pvp": false,
+              "recipeID": 2149
+            },
+            {
+              "name": "Handstitched Leather Cloak",
+              "pvp": false,
+              "recipeID": 9058
             },
             {
               "name": "Deposit",
@@ -2083,7 +2126,7 @@
               "pvp": false
             }
           ],
-          "count": 55
+          "count": 54
         }
       }
     },
@@ -2839,481 +2882,6 @@
     },
     "Piggybank-Terenas": {
       "professions": {
-        "Leatherworking": {
-          "recipes": [
-            {
-              "name": "Recraft Equipment",
-              "pvp": false,
-              "recipeID": 471046
-            },
-            {
-              "name": "Infused Scalewoven Hide",
-              "pvp": false,
-              "recipeID": 1237573
-            },
-            {
-              "name": "Scalewoven Hide",
-              "pvp": false,
-              "recipeID": 1237572
-            },
-            {
-              "name": "Sin'dorei Armor Banding",
-              "pvp": false,
-              "recipeID": 1237574
-            },
-            {
-              "name": "Silvermoon Weapon Wrap",
-              "pvp": false,
-              "recipeID": 1237575
-            },
-            {
-              "name": "Void-touched Drums",
-              "pvp": false,
-              "recipeID": 1237547
-            },
-            {
-              "name": "Thalassian Scout Armor Kit",
-              "pvp": true,
-              "recipeID": 1237546
-            },
-            {
-              "name": "Smuggler's Reinforced Hood",
-              "pvp": false,
-              "recipeID": 1237502
-            },
-            {
-              "name": "Smuggler's Reinforced Pants",
-              "pvp": false,
-              "recipeID": 1237503
-            },
-            {
-              "name": "Smuggler's Reinforced Shoulderguards",
-              "pvp": false,
-              "recipeID": 1237504
-            },
-            {
-              "name": "Smuggler's Reinforced Gloves",
-              "pvp": false,
-              "recipeID": 1237501
-            },
-            {
-              "name": "Smuggler's Reinforced Binding",
-              "pvp": false,
-              "recipeID": 1237505
-            },
-            {
-              "name": "Smuggler's Leather Tunic",
-              "pvp": false,
-              "recipeID": 1237499
-            },
-            {
-              "name": "Smuggler's Leather Footpads",
-              "pvp": false,
-              "recipeID": 1237500
-            },
-            {
-              "name": "Smuggler's Leather Wristbands",
-              "pvp": false,
-              "recipeID": 1237506
-            },
-            {
-              "name": "Scout's Polished Skullcap",
-              "pvp": false,
-              "recipeID": 1237531
-            },
-            {
-              "name": "Scout's Polished Legguards",
-              "pvp": false,
-              "recipeID": 1237532
-            },
-            {
-              "name": "Scout's Polished Spaulders",
-              "pvp": false,
-              "recipeID": 1237533
-            },
-            {
-              "name": "Scout's Polished Gauntlets",
-              "pvp": false,
-              "recipeID": 1237530
-            },
-            {
-              "name": "Scout's Polished Wrap",
-              "pvp": false,
-              "recipeID": 1237534
-            },
-            {
-              "name": "Scout's Scaled Vest",
-              "pvp": false,
-              "recipeID": 1237528
-            },
-            {
-              "name": "Scout's Scaled Boots",
-              "pvp": false,
-              "recipeID": 1237529
-            },
-            {
-              "name": "Scout's Scaled Bracers",
-              "pvp": false,
-              "recipeID": 1237535
-            },
-            {
-              "name": "Thalassian Wildseeker's Stridercap",
-              "pvp": true,
-              "recipeID": 1237571
-            },
-            {
-              "name": "Chemist's Cap",
-              "pvp": false,
-              "recipeID": 1237548
-            },
-            {
-              "name": "Apprentice Smith's Apron",
-              "pvp": false,
-              "recipeID": 1237551
-            },
-            {
-              "name": "Tinker's Handguard",
-              "pvp": false,
-              "recipeID": 1237554
-            },
-            {
-              "name": "Apprentice Jeweler's Apron",
-              "pvp": false,
-              "recipeID": 1237560
-            },
-            {
-              "name": "Hideworker's Cover",
-              "pvp": false,
-              "recipeID": 1237563
-            },
-            {
-              "name": "Skinner's Backpack",
-              "pvp": false,
-              "recipeID": 1237566
-            },
-            {
-              "name": "Eversong Botanist's Satchel",
-              "pvp": false,
-              "recipeID": 1237557
-            },
-            {
-              "name": "Skinner's Cap",
-              "pvp": false,
-              "recipeID": 1237569
-            },
-            {
-              "name": "Artisan Leatherworker's Moxie",
-              "pvp": false,
-              "recipeID": 1265672
-            },
-            {
-              "name": "Concentration",
-              "pvp": false,
-              "recipeID": 1265681
-            },
-            {
-              "name": "Knowledge",
-              "pvp": false,
-              "recipeID": 1265620
-            },
-            {
-              "name": "Quality",
-              "pvp": false,
-              "recipeID": 1265657
-            },
-            {
-              "name": "Sparks",
-              "pvp": false,
-              "recipeID": 1265665
-            },
-            {
-              "name": "Ingenuity",
-              "pvp": false,
-              "recipeID": 1265707
-            },
-            {
-              "name": "Multicraft",
-              "pvp": false,
-              "recipeID": 1265607
-            },
-            {
-              "name": "Resourcefulness",
-              "pvp": false,
-              "recipeID": 1265699
-            },
-            {
-              "name": "Skill",
-              "pvp": false,
-              "recipeID": 1265691
-            },
-            {
-              "name": "Light Leather",
-              "pvp": false,
-              "recipeID": 2881
-            },
-            {
-              "name": "Light Armor Kit",
-              "pvp": false,
-              "recipeID": 2152
-            },
-            {
-              "name": "Handstitched Leather Vest",
-              "pvp": false,
-              "recipeID": 7126
-            },
-            {
-              "name": "Handstitched Leather Bracers",
-              "pvp": false,
-              "recipeID": 9059
-            },
-            {
-              "name": "Handstitched Leather Boots",
-              "pvp": false,
-              "recipeID": 2149
-            },
-            {
-              "name": "Handstitched Leather Cloak",
-              "pvp": false,
-              "recipeID": 9058
-            },
-            {
-              "name": "Recraft Equipment",
-              "pvp": false,
-              "recipeID": 471041
-            },
-            {
-              "name": "Sterling Alloy",
-              "pvp": false,
-              "recipeID": 1230763
-            },
-            {
-              "name": "Gloaming Alloy",
-              "pvp": false,
-              "recipeID": 1230762
-            },
-            {
-              "name": "Refulgent Copper Ingot",
-              "pvp": false,
-              "recipeID": 1230761
-            },
-            {
-              "name": "Blood-Tempered Leggings",
-              "pvp": false,
-              "recipeID": 1229624
-            },
-            {
-              "name": "Blood-Tempered Pauldrons",
-              "pvp": false,
-              "recipeID": 1229622
-            },
-            {
-              "name": "Blood-Tempered Greaves",
-              "pvp": false,
-              "recipeID": 1229629
-            },
-            {
-              "name": "Blood-Tempered Basinet",
-              "pvp": false,
-              "recipeID": 1229625
-            },
-            {
-              "name": "Blood-Tempered Gauntlets",
-              "pvp": false,
-              "recipeID": 1229621
-            },
-            {
-              "name": "Blood-Tempered Bulwark",
-              "pvp": false,
-              "recipeID": 1229626
-            },
-            {
-              "name": "Blood-Tempered Bracers",
-              "pvp": false,
-              "recipeID": 1229623
-            },
-            {
-              "name": "Blood-Tempered Greatbelt",
-              "pvp": false,
-              "recipeID": 1229627
-            },
-            {
-              "name": "Blood-Tempered Chestplate",
-              "pvp": false,
-              "recipeID": 1229628
-            },
-            {
-              "name": "Dawnforged War Mace",
-              "pvp": false,
-              "recipeID": 1229616
-            },
-            {
-              "name": "Primalforged Knuckles",
-              "pvp": false,
-              "recipeID": 1229617
-            },
-            {
-              "name": "Dawnforged Long Blade",
-              "pvp": false,
-              "recipeID": 1229618
-            },
-            {
-              "name": "Dawnforged Splitter",
-              "pvp": false,
-              "recipeID": 1229615
-            },
-            {
-              "name": "Dawnforged Edge",
-              "pvp": false,
-              "recipeID": 1229619
-            },
-            {
-              "name": "Dawnforged Ritual Knife",
-              "pvp": false,
-              "recipeID": 1229620
-            },
-            {
-              "name": "Primalforged Heavy Axe",
-              "pvp": false,
-              "recipeID": 1229614
-            },
-            {
-              "name": "Thalassian Blacksmith's Hammer",
-              "pvp": true,
-              "recipeID": 1229606
-            },
-            {
-              "name": "Thalassian Blacksmith's Toolbox",
-              "pvp": true,
-              "recipeID": 1229611
-            },
-            {
-              "name": "Thalassian Leatherworker's Knife",
-              "pvp": true,
-              "recipeID": 1229607
-            },
-            {
-              "name": "Thalassian Leatherworker's Toolset",
-              "pvp": true,
-              "recipeID": 1229612
-            },
-            {
-              "name": "Thalassian Needle Set",
-              "pvp": true,
-              "recipeID": 1229613
-            },
-            {
-              "name": "Thalassian Pickaxe",
-              "pvp": true,
-              "recipeID": 1229609
-            },
-            {
-              "name": "Thalassian Sickle",
-              "pvp": true,
-              "recipeID": 1229610
-            },
-            {
-              "name": "Thalassian Skinning Knife",
-              "pvp": true,
-              "recipeID": 1229608
-            },
-            {
-              "name": "Refulgent Razorstone",
-              "pvp": false,
-              "recipeID": 1230760
-            },
-            {
-              "name": "Refulgent Weightstone",
-              "pvp": false,
-              "recipeID": 1230759
-            },
-            {
-              "name": "Refulgent Whetstone",
-              "pvp": false,
-              "recipeID": 1230758
-            },
-            {
-              "name": "Thalassian Competitor's Greatsword",
-              "pvp": true,
-              "recipeID": 1229631
-            },
-            {
-              "name": "Thalassian Competitor's Skewer",
-              "pvp": true,
-              "recipeID": 1229632
-            },
-            {
-              "name": "Refulgent Repair Hammer",
-              "pvp": false,
-              "recipeID": 1230764
-            },
-            {
-              "name": "Artisan Blacksmith's Moxie",
-              "pvp": false,
-              "recipeID": 1265668
-            },
-            {
-              "name": "Concentration",
-              "pvp": false,
-              "recipeID": 1265676
-            },
-            {
-              "name": "Knowledge",
-              "pvp": false,
-              "recipeID": 1265615
-            },
-            {
-              "name": "Quality",
-              "pvp": false,
-              "recipeID": 1265652
-            },
-            {
-              "name": "Sparks",
-              "pvp": false,
-              "recipeID": 1265660
-            },
-            {
-              "name": "Ingenuity",
-              "pvp": false,
-              "recipeID": 1265702
-            },
-            {
-              "name": "Multicraft",
-              "pvp": false,
-              "recipeID": 1265594
-            },
-            {
-              "name": "Skill",
-              "pvp": false,
-              "recipeID": 1265684
-            },
-            {
-              "name": "Resourcefulness",
-              "pvp": false,
-              "recipeID": 1265694
-            },
-            {
-              "name": "Rough Sharpening Stone",
-              "pvp": false,
-              "recipeID": 2660
-            },
-            {
-              "name": "Rough Weightstone",
-              "pvp": false,
-              "recipeID": 3115
-            },
-            {
-              "name": "Rough Copper Vest",
-              "pvp": false,
-              "recipeID": 12260
-            },
-            {
-              "name": "Copper Bracers",
-              "pvp": false,
-              "recipeID": 2663
-            }
-          ],
-          "count": 94
-        },
         "Blacksmithing": {
           "recipes": [
             {
@@ -3550,6 +3118,481 @@
               "name": "Copper Bracers",
               "pvp": false,
               "recipeID": 2663
+            },
+            {
+              "name": "Recraft Equipment",
+              "pvp": false,
+              "recipeID": 471046
+            },
+            {
+              "name": "Infused Scalewoven Hide",
+              "pvp": false,
+              "recipeID": 1237573
+            },
+            {
+              "name": "Scalewoven Hide",
+              "pvp": false,
+              "recipeID": 1237572
+            },
+            {
+              "name": "Sin'dorei Armor Banding",
+              "pvp": false,
+              "recipeID": 1237574
+            },
+            {
+              "name": "Silvermoon Weapon Wrap",
+              "pvp": false,
+              "recipeID": 1237575
+            },
+            {
+              "name": "Void-touched Drums",
+              "pvp": false,
+              "recipeID": 1237547
+            },
+            {
+              "name": "Thalassian Scout Armor Kit",
+              "pvp": true,
+              "recipeID": 1237546
+            },
+            {
+              "name": "Smuggler's Reinforced Hood",
+              "pvp": false,
+              "recipeID": 1237502
+            },
+            {
+              "name": "Smuggler's Reinforced Pants",
+              "pvp": false,
+              "recipeID": 1237503
+            },
+            {
+              "name": "Smuggler's Reinforced Shoulderguards",
+              "pvp": false,
+              "recipeID": 1237504
+            },
+            {
+              "name": "Smuggler's Reinforced Gloves",
+              "pvp": false,
+              "recipeID": 1237501
+            },
+            {
+              "name": "Smuggler's Reinforced Binding",
+              "pvp": false,
+              "recipeID": 1237505
+            },
+            {
+              "name": "Smuggler's Leather Tunic",
+              "pvp": false,
+              "recipeID": 1237499
+            },
+            {
+              "name": "Smuggler's Leather Footpads",
+              "pvp": false,
+              "recipeID": 1237500
+            },
+            {
+              "name": "Smuggler's Leather Wristbands",
+              "pvp": false,
+              "recipeID": 1237506
+            },
+            {
+              "name": "Scout's Polished Skullcap",
+              "pvp": false,
+              "recipeID": 1237531
+            },
+            {
+              "name": "Scout's Polished Legguards",
+              "pvp": false,
+              "recipeID": 1237532
+            },
+            {
+              "name": "Scout's Polished Spaulders",
+              "pvp": false,
+              "recipeID": 1237533
+            },
+            {
+              "name": "Scout's Polished Gauntlets",
+              "pvp": false,
+              "recipeID": 1237530
+            },
+            {
+              "name": "Scout's Polished Wrap",
+              "pvp": false,
+              "recipeID": 1237534
+            },
+            {
+              "name": "Scout's Scaled Vest",
+              "pvp": false,
+              "recipeID": 1237528
+            },
+            {
+              "name": "Scout's Scaled Boots",
+              "pvp": false,
+              "recipeID": 1237529
+            },
+            {
+              "name": "Scout's Scaled Bracers",
+              "pvp": false,
+              "recipeID": 1237535
+            },
+            {
+              "name": "Thalassian Wildseeker's Stridercap",
+              "pvp": true,
+              "recipeID": 1237571
+            },
+            {
+              "name": "Chemist's Cap",
+              "pvp": false,
+              "recipeID": 1237548
+            },
+            {
+              "name": "Apprentice Smith's Apron",
+              "pvp": false,
+              "recipeID": 1237551
+            },
+            {
+              "name": "Tinker's Handguard",
+              "pvp": false,
+              "recipeID": 1237554
+            },
+            {
+              "name": "Apprentice Jeweler's Apron",
+              "pvp": false,
+              "recipeID": 1237560
+            },
+            {
+              "name": "Hideworker's Cover",
+              "pvp": false,
+              "recipeID": 1237563
+            },
+            {
+              "name": "Skinner's Backpack",
+              "pvp": false,
+              "recipeID": 1237566
+            },
+            {
+              "name": "Eversong Botanist's Satchel",
+              "pvp": false,
+              "recipeID": 1237557
+            },
+            {
+              "name": "Skinner's Cap",
+              "pvp": false,
+              "recipeID": 1237569
+            },
+            {
+              "name": "Artisan Leatherworker's Moxie",
+              "pvp": false,
+              "recipeID": 1265672
+            },
+            {
+              "name": "Concentration",
+              "pvp": false,
+              "recipeID": 1265681
+            },
+            {
+              "name": "Knowledge",
+              "pvp": false,
+              "recipeID": 1265620
+            },
+            {
+              "name": "Quality",
+              "pvp": false,
+              "recipeID": 1265657
+            },
+            {
+              "name": "Sparks",
+              "pvp": false,
+              "recipeID": 1265665
+            },
+            {
+              "name": "Ingenuity",
+              "pvp": false,
+              "recipeID": 1265707
+            },
+            {
+              "name": "Multicraft",
+              "pvp": false,
+              "recipeID": 1265607
+            },
+            {
+              "name": "Resourcefulness",
+              "pvp": false,
+              "recipeID": 1265699
+            },
+            {
+              "name": "Skill",
+              "pvp": false,
+              "recipeID": 1265691
+            },
+            {
+              "name": "Light Leather",
+              "pvp": false,
+              "recipeID": 2881
+            },
+            {
+              "name": "Light Armor Kit",
+              "pvp": false,
+              "recipeID": 2152
+            },
+            {
+              "name": "Handstitched Leather Vest",
+              "pvp": false,
+              "recipeID": 7126
+            },
+            {
+              "name": "Handstitched Leather Bracers",
+              "pvp": false,
+              "recipeID": 9059
+            },
+            {
+              "name": "Handstitched Leather Boots",
+              "pvp": false,
+              "recipeID": 2149
+            },
+            {
+              "name": "Handstitched Leather Cloak",
+              "pvp": false,
+              "recipeID": 9058
+            }
+          ],
+          "count": 94
+        },
+        "Leatherworking": {
+          "recipes": [
+            {
+              "name": "Recraft Equipment",
+              "pvp": false,
+              "recipeID": 471046
+            },
+            {
+              "name": "Infused Scalewoven Hide",
+              "pvp": false,
+              "recipeID": 1237573
+            },
+            {
+              "name": "Scalewoven Hide",
+              "pvp": false,
+              "recipeID": 1237572
+            },
+            {
+              "name": "Sin'dorei Armor Banding",
+              "pvp": false,
+              "recipeID": 1237574
+            },
+            {
+              "name": "Silvermoon Weapon Wrap",
+              "pvp": false,
+              "recipeID": 1237575
+            },
+            {
+              "name": "Void-touched Drums",
+              "pvp": false,
+              "recipeID": 1237547
+            },
+            {
+              "name": "Thalassian Scout Armor Kit",
+              "pvp": true,
+              "recipeID": 1237546
+            },
+            {
+              "name": "Smuggler's Reinforced Hood",
+              "pvp": false,
+              "recipeID": 1237502
+            },
+            {
+              "name": "Smuggler's Reinforced Pants",
+              "pvp": false,
+              "recipeID": 1237503
+            },
+            {
+              "name": "Smuggler's Reinforced Shoulderguards",
+              "pvp": false,
+              "recipeID": 1237504
+            },
+            {
+              "name": "Smuggler's Reinforced Gloves",
+              "pvp": false,
+              "recipeID": 1237501
+            },
+            {
+              "name": "Smuggler's Reinforced Binding",
+              "pvp": false,
+              "recipeID": 1237505
+            },
+            {
+              "name": "Smuggler's Leather Tunic",
+              "pvp": false,
+              "recipeID": 1237499
+            },
+            {
+              "name": "Smuggler's Leather Footpads",
+              "pvp": false,
+              "recipeID": 1237500
+            },
+            {
+              "name": "Smuggler's Leather Wristbands",
+              "pvp": false,
+              "recipeID": 1237506
+            },
+            {
+              "name": "Scout's Polished Skullcap",
+              "pvp": false,
+              "recipeID": 1237531
+            },
+            {
+              "name": "Scout's Polished Legguards",
+              "pvp": false,
+              "recipeID": 1237532
+            },
+            {
+              "name": "Scout's Polished Spaulders",
+              "pvp": false,
+              "recipeID": 1237533
+            },
+            {
+              "name": "Scout's Polished Gauntlets",
+              "pvp": false,
+              "recipeID": 1237530
+            },
+            {
+              "name": "Scout's Polished Wrap",
+              "pvp": false,
+              "recipeID": 1237534
+            },
+            {
+              "name": "Scout's Scaled Vest",
+              "pvp": false,
+              "recipeID": 1237528
+            },
+            {
+              "name": "Scout's Scaled Boots",
+              "pvp": false,
+              "recipeID": 1237529
+            },
+            {
+              "name": "Scout's Scaled Bracers",
+              "pvp": false,
+              "recipeID": 1237535
+            },
+            {
+              "name": "Thalassian Wildseeker's Stridercap",
+              "pvp": true,
+              "recipeID": 1237571
+            },
+            {
+              "name": "Chemist's Cap",
+              "pvp": false,
+              "recipeID": 1237548
+            },
+            {
+              "name": "Apprentice Smith's Apron",
+              "pvp": false,
+              "recipeID": 1237551
+            },
+            {
+              "name": "Tinker's Handguard",
+              "pvp": false,
+              "recipeID": 1237554
+            },
+            {
+              "name": "Apprentice Jeweler's Apron",
+              "pvp": false,
+              "recipeID": 1237560
+            },
+            {
+              "name": "Hideworker's Cover",
+              "pvp": false,
+              "recipeID": 1237563
+            },
+            {
+              "name": "Skinner's Backpack",
+              "pvp": false,
+              "recipeID": 1237566
+            },
+            {
+              "name": "Eversong Botanist's Satchel",
+              "pvp": false,
+              "recipeID": 1237557
+            },
+            {
+              "name": "Skinner's Cap",
+              "pvp": false,
+              "recipeID": 1237569
+            },
+            {
+              "name": "Artisan Leatherworker's Moxie",
+              "pvp": false,
+              "recipeID": 1265672
+            },
+            {
+              "name": "Concentration",
+              "pvp": false,
+              "recipeID": 1265681
+            },
+            {
+              "name": "Knowledge",
+              "pvp": false,
+              "recipeID": 1265620
+            },
+            {
+              "name": "Quality",
+              "pvp": false,
+              "recipeID": 1265657
+            },
+            {
+              "name": "Sparks",
+              "pvp": false,
+              "recipeID": 1265665
+            },
+            {
+              "name": "Ingenuity",
+              "pvp": false,
+              "recipeID": 1265707
+            },
+            {
+              "name": "Multicraft",
+              "pvp": false,
+              "recipeID": 1265607
+            },
+            {
+              "name": "Resourcefulness",
+              "pvp": false,
+              "recipeID": 1265699
+            },
+            {
+              "name": "Skill",
+              "pvp": false,
+              "recipeID": 1265691
+            },
+            {
+              "name": "Light Leather",
+              "pvp": false,
+              "recipeID": 2881
+            },
+            {
+              "name": "Light Armor Kit",
+              "pvp": false,
+              "recipeID": 2152
+            },
+            {
+              "name": "Handstitched Leather Vest",
+              "pvp": false,
+              "recipeID": 7126
+            },
+            {
+              "name": "Handstitched Leather Bracers",
+              "pvp": false,
+              "recipeID": 9059
+            },
+            {
+              "name": "Handstitched Leather Boots",
+              "pvp": false,
+              "recipeID": 2149
+            },
+            {
+              "name": "Handstitched Leather Cloak",
+              "pvp": false,
+              "recipeID": 9058
             }
           ],
           "count": 47
@@ -3557,5 +3600,5 @@
       }
     }
   },
-  "exported": "2026-03-24T10:43:10Z"
+  "exported": "2026-03-24T10:51:00Z"
 }

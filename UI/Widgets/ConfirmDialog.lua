@@ -42,16 +42,15 @@ function GF.UI.Widgets:ShowConfirmDialog(title, message, onConfirm, onCancel)
         dialog.message:SetWordWrap(true)
         dialog.message:SetJustifyH("CENTER")
 
-        -- Confirm button (accent)
+        -- Confirm button (accent) — elevated above dialog to receive clicks
         dialog.yesBtn = T:ActionButton(dialog, "Confirm", 120, 28)
         dialog.yesBtn:SetPoint("BOTTOMLEFT", 40, PADDING)
+        dialog.yesBtn:SetFrameLevel(dialog:GetFrameLevel() + 10)
 
         -- Cancel button
         dialog.noBtn = T:Button(dialog, "Cancel", 120, 28)
         dialog.noBtn:SetPoint("BOTTOMRIGHT", -40, PADDING)
-
-        -- Make it close with Escape
-        dialog:SetMovable(true)
+        dialog.noBtn:SetFrameLevel(dialog:GetFrameLevel() + 10)
     end
 
     dialog.title:SetText(title)
