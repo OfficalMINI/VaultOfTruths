@@ -401,11 +401,18 @@ function SL:DistributeAllPending()
                 " profit=" .. tostring(sale.profit) ..
                 " item=" .. tostring(sale.itemName or sale.itemID))
             if (sale.profit or 0) > 0 then
-                self:DistributeProfit(sale.id)
-                count = count + 1
-                totalProfit = totalProfit + sale.profit
+                local ok, err = pcall(function()
+                    self:DistributeProfit(sale.id)
+                end)
+                if ok then
+                    count = count + 1
+                    totalProfit = totalProfit + sale.profit
+                    print("|cFF00FF00[VoT]|r  Distributed #" .. i .. " OK")
+                else
+                    print("|cFFFF0000[VoT]|r  ERROR distributing #" .. i .. ": " .. tostring(err))
+                    sale.distributed = true -- skip it so it doesn't block others
+                end
             else
-                -- Force-mark zero/negative profit sales as distributed
                 sale.distributed = true
                 count = count + 1
             end
