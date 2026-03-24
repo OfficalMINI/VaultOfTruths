@@ -18,24 +18,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Extract version changelog
-        run: |
-          VERSION="${GITHUB_REF_NAME#v}"
-          # Extract only the section for this version from CHANGELOG.md
-          awk "/^## ${VERSION}$/,/^## [0-9]/" CHANGELOG.md | sed '$d' > RELEASE_CHANGELOG.md
-          # Fallback: if nothing extracted, use the tag name
-          if [ ! -s RELEASE_CHANGELOG.md ]; then
-            echo "## ${VERSION}" > RELEASE_CHANGELOG.md
-            echo "" >> RELEASE_CHANGELOG.md
-            echo "Release ${GITHUB_REF_NAME}" >> RELEASE_CHANGELOG.md
-          fi
-          echo "--- Release changelog ---"
-          cat RELEASE_CHANGELOG.md
-
       - name: Package and Release
         uses: BigWigsMods/packager@v2
-        with:
-          args: -c RELEASE_CHANGELOG.md
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}

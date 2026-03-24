@@ -1760,9 +1760,33 @@
               "name": "Copper Bracers",
               "pvp": false,
               "recipeID": 2663
+            },
+            {
+              "name": "Deposit",
+              "pvp": false
+            },
+            {
+              "name": "PVP Supplies",
+              "pvp": false
+            },
+            {
+              "name": "Mats T1",
+              "pvp": false
+            },
+            {
+              "name": "Mats T2",
+              "pvp": false
+            },
+            {
+              "name": "AH Goods",
+              "pvp": false
+            },
+            {
+              "name": "Officer",
+              "pvp": false
             }
           ],
-          "count": 97
+          "count": 103
         },
         "Blacksmithing": {
           "recipes": [
@@ -2003,12 +2027,14 @@
             {
               "name": "Quality",
               "pvp": false,
-              "recipeID": 1265652
+              "recipeID": 1265652,
+              "outputItemID": 240951
             },
             {
               "name": "Sparks",
               "pvp": false,
-              "recipeID": 1265660
+              "recipeID": 1265660,
+              "outputItemID": 471047
             },
             {
               "name": "Ingenuity",
@@ -2049,9 +2075,35 @@
               "name": "Copper Bracers",
               "pvp": false,
               "recipeID": 2663
+            },
+            {
+              "name": "Deposit",
+              "pvp": false,
+              "recipeID": 1230503
+            },
+            {
+              "name": "PVP Supplies",
+              "pvp": false,
+              "recipeID": 471047
+            },
+            {
+              "name": "Mats T1",
+              "pvp": false
+            },
+            {
+              "name": "Mats T2",
+              "pvp": false
+            },
+            {
+              "name": "AH Goods",
+              "pvp": false
+            },
+            {
+              "name": "Officer",
+              "pvp": false
             }
           ],
-          "count": 49
+          "count": 55
         }
       }
     },
@@ -3525,5 +3577,5 @@
       }
     }
   },
-  "exported": "2026-03-24T11:26:05Z"
+  "exported": "2026-03-24T21:49:23Z"
 }
