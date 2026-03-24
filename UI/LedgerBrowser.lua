@@ -408,9 +408,15 @@ function LB:Refresh()
     parent._list:SetData(entries)
 
     -- Update footer
-    local totalValue = 0
+    local depositValue = 0
+    local withdrawValue = 0
     for _, e in ipairs(entries) do
-        totalValue = totalValue + (e.totalValue or 0)
+        if e.action == GF.ACTIONS.DEPOSIT then
+            depositValue = depositValue + (e.totalValue or 0)
+        elseif e.action == GF.ACTIONS.WITHDRAW then
+            withdrawValue = withdrawValue + (e.totalValue or 0)
+        end
     end
-    parent._footer:SetText(#entries .. " entries | Total value: " .. GF.Utils:FormatGold(totalValue))
+    parent._footer:SetText(#entries .. " entries | Deposits: " .. GF.Utils:FormatGold(depositValue) ..
+        " | Withdrawn: " .. GF.Utils:FormatGold(withdrawValue))
 end

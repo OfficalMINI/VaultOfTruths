@@ -319,49 +319,44 @@ function SL:DistributeProfit(saleID)
         return nil
     end
 
-    -- Credit deposit contributions BEFORE calculating profit distribution
-    -- so depositors' totalContributed is up-to-date for the proportional split
+    -- Credit deposit contributions — only up to the sold quantity (FIFO)
+    -- Prevents inflation from deposit-withdraw-redeposit cycles
     local saleItemID = sale.itemID
+    local saleQty = sale.quantity or 1
+    local remainingQty = saleQty
     local credited = false
 
-    for _, entry in ipairs(guildData.ledger.entries) do
-        if entry.status == "pending" and entry.action == GF.ACTIONS.DEPOSIT then
-            local shouldCredit = false
-
-            if saleItemID and saleItemID > 0 and entry.items then
+    if saleItemID and saleItemID > 0 then
+        for _, entry in ipairs(guildData.ledger.entries) do
+            if remainingQty <= 0 then break end
+            if entry.status == "pending" and entry.action == GF.ACTIONS.DEPOSIT and entry.items then
                 for _, item in ipairs(entry.items) do
                     if item.itemID == saleItemID then
-                        shouldCredit = true
+                        local qty = item.quantity or 1
+                        local creditQty = math.min(qty, remainingQty)
+                        local creditValue = (item.unitValue or 0) * creditQty
+
+                        entry.status = "credited"
+                        GF.Ledger:UpdateContribution(entry.player, creditValue)
+                        remainingQty = remainingQty - creditQty
+                        credited = true
                         break
                     end
                 end
-            elseif (not saleItemID or saleItemID == 0) and not credited then
-                local entryValue = entry.totalValue or 0
-                local saleValue = sale.salePrice or 0
-                if entryValue > 0 and saleValue > 0 then
-                    local ratio = entryValue / saleValue
-                    if ratio > 0.5 and ratio < 2.0 then
-                        shouldCredit = true
-                    end
-                end
-            end
-
-            if shouldCredit then
-                entry.status = "credited"
-                GF.Ledger:UpdateContribution(entry.player, entry.totalValue)
-                credited = true
             end
         end
     end
 
-    -- Fallback: credit all pending deposits up to sale value
+    -- Fallback: credit pending deposits up to sale value (for unmatched items)
     if not credited then
-        local remaining = sale.salePrice or 0
+        local remainingValue = sale.salePrice or 0
         for _, entry in ipairs(guildData.ledger.entries) do
-            if entry.status == "pending" and entry.action == GF.ACTIONS.DEPOSIT and remaining > 0 then
+            if remainingValue <= 0 then break end
+            if entry.status == "pending" and entry.action == GF.ACTIONS.DEPOSIT then
                 entry.status = "credited"
-                GF.Ledger:UpdateContribution(entry.player, entry.totalValue)
-                remaining = remaining - (entry.totalValue or 0)
+                local val = math.min(entry.totalValue or 0, remainingValue)
+                GF.Ledger:UpdateContribution(entry.player, val)
+                remainingValue = remainingValue - val
             end
         end
     end
