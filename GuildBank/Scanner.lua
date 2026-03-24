@@ -341,6 +341,22 @@ function Scanner:CheckForDeposits()
         end
     end
 
+    -- Fire withdrawal events so Ledger + CrafterTracking record them
+    for itemID, info in pairs(withdrawn) do
+        GF.Events:Fire("GF_BANK_TRANSACTION", {
+            tabIndex = currentTab,
+            type = "withdraw",
+            player = playerName,
+            itemID = itemID,
+            itemLink = info.link,
+            quantity = info.count,
+            timestamp = time(),
+        })
+
+        local name = info.link or (C_Item.GetItemInfo(itemID) or ("Item:" .. itemID))
+        GF.ChatNotify:Info("Withdrawn: x" .. info.count .. " " .. name)
+    end
+
     -- Create ledger entries and accumulate for session summary
     for itemID, info in pairs(deposited) do
         local value, source = GF.TSM:GetBestPrice(itemID)
