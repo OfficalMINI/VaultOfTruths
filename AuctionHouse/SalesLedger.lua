@@ -539,10 +539,44 @@ function SL:ScanMailForSales()
                 local itemName = subject:match("%[(.-)%]") or subject:match("Auction%s+%w+:%s*(.+)") or "Unknown Item"
 
                 -- Use mail index + money + daysLeft for a stable dedup key
-                -- (avoids collisions from itemID=0 for all mail sales)
                 local key = "mail:" .. i .. ":" .. tostring(money) .. ":" .. tostring(daysLeft)
                 if not processedSaleKeys[key] then
                     processedSaleKeys[key] = true
+
+                    -- Check if this sale was already recorded by ScanOwnedAuctions
+                    -- Match by gold amount AND item name to avoid false positives from unrelated mail
+                    local alreadyRecorded = false
+                    for _, existing in ipairs(guildData.ahSales) do
+                        if not existing._mailMatched then
+                            local expectedMail = (existing.salePrice or 0) - (existing.ahCut or 0)
+                            local goldMatch = math.abs(expectedMail - money) <= 1
+
+                            -- Also match by item name if available
+                            local nameMatch = false
+                            if itemName ~= "Unknown Item" and existing.itemName then
+                                nameMatch = existing.itemName:lower():find(itemName:lower(), 1, true) ~= nil
+                            elseif itemName ~= "Unknown Item" and existing.itemID and existing.itemID > 0 then
+                                local existingName = C_Item.GetItemInfo(existing.itemID)
+                                if existingName then
+                                    nameMatch = existingName:lower():find(itemName:lower(), 1, true) ~= nil
+                                end
+                            end
+
+                            -- Require both gold AND name match for confident dedup
+                            -- If we can't resolve the name, gold match alone is enough
+                            if goldMatch and (nameMatch or itemName == "Unknown Item") then
+                                existing._mailMatched = true
+                                alreadyRecorded = true
+                                break
+                            end
+                        end
+                    end
+
+                    if alreadyRecorded then
+                        if GF.debug then
+                            GF.ChatNotify:Debug("Mail sale skipped (already recorded via AH): " .. itemName .. " — " .. GF.Utils:FormatMoney(money))
+                        end
+                    else
 
                     -- Try to find itemID from the item name
                     local itemID = 0
@@ -595,6 +629,8 @@ function SL:ScanMailForSales()
                     if sale then
                         newSales = newSales + 1
                     end
+
+                    end -- close alreadyRecorded else
                 end
             end
         end

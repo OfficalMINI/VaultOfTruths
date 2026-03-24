@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.5-beta
+- Improve AH mail sale dedup — match by gold amount AND item name
+- Fix double-counting sales from owned auctions + mail pickup
+- Fix nil contributorEarnings crash on old payout records
+- Add /vot redist to repair broken distributions
+- README added
+
 ## 1.2.0
 - Fix confirm dialog buttons not clicking (EnableMouse on parent intercepting)
 - Fix nil contributorEarnings crash on old payout records
