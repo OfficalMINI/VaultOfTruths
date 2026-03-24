@@ -295,18 +295,25 @@ end
 ---@param saleID string
 ---@return table|nil distribution
 function SL:DistributeProfit(saleID)
+    if GF.debug then
+        GF.ChatNotify:Debug("DistributeProfit — saleID: " .. tostring(saleID))
+    end
+
     local guildData = GF.Settings:GetGuildData()
     if not guildData then return nil end
 
     local sale
-    for _, s in ipairs(guildData.ahSales) do
+    for i, s in ipairs(guildData.ahSales) do
         if s.id == saleID then
             sale = s
             break
         end
     end
 
-    if not sale then return nil end
+    if not sale then
+        GF.ChatNotify:Warning("Sale not found (id: " .. tostring(saleID) .. ")")
+        return nil
+    end
     if sale.distributed then
         GF.ChatNotify:Warning("Profit for this sale already distributed.")
         return nil

@@ -141,6 +141,7 @@ local function Init()
                 row.status:Hide()
                 row.distBtn:Show()
                 row.distBtn:SetScript("OnClick", function()
+                    print("|cFF00FF00[VoT]|r Distribute clicked — sale.id: " .. tostring(sale.id) .. " item: " .. tostring(sale.itemName))
                     local result = GF.SalesLedger:DistributeProfit(sale.id)
                     if result then
                         GF.ChatNotify:Success("Distributed profit for " .. (sale.itemName or "sale"))
