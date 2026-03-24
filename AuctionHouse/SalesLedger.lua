@@ -389,6 +389,11 @@ function SL:DistributeAllPending()
     local count = 0
     local totalProfit = 0
 
+    print("|cFF33AAFF[VoT]|r Total sales in DB: " .. #guildData.ahSales)
+    for i, sale in ipairs(guildData.ahSales) do
+        print("|cFF888888[VoT]|r  #" .. i .. " id=" .. tostring(sale.id) .. " dist=" .. tostring(sale.distributed) .. " profit=" .. tostring(sale.profit) .. " item=" .. tostring(sale.itemName or sale.itemID))
+    end
+
     for i, sale in ipairs(guildData.ahSales) do
         if not sale.distributed then
             print("|cFF33AAFF[VoT]|r DistributeAll — sale #" .. i ..
