@@ -141,9 +141,15 @@ local function Init()
                 row.status:Hide()
                 row.distBtn:Show()
                 row.distBtn:SetScript("OnClick", function()
-                    GF.SalesLedger:DistributeProfit(sale.id)
+                    local result = GF.SalesLedger:DistributeProfit(sale.id)
+                    if result then
+                        GF.ChatNotify:Success("Distributed profit for " .. (sale.itemName or "sale"))
+                    else
+                        -- Force-distribute: mark as distributed even if no matching deposits
+                        sale.distributed = true
+                        GF.ChatNotify:Warning("No matching deposits found — marked as distributed.")
+                    end
                     AHP:Refresh()
-                    GF.ChatNotify:Success("Distributed profit for " .. (sale.itemName or "sale"))
                 end)
             end
         end
