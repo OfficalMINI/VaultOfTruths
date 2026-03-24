@@ -31,5 +31,3 @@ ignore:
     - tests
     - "*.md"
     - "*.rockspec"
-
-manual-changelog: CHANGELOG.md
