@@ -153,9 +153,10 @@ end
 ---@param itemID number
 ---@param quantity number|nil Quantity to consume (reduces remainingQty)
 ---@return string|nil trailID
+---@return number consumed How many items were consumed from this trail
 function IT:FindActiveTrail(itemID, quantity)
     local trails = EnsureTrailLog()
-    if not trails then return nil end
+    if not trails then return nil, 0 end
 
     -- Collect all active trails for this item, sorted oldest first
     local candidates = {}
@@ -165,7 +166,7 @@ function IT:FindActiveTrail(itemID, quantity)
         end
     end
 
-    if #candidates == 0 then return nil end
+    if #candidates == 0 then return nil, 0 end
 
     -- Sort oldest first (FIFO)
     table.sort(candidates, function(a, b) return a.startedAt < b.startedAt end)
@@ -173,15 +174,14 @@ function IT:FindActiveTrail(itemID, quantity)
     local trailID = candidates[1].id
     local trail = trails[trailID]
 
-    -- Consume quantity from this trail
+    -- Consume quantity from this trail (only up to what's available)
+    local consumed = 0
     if quantity and trail.remainingQty then
-        trail.remainingQty = trail.remainingQty - quantity
-        if trail.remainingQty <= 0 then
-            trail.remainingQty = 0
-        end
+        consumed = math.min(quantity, trail.remainingQty)
+        trail.remainingQty = trail.remainingQty - consumed
     end
 
-    return trailID
+    return trailID, consumed
 end
 
 --- Find a trail for a crafted item (deposited back, ready for AH)
@@ -349,33 +349,38 @@ function IT:OnDeposit(player, itemID, itemLink, quantity, value)
 end
 
 --- Hook: log any guild bank withdrawal to the trail (all tabs)
---- Does NOT consume the trail (item may be returned)
+--- Splits across multiple depositors' trails FIFO (stacked items = pooled deposits)
 ---@param player string
 ---@param itemID number
 ---@param quantity number
 ---@param value number
 function IT:OnWithdraw(player, itemID, quantity, value)
-    local trailID = self:FindActiveTrail(itemID)
-    if trailID then
-        self:LogEvent(GF.ACTIONS.WITHDRAW, player, itemID, nil, quantity, value, trailID,
+    local remaining = quantity
+    local unitValue = quantity > 0 and (value / quantity) or 0
+    while remaining > 0 do
+        local trailID, consumed = self:FindActiveTrail(itemID, remaining)
+        if not trailID or consumed == 0 then break end
+        self:LogEvent(GF.ACTIONS.WITHDRAW, player, itemID, nil, consumed, unitValue * consumed, trailID,
             "Withdrawn from guild bank")
+        remaining = remaining - consumed
     end
 end
 
 --- Hook: call this from CrafterTracking when mats are withdrawn
---- Consumes from oldest active trail (FIFO)
+--- Consumes from oldest active trails FIFO (splits across multiple depositors)
 ---@param player string
 ---@param itemID number
 ---@param quantity number
 ---@param value number
 function IT:OnCraftWithdraw(player, itemID, quantity, value)
     local remaining = quantity
+    local unitValue = quantity > 0 and (value / quantity) or 0
     while remaining > 0 do
-        local trailID = self:FindActiveTrail(itemID, remaining)
-        if not trailID then break end
-        self:LogEvent(GF.ACTIONS.CRAFT_WITHDRAW, player, itemID, nil, remaining, value, trailID,
+        local trailID, consumed = self:FindActiveTrail(itemID, remaining)
+        if not trailID or consumed == 0 then break end
+        self:LogEvent(GF.ACTIONS.CRAFT_WITHDRAW, player, itemID, nil, consumed, unitValue * consumed, trailID,
             "Withdrawn for crafting")
-        remaining = 0 -- FindActiveTrail already consumed the qty
+        remaining = remaining - consumed
     end
 end
 
