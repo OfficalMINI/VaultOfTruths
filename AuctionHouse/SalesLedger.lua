@@ -611,6 +611,46 @@ function SL:ScanMailForSales()
 end
 
 
+--- Force re-distribute ALL sales (repairs broken distributions)
+--- Resets distributed flag and re-runs profit distribution
+---@return number count
+function SL:RedistributeAll()
+    local guildData = GF.Settings:GetGuildData()
+    if not guildData or not guildData.ahSales then return 0 end
+
+    -- Reset all payout earnings to zero (will be rebuilt)
+    for _, record in pairs(guildData.payouts) do
+        record.contributorEarnings = 0
+        record.crafterEarnings = 0
+        record.auctioneerEarnings = 0
+    end
+
+    local count = 0
+    for _, sale in ipairs(guildData.ahSales) do
+        sale.distributed = false
+    end
+
+    -- Now distribute all
+    for _, sale in ipairs(guildData.ahSales) do
+        if (sale.profit or 0) > 0 then
+            local ok, err = pcall(function()
+                self:DistributeProfit(sale.id)
+            end)
+            if ok then
+                count = count + 1
+            else
+                print("|cFFFF0000[VoT]|r Redist error: " .. tostring(err))
+                sale.distributed = true
+            end
+        else
+            sale.distributed = true
+        end
+    end
+
+    GF.ChatNotify:Gold("Re-distributed " .. count .. " sale(s). Check payouts.")
+    return count
+end
+
 --- Get count of pending (not yet distributed) sales
 ---@return number
 function SL:GetPendingSalesCount()
