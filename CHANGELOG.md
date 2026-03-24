@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.1.4
+- Fix withdrawal trail tracking to split across multiple depositors (FIFO)
+- Stacked guild bank items now properly attribute to each depositor
+
+## 1.1.3
+- Fix Distribute button not responding to clicks
+- Fix guild chat incorrectly showing "craft" for raw PVP item sales
+- Distribute button now force-marks as distributed if no deposits match
+- Add crafter recipe export script (snapshots on commit)
+
+## 1.1.2
+- Include guild bank tab 5 (Finished Goods) in ledger tracking
+
+## 1.1.1
+- Fix withdrawals not tracked in ledger or notified
+- Scanner now fires events and chat notifications for withdrawals
+
 ## 1.1.0
 - Restyle all UI panels to custom theme — no default WoW chrome remaining
 - Fix T:Button not responding to clicks (missing RegisterForClicks)

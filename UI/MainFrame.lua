@@ -129,6 +129,9 @@ local function CreateMainFrame()
     local settingsContent = CreateFrame("Frame", nil, contentArea)
     settingsContent:SetAllPoints()
 
+    local whatsnewContent = CreateFrame("Frame", nil, contentArea)
+    whatsnewContent:SetAllPoints()
+
     -- Store references for sub-panels to use
     mainFrame._contentFrames = {
         dashboard = dashboardContent,
@@ -137,6 +140,7 @@ local function CreateMainFrame()
         ah = ahContent,
         officer = officerContent,
         settings = settingsContent,
+        whatsnew = whatsnewContent,
     }
 
     -- Build tabs based on access level:
@@ -154,6 +158,7 @@ local function CreateMainFrame()
             { id = "ah", label = "AH", content = ahContent },
             { id = "officer", label = "Officer", content = officerContent },
             { id = "settings", label = "Settings", content = settingsContent },
+            { id = "whatsnew", label = "What's New", content = whatsnewContent },
         }
     elseif isInCommunity then
         tabs = {
@@ -318,6 +323,7 @@ function MF:OnTabChanged(tabID)
         ah = GF.UI.AHPanel,
         officer = GF.UI.OfficerPanel,
         settings = GF.UI.SettingsPanel,
+        whatsnew = GF.UI.WhatsNew,
     }
     local panel = tabRefreshMap[tabID]
     if panel and panel.Refresh then
