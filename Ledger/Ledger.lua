@@ -389,7 +389,13 @@ function Ledger:RecordProfitDistribution(distribution)
                 currentBalance = 0,
             }
         end
-        return guildData.payouts[playerName]
+        -- Backfill missing fields on old records
+        local r = guildData.payouts[playerName]
+        if not r.contributorEarnings then r.contributorEarnings = 0 end
+        if not r.crafterEarnings then r.crafterEarnings = 0 end
+        if not r.auctioneerEarnings then r.auctioneerEarnings = 0 end
+        if not r.totalPaidOut then r.totalPaidOut = 0 end
+        return r
     end
 
     -- Credit each contributor their profit share
