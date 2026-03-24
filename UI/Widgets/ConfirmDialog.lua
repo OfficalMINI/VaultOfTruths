@@ -27,7 +27,6 @@ function GF.UI.Widgets:ShowConfirmDialog(title, message, onConfirm, onCancel)
         dialog:SetFrameStrata("FULLSCREEN_DIALOG")
         dialog:SetBackdropColor(0.06, 0.07, 0.11, 0.98)
         dialog:SetBackdropBorderColor(0.2, 0.35, 0.55, 0.8)
-        dialog:EnableMouse(true)
 
         -- Title
         dialog.title = dialog:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
@@ -42,16 +41,15 @@ function GF.UI.Widgets:ShowConfirmDialog(title, message, onConfirm, onCancel)
         dialog.message:SetWordWrap(true)
         dialog.message:SetJustifyH("CENTER")
 
-        -- Confirm button (accent)
+        -- Confirm button (accent) — elevated above dialog to receive clicks
         dialog.yesBtn = T:ActionButton(dialog, "Confirm", 120, 28)
         dialog.yesBtn:SetPoint("BOTTOMLEFT", 40, PADDING)
+        dialog.yesBtn:SetFrameLevel(dialog:GetFrameLevel() + 10)
 
         -- Cancel button
         dialog.noBtn = T:Button(dialog, "Cancel", 120, 28)
         dialog.noBtn:SetPoint("BOTTOMRIGHT", -40, PADDING)
-
-        -- Make it close with Escape
-        dialog:SetMovable(true)
+        dialog.noBtn:SetFrameLevel(dialog:GetFrameLevel() + 10)
     end
 
     dialog.title:SetText(title)
@@ -64,11 +62,13 @@ function GF.UI.Widgets:ShowConfirmDialog(title, message, onConfirm, onCancel)
     dialog:SetHeight(math.max(MIN_HEIGHT, totalHeight))
 
     dialog.yesBtn:SetScript("OnClick", function()
+        print("|cFF00FF00[VoT]|r Confirm clicked")
         dialog:Hide()
         if onConfirm then onConfirm() end
     end)
 
     dialog.noBtn:SetScript("OnClick", function()
+        print("|cFFFFAA00[VoT]|r Cancel clicked")
         dialog:Hide()
         if onCancel then onCancel() end
     end)

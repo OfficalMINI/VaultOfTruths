@@ -86,4 +86,5 @@ UI\GuildInfoPanel.lua
 UI\OnboardingDialog.lua
 UI\SetupGuide.lua
 UI\ProgressionPanel.lua
+UI\WhatsNewPanel.lua
 UI\MinimapButton.lua

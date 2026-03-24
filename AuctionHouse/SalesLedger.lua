@@ -295,66 +295,68 @@ end
 ---@param saleID string
 ---@return table|nil distribution
 function SL:DistributeProfit(saleID)
+    if GF.debug then
+        GF.ChatNotify:Debug("DistributeProfit — saleID: " .. tostring(saleID))
+    end
+
     local guildData = GF.Settings:GetGuildData()
     if not guildData then return nil end
 
     local sale
-    for _, s in ipairs(guildData.ahSales) do
+    for i, s in ipairs(guildData.ahSales) do
         if s.id == saleID then
             sale = s
             break
         end
     end
 
-    if not sale then return nil end
+    if not sale then
+        GF.ChatNotify:Warning("Sale not found (id: " .. tostring(saleID) .. ")")
+        return nil
+    end
     if sale.distributed then
         GF.ChatNotify:Warning("Profit for this sale already distributed.")
         return nil
     end
 
-    -- Credit deposit contributions BEFORE calculating profit distribution
-    -- so depositors' totalContributed is up-to-date for the proportional split
+    -- Credit deposit contributions — only up to the sold quantity (FIFO)
+    -- Prevents inflation from deposit-withdraw-redeposit cycles
     local saleItemID = sale.itemID
+    local saleQty = sale.quantity or 1
+    local remainingQty = saleQty
     local credited = false
 
-    for _, entry in ipairs(guildData.ledger.entries) do
-        if entry.status == "pending" and entry.action == GF.ACTIONS.DEPOSIT then
-            local shouldCredit = false
-
-            if saleItemID and saleItemID > 0 and entry.items then
+    if saleItemID and saleItemID > 0 then
+        for _, entry in ipairs(guildData.ledger.entries) do
+            if remainingQty <= 0 then break end
+            if entry.status == "pending" and entry.action == GF.ACTIONS.DEPOSIT and entry.items then
                 for _, item in ipairs(entry.items) do
                     if item.itemID == saleItemID then
-                        shouldCredit = true
+                        local qty = item.quantity or 1
+                        local creditQty = math.min(qty, remainingQty)
+                        local creditValue = (item.unitValue or 0) * creditQty
+
+                        entry.status = "credited"
+                        GF.Ledger:UpdateContribution(entry.player, creditValue)
+                        remainingQty = remainingQty - creditQty
+                        credited = true
                         break
                     end
                 end
-            elseif (not saleItemID or saleItemID == 0) and not credited then
-                local entryValue = entry.totalValue or 0
-                local saleValue = sale.salePrice or 0
-                if entryValue > 0 and saleValue > 0 then
-                    local ratio = entryValue / saleValue
-                    if ratio > 0.5 and ratio < 2.0 then
-                        shouldCredit = true
-                    end
-                end
-            end
-
-            if shouldCredit then
-                entry.status = "credited"
-                GF.Ledger:UpdateContribution(entry.player, entry.totalValue)
-                credited = true
             end
         end
     end
 
-    -- Fallback: credit all pending deposits up to sale value
+    -- Fallback: credit pending deposits up to sale value (for unmatched items)
     if not credited then
-        local remaining = sale.salePrice or 0
+        local remainingValue = sale.salePrice or 0
         for _, entry in ipairs(guildData.ledger.entries) do
-            if entry.status == "pending" and entry.action == GF.ACTIONS.DEPOSIT and remaining > 0 then
+            if remainingValue <= 0 then break end
+            if entry.status == "pending" and entry.action == GF.ACTIONS.DEPOSIT then
                 entry.status = "credited"
-                GF.Ledger:UpdateContribution(entry.player, entry.totalValue)
-                remaining = remaining - (entry.totalValue or 0)
+                local val = math.min(entry.totalValue or 0, remainingValue)
+                GF.Ledger:UpdateContribution(entry.player, val)
+                remainingValue = remainingValue - val
             end
         end
     end
@@ -382,11 +384,33 @@ function SL:DistributeAllPending()
     local count = 0
     local totalProfit = 0
 
-    for _, sale in ipairs(guildData.ahSales) do
-        if not sale.distributed and sale.profit > 0 then
-            self:DistributeProfit(sale.id)
-            count = count + 1
-            totalProfit = totalProfit + sale.profit
+    print("|cFF33AAFF[VoT]|r Total sales in DB: " .. #guildData.ahSales)
+    for i, sale in ipairs(guildData.ahSales) do
+        print("|cFF888888[VoT]|r  #" .. i .. " id=" .. tostring(sale.id) .. " dist=" .. tostring(sale.distributed) .. " profit=" .. tostring(sale.profit) .. " item=" .. tostring(sale.itemName or sale.itemID))
+    end
+
+    for i, sale in ipairs(guildData.ahSales) do
+        if not sale.distributed then
+            print("|cFF33AAFF[VoT]|r DistributeAll — sale #" .. i ..
+                " id=" .. tostring(sale.id) ..
+                " profit=" .. tostring(sale.profit) ..
+                " item=" .. tostring(sale.itemName or sale.itemID))
+            if (sale.profit or 0) > 0 then
+                local ok, err = pcall(function()
+                    self:DistributeProfit(sale.id)
+                end)
+                if ok then
+                    count = count + 1
+                    totalProfit = totalProfit + sale.profit
+                    print("|cFF00FF00[VoT]|r  Distributed #" .. i .. " OK")
+                else
+                    print("|cFFFF0000[VoT]|r  ERROR distributing #" .. i .. ": " .. tostring(err))
+                    sale.distributed = true -- skip it so it doesn't block others
+                end
+            else
+                sale.distributed = true
+                count = count + 1
+            end
         end
     end
 
@@ -581,6 +605,46 @@ function SL:ScanMailForSales()
     end
 end
 
+
+--- Force re-distribute ALL sales (repairs broken distributions)
+--- Resets distributed flag and re-runs profit distribution
+---@return number count
+function SL:RedistributeAll()
+    local guildData = GF.Settings:GetGuildData()
+    if not guildData or not guildData.ahSales then return 0 end
+
+    -- Reset all payout earnings to zero (will be rebuilt)
+    for _, record in pairs(guildData.payouts) do
+        record.contributorEarnings = 0
+        record.crafterEarnings = 0
+        record.auctioneerEarnings = 0
+    end
+
+    local count = 0
+    for _, sale in ipairs(guildData.ahSales) do
+        sale.distributed = false
+    end
+
+    -- Now distribute all
+    for _, sale in ipairs(guildData.ahSales) do
+        if (sale.profit or 0) > 0 then
+            local ok, err = pcall(function()
+                self:DistributeProfit(sale.id)
+            end)
+            if ok then
+                count = count + 1
+            else
+                print("|cFFFF0000[VoT]|r Redist error: " .. tostring(err))
+                sale.distributed = true
+            end
+        else
+            sale.distributed = true
+        end
+    end
+
+    GF.ChatNotify:Gold("Re-distributed " .. count .. " sale(s). Check payouts.")
+    return count
+end
 
 --- Get count of pending (not yet distributed) sales
 ---@return number

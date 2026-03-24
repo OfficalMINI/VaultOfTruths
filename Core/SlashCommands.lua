@@ -467,6 +467,14 @@ SC:Register("repair", function()
     GF.ItemTrail:RepairTrails()
 end, "Officer: rebuild trail supplier links and fix FIFO credits", true)
 
+SC:Register("redist", function()
+    if not GF.Roles:IsAddonOfficer() then
+        print("|cFFFF0000[Vault of Truths]|r Officers only.")
+        return
+    end
+    GF.SalesLedger:RedistributeAll()
+end, "Officer: re-distribute all sale profits (repairs broken distributions)", true)
+
 SC:Register("test", function(args)
     if args == "bag" then
         -- Scan all bag items and check which are bankable
