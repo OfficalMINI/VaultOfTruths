@@ -130,7 +130,7 @@ end
 -- Tab classification for ledger tracking
 local DEPOSIT_TABS = { [1] = true }          -- Deposits here = contributions
 local PERK_TABS = { [2] = true }             -- Withdrawals here = rank perks (no ledger entry)
-local SKIP_TABS = { [5] = true, [6] = true } -- Internal logistics (no ledger entry either way)
+local SKIP_TABS = { [6] = true } -- Officer reserves only (no ledger entry)
 
 function Ledger:ProcessBankTransaction(transaction)
     if not transaction.itemID then return end
