@@ -169,17 +169,6 @@ function T:Button(parent, text, width, height)
         end
         self:SetBackdropBorderColor(0.2, 0.35, 0.55, 0.7)
     end)
-    btn:SetScript("OnMouseDown", function(self)
-        if not self._disabled then
-            self:SetBackdropColor(0.1, 0.15, 0.25, 1)
-        end
-    end)
-    btn:SetScript("OnMouseUp", function(self)
-        if not self._disabled then
-            self:SetBackdropColor(0.2, 0.3, 0.45, 0.95)
-        end
-    end)
-
     -- Override SetText
     function btn:SetText(t)
         self._label:SetText(t)

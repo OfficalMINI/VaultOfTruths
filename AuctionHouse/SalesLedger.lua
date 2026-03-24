@@ -196,16 +196,21 @@ function SL:RecordSale(itemID, quantity, salePrice, ahCut, sourceOrderID, crafte
         local crafterShort = crafterName and (crafterName:match("^(.+)-") or crafterName) or nil
         local wasCrafted = crafterName ~= nil
 
-        -- Search the item trail for this item (now marked "sold" by OnAHSale above)
+        -- Search the item trail for this item
         if GF.ItemTrail then
-            -- Only look for a crafted trail — direct resales have no craftedItemID
-            local craftedTrailID = GF.ItemTrail:FindCraftedTrail(itemID)
-            local trail = craftedTrailID and GF.ItemTrail:GetTrail(craftedTrailID) or nil
-
-            -- If no crafted trail, look for any active/sold trail (direct resale)
-            if not trail then
-                local guildData2 = GF.Settings:GetGuildData()
-                if guildData2 and guildData2.itemTrails then
+            -- Find the trail that was used for this sale (prefer active/sold over crafted)
+            local guildData2 = GF.Settings:GetGuildData()
+            local trail = nil
+            if guildData2 and guildData2.itemTrails then
+                -- First pass: find a trail with status "sold" for this item (just marked by OnAHSale)
+                for _, t in pairs(guildData2.itemTrails) do
+                    if t.status == "sold" and (t.itemID == itemID or t.craftedItemID == itemID) then
+                        trail = t
+                        break
+                    end
+                end
+                -- Second pass: any trail matching this item
+                if not trail then
                     for _, t in pairs(guildData2.itemTrails) do
                         if t.itemID == itemID or t.craftedItemID == itemID then
                             trail = t
@@ -222,8 +227,15 @@ function SL:RecordSale(itemID, quantity, salePrice, ahCut, sourceOrderID, crafte
                         depositorNames[name] = true
                     end
                 end
-                -- Only attribute as crafted if the trail has a CRAFT_DEPOSIT event
-                if trail.craftedBy and (trail.status == "crafted" or trail.status == "listed" or trail.status == "sold") then
+                -- Only attribute as crafted if the trail has an actual CRAFT_DEPOSIT event
+                local hasCraftDeposit = false
+                for _, evt in ipairs(trail.events or {}) do
+                    if evt.action == GF.ACTIONS.CRAFT_DEPOSIT then
+                        hasCraftDeposit = true
+                        break
+                    end
+                end
+                if hasCraftDeposit and trail.craftedBy then
                     wasCrafted = true
                     if not crafterShort then
                         crafterShort = trail.craftedBy:match("^(.+)-") or trail.craftedBy
