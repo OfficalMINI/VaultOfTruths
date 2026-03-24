@@ -539,10 +539,30 @@ function SL:ScanMailForSales()
                 local itemName = subject:match("%[(.-)%]") or subject:match("Auction%s+%w+:%s*(.+)") or "Unknown Item"
 
                 -- Use mail index + money + daysLeft for a stable dedup key
-                -- (avoids collisions from itemID=0 for all mail sales)
                 local key = "mail:" .. i .. ":" .. tostring(money) .. ":" .. tostring(daysLeft)
                 if not processedSaleKeys[key] then
                     processedSaleKeys[key] = true
+
+                    -- Check if this sale was already recorded by ScanOwnedAuctions
+                    -- Mail gold = salePrice - ahCut (5%), so match against existing sales
+                    local alreadyRecorded = false
+                    local now2 = time()
+                    for _, existing in ipairs(guildData.ahSales) do
+                        if math.abs((existing.timestamp or 0) - now2) < 86400 then
+                            -- Mail money = salePrice - ahCut = salePrice * 0.95
+                            local expectedMail = math.floor((existing.salePrice or 0) * 0.95)
+                            if math.abs(expectedMail - money) <= 1 then
+                                alreadyRecorded = true
+                                break
+                            end
+                        end
+                    end
+
+                    if alreadyRecorded then
+                        if GF.debug then
+                            GF.ChatNotify:Debug("Mail sale skipped (already recorded via AH): " .. itemName .. " — " .. GF.Utils:FormatMoney(money))
+                        end
+                    else
 
                     -- Try to find itemID from the item name
                     local itemID = 0
@@ -595,6 +615,8 @@ function SL:ScanMailForSales()
                     if sale then
                         newSales = newSales + 1
                     end
+
+                    end -- close alreadyRecorded else
                 end
             end
         end
