@@ -544,17 +544,15 @@ function SL:ScanMailForSales()
                     processedSaleKeys[key] = true
 
                     -- Check if this sale was already recorded by ScanOwnedAuctions
-                    -- Mail gold = salePrice - ahCut (5%), so match against existing sales
+                    -- Mail gold = salePrice * 0.95, so match against any existing sale
                     local alreadyRecorded = false
-                    local now2 = time()
                     for _, existing in ipairs(guildData.ahSales) do
-                        if math.abs((existing.timestamp or 0) - now2) < 86400 then
-                            -- Mail money = salePrice - ahCut = salePrice * 0.95
-                            local expectedMail = math.floor((existing.salePrice or 0) * 0.95)
-                            if math.abs(expectedMail - money) <= 1 then
-                                alreadyRecorded = true
-                                break
-                            end
+                        -- Match: mail gold should equal salePrice - ahCut
+                        local expectedMail = (existing.salePrice or 0) - (existing.ahCut or 0)
+                        if math.abs(expectedMail - money) <= 1 and not existing._mailMatched then
+                            existing._mailMatched = true -- mark so we don't match twice
+                            alreadyRecorded = true
+                            break
                         end
                     end
 
